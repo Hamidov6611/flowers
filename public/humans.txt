@@ -1,0 +1,12 @@
+/* TEAM */
+Lead Developer: Ibrohim
+Designer: Dilmurod
+
+
+/* CONTACT */
+Email: dilmuroddelitot@gmail.com
+
+
+
+/* THANKS */
+Special thanks to our supportive community and open-source contributors!

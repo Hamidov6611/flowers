@@ -1,0 +1,58 @@
+
+
+
+  
+  .swiper {
+    width: 100%;
+    height: 100%;
+   
+    /* padding: 20px 0; */
+  }
+  
+  .swiper-slide {
+    width: auto;
+    height: auto;
+    text-align: center;
+    font-size: 18px;
+    /* background: #fff; */
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+    
+  .swiper-slide img {
+    /* width: 100%; */
+    height: 100%;
+    object-fit: cover;
+  }
+  .swiper-button-next::after {
+    color: #443926;
+  }
+  .swiper-button-prev::after {
+    color: #443926;
+  }
+
+  .react-multiple-carousel__arrow--right {
+    /* background-color: red; */
+  }
+  
+  .react-multiple-carousel__arrow {
+      background: rgba(255, 0, 0, 0);
+      color: #443926;
+  }
+  .react-multiple-carousel__arrow:hover {
+    background: rgba(255, 0, 0, 0);
+  
+  }
+
+  .react-multiple-carousel__arrow::before {
+    color: #443926;
+    font-size: 30px;
+  }
+
+  .react-multiple-carousel__arrow--right {
+   right: 0; 
+   z-index: 999;
+  }

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /puplic
+Sitemap: https://www.xn--78-6kcaaad6a7betkd8bwhgidq0u.xn--p1ai/sitemap.xml
