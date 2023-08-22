@@ -6,14 +6,23 @@ function Action() {
     <Wrapper>
       <div
         className="mt-0  action w-[100%] h-[441px] md:h-[660px]"
-        style={{ backgroundImage: `url(./images/action_bg.png)`}}
+        // style={{ backgroundImage: `url(./images/action_bg.png)`}}
       
       >
-        <div className="container">
+        <div className="w-[100%] h-[441px] md:h-[660px]">
+            <img
+              src="./images/action_bg.png"
+              alt=""
+              width={"100%"}
+              height={"100%"}
+              className="absolute top-0 z-0"
+            />
+          </div>
+        <div className="container z-20 absolute top-32">
           <p className="title w-[40%]">Акция</p>
 
           <div className="card w-[40%]">
-            <img src="./images/action.png" alt="" />
+            <img src="./images/action.png" alt=""  />
 
             <span>
               При самовывозе любой напиток из нашего меню в подарок, например
