@@ -10,7 +10,7 @@ import { useState } from "react";
 
 function App() {
   const location = useLocation()
-  console.log(location.pathname)
+  // console.log(location.pathname)
    const [state, setstate] = useState([])
   
   return (

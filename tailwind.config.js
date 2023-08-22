@@ -14,7 +14,8 @@ module.exports = {
         bgPrimary: '#EEF1F3',
         tableGreey: '#74808C',
         lightBlue: '#1181D9',
-        darkMode: "#fff"
+        darkMode: "#fff",
+        modal:"rgba(0,0,0,.8)"
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif']

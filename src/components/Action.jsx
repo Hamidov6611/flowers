@@ -5,13 +5,14 @@ function Action() {
   return (
     <Wrapper>
       <div
-        className="mt-0  action w-[100%] md:h-[660px] h-[249px] md:pb-[100px]"
-        style={{ backgroundImage: `url(./images/action_bg.png)`, height: "100%"}}
+        className="mt-0  action w-[100%] h-[441px] md:h-[660px]"
+        style={{ backgroundImage: `url(./images/action_bg.png)`}}
+      
       >
-        <div className="container ">
-          <p className="title">Акция</p>
+        <div className="container">
+          <p className="title w-[40%]">Акция</p>
 
-          <div className="card">
+          <div className="card w-[40%]">
             <img src="./images/action.png" alt="" />
 
             <span>
@@ -29,12 +30,9 @@ export default Action;
 
 const Wrapper = styled.section`
   width: 100%;
-  margin: 80px 0;
 
   .action {
-    padding-top: 40px;
     width: 100%;
-    height: 441px;
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -50,7 +48,6 @@ const Wrapper = styled.section`
     }
   }
   .card {
-    width: 592px;
     background: rgba(0, 0, 0, 0.34);
     border: 1px solid ${(props) => props.theme.colors.whiteColor};
     border-radius: 30px;
@@ -79,7 +76,6 @@ const Wrapper = styled.section`
     .action {
       width: 100%;
       margin: 0 auto;
-      height: 249px;
     }
     .card {
       width: 100%;
@@ -89,8 +85,8 @@ const Wrapper = styled.section`
       height: 249px;
       position: relative;
       bottom: 40px;
-      gap: 50px;
-      margin-top: 32px;
+      gap: 0px;
+      margin-top: 52px;
 
       background: none;
     border: none;
@@ -99,7 +95,6 @@ const Wrapper = styled.section`
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
-        line-height: 24px;
         color: ${(props) => props.theme.colors.whiteColor};
       }
     }
@@ -114,7 +109,6 @@ const Wrapper = styled.section`
     }
     .card span {
       font-size: 20px;
-      // margin-top: 60px;
     }
   }
 `;

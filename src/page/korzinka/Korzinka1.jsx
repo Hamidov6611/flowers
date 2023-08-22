@@ -4,7 +4,6 @@ import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { uri } from "../../layout/config";
 
-
 function Korzinka1() {
   const [defaultPrice, setDefaultPrice] = useState(0);
   const [price, setPrice] = useState(defaultPrice);
@@ -13,17 +12,17 @@ function Korzinka1() {
   const [sum, setSum] = useState(delivery);
   const [kor, setKor] = useState([]);
   const [price2, setPrice2] = useState(0);
-  const [tovar, setTovar] = useState(0);
+  const [tovar, setTovar] = useState(Number);
   const [selected, setSelected] = useState(true);
-  const [id1, setId1] = useState(Number)
+  const [id1, setId1] = useState(Number);
 
   const addHandler = (id) => {
     kor?.map((item) => {
-        if (item.id === id) {
-          item.count = item.count >= 0 && item.count + 1;
-          console.log(item.count)
-          setSum((prev) => prev + parseInt(item.price));
-          setTovar((prev) => prev + 1);
+      if (item.id === id) {
+        item.count = item.count >= 0 && item.count + 1;
+        console.log(item.count);
+        setSum((prev) => prev + parseInt(item.price));
+        setTovar((prev) => prev + 1);
       }
     });
   };
@@ -31,40 +30,52 @@ function Korzinka1() {
   const removeHandler = (id) => {
     kor?.map((item) => {
       if (item.id === id) {
-        item.count = item.count > 0 ? item.count - 1 : 0
+       if(item?.count > 1) {
+        item.count = item.count > 0 ? item.count - 1 : 0;
         if (sum > 0 && tovar > 0 && item.count >= 0) {
-        
-          setSum((prev) =>  prev - parseInt(item.price));
+          setSum((prev) => prev - parseInt(item.price));
           setTovar((prev) => prev - 1);
           setSelected(item.selected);
         }
+       }
       }
     });
   };
-  
-  localStorage.setItem("full", JSON.stringify({countFinally: tovar, sumFinally: sum}))
+
+  localStorage.setItem(
+    "full",
+    JSON.stringify({ countFinally: tovar, sumFinally: sum })
+  );
 
   const selectedHandler = (id) => {
-    kor?.map(item => item.id == id && (item.selected = true))
+    kor?.map((item) => item.id == id && (item.selected = true));
   };
 
- 
-
-  const len = kor?.length
+  const len = kor?.length;
 
   useEffect(() => {
     const a = localStorage.getItem("basket");
     if (a) {
       const res = JSON.parse(a);
       setKor(res);
+      // console.log(JSON.parse(a))
+      res?.map((item) => {
+        setSum((prev) => prev +( parseInt(item?.count) * parseInt(item?.price)));
+        setTovar((prev) => prev + parseInt(item?.count))
+      });
     }
   }, []);
   const removeProduct = (id) => {
-    let a = kor?.filter(i => i?.id !== id)
-    console.log(a)
-    setKor(a)
-    localStorage.setItem("basket", JSON.stringify(a))
-  }
+    let a = kor?.filter((i) => i?.id !== id);
+    console.log(a);
+    setKor(a);
+    kor?.map(c => {
+      if(c.id == id) {
+        setSum(prev => prev - ( parseInt(c?.count) * parseInt(c?.price)))
+      }
+    })
+    localStorage.setItem("basket", JSON.stringify(a));
+  };
   return (
     <Wrapper>
       <div className="container">
@@ -72,88 +83,86 @@ function Korzinka1() {
 
         <div className="wrap flex flex-col md:flex-row">
           <div className="flex flex-col left w-[100%] md:w-[60%]">
-            {kor && kor?.map((item,index) => (
-              <div key={index} className="">
-                <hr className="w-[100%]" />
-                <div class="container-section gap-[5px] sm:gap-[30px] md:gap-[60px] flex lg:flex-row flex-col items-center">
-                  <div class="container1 p-2">
-                    <button onClick={() => removeProduct(item.id)}>
-                    <img
-                      src="./images/korzinka12.svg"
-                      alt=""
-                      className="cursor-pointer"
-                    />
-                    </button>
-                    <div className="w-[119px] h-[106px] flex">
-                      <img
-                        width={"100%"}
-                        height={"100%"}
-                        className="rounded-lg"
-                        src={`${uri}${item?.flowers[0]?.img}`}
-                        alt=""
-                      />
-                    </div>
-
-                  </div>
-                  <div class="container2 mb-[10px] sm:mb-0">
-                    <div className="count">
-                      <button
-                        className="plus cursor-pointer"
-                        onClick={() => addHandler(item.id)}
-                      >
-                        +
+            {kor &&
+              kor?.map((item, index) => (
+                <div key={index} className="">
+                  <hr className="w-[100%]" />
+                  <div className="container-section gap-[5px] sm:gap-[30px] md:gap-[60px] flex lg:flex-row flex-col items-center">
+                    <div className="container1 p-2">
+                      <button onClick={() => removeProduct(item.id)}>
+                        <img
+                          src="./images/korzinka12.svg"
+                          alt=""
+                          className="cursor-pointer object-cover"
+                        />
                       </button>
-                      <span>{item?.count}</span>
-                      {item.count > 0 ? (
-                          <button
-
-                          className="minus cursor-pointer"
-                          onClick={() => removeHandler(item.id)}
-                        >
-                          -
-                        </button>
-                        ) :
-                        <button
-                          disabled
-                          className="minus cursor-pointer"
-                        >
-                          -
-                        </button>
-                        }
+                      <div className="w-[119px] h-[106px] flex">
+                        <img
+                          width={"100%"}
+                          height={"100%"}
+                          className="rounded-lg"
+                          src={`${uri}${item?.flowers[0]?.img}`}
+                          alt=""
+                        />
+                      </div>
                     </div>
-                    <h4 className="flex">
-                      {item.price} <p className="ml-1">₽</p>
-                    </h4>
-                    
+                    <div className="container2 mb-[10px] sm:mb-0">
+                      <div className="count">
+                        <button
+                          className="plus cursor-pointer"
+                          onClick={() => addHandler(item.id)}
+                        >
+                          +
+                        </button>
+                        <span>{item?.count}</span>
+                        {item.count > 0 ? (
+                          <button
+                            className="minus cursor-pointer"
+                            onClick={() => removeHandler(item.id)}
+                          >
+                            -
+                          </button>
+                        ) : (
+                          <button disabled className="minus cursor-pointer">
+                            -
+                          </button>
+                        )}
+                      </div>
+                      <h4 className="flex">
+                        {item.price} <p className="ml-1">₽</p>
+                      </h4>
+                    </div>
                   </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="right w-[100%] md:w-[40%]">
             <p>Итого:</p>
-            <div class="price">
+            <div className="price">
               <p>{tovar} товар</p>
               <h4>{sum} ₽</h4>
             </div>
 
             <hr />
-            <div class="price">
+            <div className="price">
               <p>Доставка</p>
               <h4>{delivery} ₽</h4>
             </div>
-            <div class="price">
+            <div className="price">
               <p>К оплате</p>
               <h4>{sum} ₽</h4>
             </div>
 
-            <Link to={tovar > 0 && "/корзина/2"} className="btn1 flex justify-center my-4">
+            <Link
+              to={tovar > 0 && "/корзина/2"}
+              className="btn1 flex justify-center my-4"
+            >
               <Button>Оформить заказ</Button>
             </Link>
 
-            <span class="btn-p">
+            <span className="btn-p">
               Нажимая кнопку "Оформить заказ" вы соглашаетесь с условиями
               обработки персональных данных и публичной офертой.
             </span>

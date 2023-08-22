@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
+import StickyBtns from "../components/stickyBtn";
 
 const Layout = ({ children, title, logo, kor, desc }) => {
   return (
@@ -18,6 +19,8 @@ const Layout = ({ children, title, logo, kor, desc }) => {
       </Helmet>
       <Header logo={logo} lay={kor} />
       <main>{children}</main>
+      <StickyBtns
+       />
       <Footer />
     </>
   );

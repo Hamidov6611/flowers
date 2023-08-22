@@ -20,39 +20,79 @@ function Buket() {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [flowers1, setFlowers] = useState([]);
-  const [price1, setPrice1] = useState(8000);
-  const [basket, setBasket] = useState(JSON.parse(localStorage.getItem("basket")) || []);
+  const [isShow, setIsShow] = useState(false)
+  const [price1, setPrice1] = useState(5000);
+  const [basket, setBasket] = useState(
+    JSON.parse(localStorage.getItem("basket")) || []
+  );
   const [title, setTitle] = useState("");
   const [id, setId] = useState(Number);
   const [subId, setSubId] = useState(0);
   const [pageSize, setPageSize] = useState(Number);
+  const [filt, setFilt] = useState([{id: 1, sum: 5000}, {id: 2, sum: 10000}, {id: 3, sum: 100000}])
+
   const [pageId, setPageId] = useState(1);
 
-
-
   const [show, setShow] = useState(false);
-  const {setstate} = useContext(ProductContext)
-  const location = useLocation()
+  const { setstate } = useContext(ProductContext);
+  const location = useLocation();
   const plusHandler = () => {
-    setPrice1((prev) => prev + 2000);
+    // setPrice1((prev) => prev + 2000);
+    switch(price1) {
+      case 5000: 
+        setPrice1(price1 * 2)
+        break
+      case 10000:
+        setPrice1(price1 * 10)
+        break
+      case 100000:
+        setPrice1(5000)
+        break
+      default: setPrice1(5000)
+    }
+    sortHandler()
   };
   const basketHandler = (id) => {
-    flowers1?.map((item) => {
-      if (item.id === id) {
-        
-        basket?.push({...item, count: 0, selected: false });
-        localStorage.setItem("basket", JSON.stringify(basket));
-        
-  console.log(basket)
+    const products = JSON.parse(localStorage.getItem("basket")) || [];
+    const isProduct = products.find((c) => c.id == id);
+    if (isProduct) {
+      const updateProduct = products.map((item) => {
+        if (item?.id == id) {
+          return {
+            ...item,
+            count: item?.count + 1,
+          };
+        }
+        return item;
+      });
+      localStorage.setItem("basket", JSON.stringify(updateProduct));
+    } else {
+      flowers1?.map((item) => {
+        if (item.id === id) {
+          basket?.push({ ...item, count: 1, selected: false });
+          localStorage.setItem("basket", JSON.stringify(basket));
 
-      }
-    });
+          console.log(basket);
+        }
+      });
+    }
   };
 
   const minusHandler = () => {
-    if (price1 > 0) {
-      setPrice1((prev) => prev - 2000);
+    switch(price1) {
+      case 5000: 
+        setPrice1(100000)
+        break
+      case 10000:
+        setPrice1(5000)
+        break
+      case 100000:
+        setPrice1(10000)
+        break
+      default: setPrice1(5000)
     }
+
+    sortHandler()
   };
 
   // category handler
@@ -60,7 +100,6 @@ function Buket() {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
       setCategory(data);
-      
     } catch (error) {
       console.log(error);
     }
@@ -69,16 +108,28 @@ function Buket() {
   //filter handler
   const filterHandler = async (e) => {
     e.preventDefault();
-   try {
-  
-    const { data } = await axios.get(
-      `${url}/AllProductSearchView/?search=${title}`
-    );
-    setFlowers(data?.results);
-   } catch (error) {
-    console.log(error)
-   }
+    try {
+      const { data } = await axios.get(
+        `${url}/AllProductSearchView/?search=${title}`
+      );
+      setFlowers(data?.results);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const sortHandler = async () => {
+    // e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `${url}/AllProductSearchView/?search=${price1}`
+      );
+      setFlowers(data?.results);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //get sub category
   const categorySubHandler = async () => {
     try {
@@ -108,13 +159,15 @@ function Buket() {
   }, [subId]);
 
   const getFlowers = async () => {
-   try {
-    const { data } = await axios.get(`${url}/flowers_all_sites_views/?page=${pageId}`);
-    setFlowers(data?.results);
-    setPageSize(data?.count)
-   } catch (error) {
-    console.log(error)
-   }
+    try {
+      const { data } = await axios.get(
+        `${url}/flowers_all_sites_views/?page=${pageId}`
+      );
+      setFlowers(data?.results);
+      setPageSize(data?.count);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getFlowers();
@@ -122,10 +175,10 @@ function Buket() {
   const subHandler = async (id) => {
     try {
       setId(id);
-    const {data} = await axios.get(`${url}/sub_category_all_views/${id}/`)
-    setSubCategory(data)
+      const { data } = await axios.get(`${url}/sub_category_all_views/${id}/`);
+      setSubCategory(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -145,12 +198,20 @@ function Buket() {
           Букеты
         </p>
         <div className="flex pb-[40px] items-center flex-col md:flex-row">
-          <div className="flex mb-[20px] md:mb-0">
+          <div className="flex mb-[20px] md:mb-0 relative">
             <p className="text-[20px] font-medium text-[#656565] md:mr-4">
               до {price1}
             </p>
             <ArrowUpwardIcon className="cursor-pointer" onClick={plusHandler} />
             <ArrowDownwardIcon onClick={minusHandler} />
+
+            {/* <div className="absolute top-8 left-0 h-25 w-28 flex flex-col">
+                {filt?.map((item, index) => {
+                  return (
+                    <p key={item?.id} className="font-semibold text-[#15100C]">{item?.sum}</p>
+                  )
+                })}
+            </div> */}
           </div>
           <form onSubmit={filterHandler}>
             <input
@@ -164,17 +225,19 @@ function Buket() {
         </div>
         <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
           {category?.map((item) => (
-            <button 
-              key={item?.id}
-              onClick={() => subHandler(item?.id)}
-              className={`bg-white text-[#443926] border-2 border-[#443926]
+            <>
+              <button
+                key={item?.id}
+                onClick={() => subHandler(item?.id)}
+                className={`bg-white text-[#443926] border-2 border-[#443926]
                py-1 md:py-2 mb-[20px] px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
-            >
-              {item?.title}
-            </button>
+              >
+                {item?.title}
+              </button>
+            </>
           ))}
         </div>
-      
+
         <div className="flex pb-[30px] flex-col md:flex-row">
           <div className="flex flex-wrap">
             <button
@@ -199,64 +262,81 @@ function Buket() {
         <div className="bgbgbg  rounded-3xl p-5 flex flex-row justify-between flex-wrap mb-[40px]">
           {flowers1.length > 0 ? (
             flowers1?.map((item, index) => {
-              return ((location.pathname == '/' ? index < 4 : () => setPageId(1)) || show) &&
-            (
-              <div key={index} className="md:w-[49%] w-[100%] mb-[20px] ">
-                <div className="bg-blue-350 border border-gray-200 rounded-lg ">
-                  <div>
-                    <Swiper
-                      modules={[Pagination, A11y]}
-                      spaceBetween={50}
-                      slidesPerView={1}
-                      pagination={{ clickable: true }}
-                    >
-                      {item?.flowers?.map((c,index) => (
-                          <SwiperSlide key={index} >
-                    <div className={"h-[273px] sm:h-[440px] w-[100%]"}>
-                      <img
-                        src={` ${c?.img?.includes('https://buketyana-admin.ru') ? c?.img : (uri+c?.img) } `}
-                        className="w-[100%] h-[100%]  object-cover rounded-t-lg" alt={"flower"}
-                      />
-                    </div>
-
-                        </SwiperSlide>
-                        ))}
-                    </Swiper>
-                  </div>
-                  <div className="p-5">
-                    <div>
-                      <h5 className="mb-2 text-[16px] md:text-[18px] tracking-tight text-white dark:text-white font-montserrat">
-                        {item?.name}
-                      </h5>
-                    </div>
-                    <p className="mb-3 text-[14px] font-medium min-h-[20px] lg:min-h-[60px] text-white "
-                    dangerouslySetInnerHTML={{
-                      __html: (item?.cotent?.slice(0, 100) )
-                    }} 
-                    />
-                    <div className="flex justify-between md:flex-row">
-                      <div>
-                      <button
-                        onClick={() => basketHandler(item.id)}
-						className="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#779243] rounded-lg hover:bg-lime-500 justify-center mb-3 md:mb-0"
-                      >
-                        В корзину
-                      </button>
+              return (
+                ((location.pathname == "/" ? index < 4 : () => setPageId(1)) ||
+                  show) && (
+                  <div key={index} className="md:w-[49%] w-[100%] mb-[20px] ">
+                    <div className="bg-blue-350 border border-gray-200 rounded-lg ">
                       <Link to={`/букеты/${item.id}`}>
+                        <Swiper
+                          modules={[Pagination, A11y]}
+                          spaceBetween={50}
+                          slidesPerView={1}
+                          pagination={{ clickable: true }}
+                        >
+                          {item?.flowers?.map((c, index) => (
+                            <SwiperSlide key={index}>
+                              <div
+                                className={"h-[273px] sm:h-[440px] w-[100%]"}
+                              >
+                                <img
+                                  src={` ${
+                                    c?.img?.includes(
+                                      "https://buketyana-admin.ru"
+                                    )
+                                      ? c?.img
+                                      : uri + c?.img
+                                  } `}
+                                  className="w-[100%] h-[100%]  object-cover rounded-t-lg"
+                                  alt={"flower"}
+                                />
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                      </Link>
+                      <div className="p-5">
+                        <div>
+                          <h5 className="mb-2 text-[16px] md:text-[18px] tracking-tight text-white dark:text-white font-montserrat line-clamp-1">
+                            {item?.name}
+                          </h5>
+                        </div>
+                        {/* <div className="flex">
+                          <p className="mb-3 text-[14px] font-medium min-h-[20px] text-[#443926] mr-3 md:text-[16px] ">
+                            В составе:
+                          </p>{" "}
+                          <p
+                            className="mb-3 text-[14px] font-medium line-clamp-1 md:text-[16px] text-[#443926] md:text-[16px]"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.rank,
+                            }}
+                          />
+                        </div> */}
+                        <div className="flex justify-between md:flex-row">
+                          <div>
+                            <button
+                              onClick={() => basketHandler(item.id)}
+                              className="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#779243] rounded-lg hover:bg-lime-500 justify-center mb-3 md:mb-0"
+                            >
+                              В корзину
+                            </button>
+                            {/* <Link to={`/букеты/${item.id}`}>
                         <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#1e29ac] rounded-lg hover:bg-blue-500 justify-center mb-3 md:mb-0">
                         Подробнее
                         </button>
                       
-                      </Link>
+                      </Link> */}
+                          </div>
+                          <p className="text-white text-[24px] font-montserrat">
+                            {item?.price} ₽
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-white text-[24px] font-montserrat">
-                        {item?.price} ₽
-                      </p>
                     </div>
                   </div>
-                </div>
-              </div>
-            )})
+                )
+              );
+            })
           ) : (
             <div className="w-[100%] flex justify-center">
               <p className="font-montserrat text-[24px] text-white">
@@ -264,26 +344,27 @@ function Buket() {
               </p>
             </div>
           )}
-          {location.pathname == '/' && (
+          {location.pathname == "/" && (
             <div className="btn1 w-[100%]" style={{ textAlign: "center" }}>
-            {
-             <Link to={location.pathname == '/' && '/букеты'}>
-               <button className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]" onClick={() => setShow(!show)}>
-                {show ? "Cократить" : "Смотреть все букеты"}
-              </button>
-             </Link>
-            }
-          </div>
+              {
+                <Link to={location.pathname == "/" && "/букеты"}>
+                  <button
+                    className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]"
+                    onClick={() => setShow(!show)}
+                  >
+                    {show ? "Cократить" : "Смотреть все букеты"}
+                  </button>
+                </Link>
+              }
+            </div>
           )}
         </div>
 
-
-        {location.pathname === '/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B' && (
+        {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
           <div className="flex justify-center my-8">
-            <Pagination1 pageSize={pageSize} setPageId={setPageId}/>
+            <Pagination1 pageSize={pageSize} setPageId={setPageId} />
           </div>
-          )}
-
+        )}
       </div>
     </Wrapper>
   );
@@ -312,7 +393,6 @@ const Wrapper = styled.section`
           // width: 100%;
           // height: 395px;
           object-fit: cover;
-		  
         }
 
         h3 {

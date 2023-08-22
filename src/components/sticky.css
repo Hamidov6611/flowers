@@ -1,0 +1,86 @@
+.sticky-btns {
+    position: fixed;
+    top: 80%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 3.75rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    gap: 1.25rem;
+    z-index: 9999;
+  }
+  @keyframes pulse-purple {
+    0% {
+      -webkit-transform: scale(0.95);
+      transform: scale(0.95);
+      -webkit-box-shadow: 0 0 0 0 rgba(99, 82, 205, 0.7);
+      box-shadow: 0 0 0 0 rgba(99, 82, 205, 0.7);
+    }
+    70% {
+      -webkit-transform: scale(1.05);
+      transform: scale(1.05);
+      -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-transform: scale(0.95);
+      transform: scale(0.95);
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+  .sticky-btns__item img,
+  .sticky-btns__item svg {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+  }
+  
+  .sticky-btns__item--blue {
+    background: #4c8ced;
+    -webkit-animation: pulse-purple 2s infinite;
+    animation: pulse-purple 2s infinite;
+  }
+  
+  .sticky-btns__item {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: 1.25rem;
+    border-radius: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: 0.1s ease;
+    transition: 0.1s ease;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 0 0 0 #000;
+    box-shadow: 0 0 0 0 #000;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  @media (max-width: 767px) {
+    .sticky-btns__item {
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: 7px;
+    }
+    .sticky-btns {
+      right: 10px;
+    }
+  }

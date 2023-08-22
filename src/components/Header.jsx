@@ -21,7 +21,6 @@ function Header() {
   const [id, setId] = useState([]);
   const [counter, setCounter] = useProduct();
 
- 
   useEffect(() => {
     const num = () => {
       const a = localStorage.getItem("basket");
@@ -93,8 +92,106 @@ function Header() {
   };
 
   return (
-    <div className="w-[100%] bg-[#8C5C38]">
-      <div className="md:w-[80%] w-[90%] mx-auto flex flex-row justify-between items-center">
+    <div className="w-[100%] bg-[#EDFCD6]">
+      <div className="md:w-[100%] w-[90%] sticky top-0 mx-auto flex flex-row justify-between items-center">
+        <div className="hidden xl:flex w-[55%] justify-start sticky top-0">
+          <Link
+            to="/oнас"
+            className={` md:mr-[10px] lg:mr-[40px] lg:ml-[40px] md:ml-[30px] `}
+            onClick={active1}
+          >
+            <p
+              className={` ${
+                menu1
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px] flex  `}
+            >
+              <p> О</p> <p>нас</p>
+            </p>
+          </Link>
+
+          <Link
+            to="/букеты"
+            className="md:mr-[10px] lg:mr-[40px]"
+            onClick={active2}
+          >
+            <p
+              className={` ${
+                menu2
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+            >
+              Букеты
+            </p>
+          </Link>
+
+          <Link
+            to="/доставка"
+            className="md:mr-[10px] lg:mr-[40px]"
+            onClick={active3}
+          >
+            <p
+              className={` ${
+                menu3
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+            >
+              Доставка
+            </p>
+          </Link>
+
+          <Link
+            to="/oтзывы"
+            className="md:mr-[10px] lg:mr-[40px]"
+            onClick={active4}
+          >
+            <p
+              className={` ${
+                menu4
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+            >
+              Отзывы
+            </p>
+          </Link>
+
+          <Link
+            to="/блог"
+            className="md:mr-[10px] lg:mr-[40px]"
+            onClick={active5}
+          >
+            <p
+              className={` ${
+                menu5
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+            >
+              Блог
+            </p>
+          </Link>
+
+          <Link
+            to="/контакт"
+            onClick={active6}
+            className="md:mr-[10px] lg:mr-[40px]"
+          >
+            <p
+              className={` ${
+                menu6
+                  ? "text-[#443926] font-bold "
+                  : "text-[#8C5C38] font-semibold"
+              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+            >
+              Контакт
+            </p>
+          </Link>
+        </div>
+
         <div className="md:w-[15%] w-[40%] sm:w-[60%] cursor-pointer">
           <Link to={"/"} onClick={clickHandler}>
             <div className="w-[113px] h-[46px] lg:w-[171px] lg:h-[70px]">
@@ -103,6 +200,7 @@ function Header() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
+                // style={{fill:"#8C5C38"}}
               >
                 <rect width={171} height={70} fill="url(#pattern0)" />
                 <defs>
@@ -129,99 +227,14 @@ function Header() {
           </Link>
         </div>
 
-        <div className="hidden xl:flex w-[55%] justify-start">
-          <Link
-            to="/oнас"
-            className={` md:mr-[10px] lg:mr-[40px] lg:ml-[40px] md:ml-[30px] `}
-            onClick={active1}
-          >
-            <p
-              className={` ${
-                menu1 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px] flex  `}
-            >
-              <p> О</p> <p>нас</p>
-            </p>
-          </Link>
-
-          <Link
-            to="/букеты"
-            className="md:mr-[10px] lg:mr-[40px]"
-            onClick={active2}
-          >
-            <p
-              className={` ${
-                menu2 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Букеты
-            </p>
-          </Link>
-
-          <Link
-            to="/доставка"
-            className="md:mr-[10px] lg:mr-[40px]"
-            onClick={active3}
-          >
-            <p
-              className={` ${
-                menu3 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Доставка
-            </p>
-          </Link>
-
-          <Link
-            to="/oтзывы"
-            className="md:mr-[10px] lg:mr-[40px]"
-            onClick={active4}
-          >
-            <p
-              className={` ${
-                menu4 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Отзывы
-            </p>
-          </Link>
-
-          <Link
-            to="/блог"
-            className="md:mr-[10px] lg:mr-[40px]"
-            onClick={active5}
-          >
-            <p
-              className={` ${
-                menu5 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Блог
-            </p>
-          </Link>
-
-          <Link
-            to="/контакт"
-            onClick={active6}
-            className="md:mr-[10px] lg:mr-[40px]"
-          >
-            <p
-              className={` ${
-                menu6 ? "text-[#443926] font-bold " : "text-white"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Контакт
-            </p>
-          </Link>
-        </div>
         <div className="flex flex-row md:w-[30%] w-[60%] sm:w-[40%] justify-around items-center">
           <Link to={"tel: +79119276162"} className="flex items-center">
             <img
-              src="../images/tel.svg"
+              src="../images/tel2.svg"
               alt=""
               className="mr-3 hidden lg:flex"
             />
-            <p className="text-[12px]   lg:text-[17px] xl:text-[18px] text-white font-montserrat">
+            <p className="text-[12px]   lg:text-[17px] xl:text-[18px] text-[#8C5C38] font-semibold font-montserrat">
               + 7 (911) 927-61-62
             </p>
           </Link>
@@ -239,13 +252,13 @@ function Header() {
               >
                 <path
                   d="M5.33333 0C5.97222 0 6.52222 0.463887 6.64444 1.10506L6.72778 1.8125H30.1C31.2278 1.8125 32.1278 2.95947 31.8111 4.11551L28.8111 14.9928C28.5944 15.7744 27.8944 16.3125 27.1 16.3125H9.48333L9.99444 19.0312H27.1111C27.85 19.0312 28.4444 19.6373 28.4444 20.3906C28.4444 21.1439 27.85 21.75 27.1111 21.75H8.83889C8.25 21.75 7.7 21.2855 7.57778 20.6455L4.23 2.71875H1.33333C0.597222 2.71875 0 2.10986 0 1.35938C0 0.608887 0.597222 0 1.33333 0H5.33333ZM7.11111 26.2812C7.11111 24.7803 8.30556 23.5625 9.77778 23.5625C11.25 23.5625 12.4444 24.7803 12.4444 26.2812C12.4444 27.7822 11.25 29 9.77778 29C8.30556 29 7.11111 27.7822 7.11111 26.2812ZM28.4444 26.2812C28.4444 27.7822 27.25 29 25.7778 29C24.3056 29 23.1111 27.7822 23.1111 26.2812C23.1111 24.7803 24.3056 23.5625 25.7778 23.5625C27.25 23.5625 28.4444 24.7803 28.4444 26.2812Z"
-                  fill="white"
+                  fill="#8C5C38"
                 />
               </svg>
             </div>
 
             {id.length > 0 && (
-              <div className="bg-red-600  min-w-[20px] md:min-w-[30px] min-h-[15px] md:min-h-[20px] flex justify-center items-center rounded-[100%] relative top-[-10px] ml-1">
+              <div className="bg-red-600  min-w-[16px] md:min-w-[30px] min-h-[15px] md:min-h-[20px] flex justify-center items-center rounded-full relative top-[-10px] ml-1 text-[12px] md:text-[14px]">
                 <p className=" text-white  md:p-1 font-montserrat">
                   {id?.length}
                 </p>
@@ -253,7 +266,7 @@ function Header() {
             )}
           </Link>
 
-          <div className="xl:hidden flex text-white ">
+          <div className="xl:hidden flex text-[#8C5C38] ">
             {menu ? (
               <DehazeIcon size={"large"} onClick={menuHandler} />
             ) : (
@@ -261,44 +274,48 @@ function Header() {
             )}
           </div>
           {!menu && (
-            <div className="absolute top-[43px] lg:top-[70px] left-0 flex flex-col h-[60px] items-center  w-full bg-[#8C5C38]">
-              <div className="flex w-[90%] justify-around mb-[5px]">
-                <Link to="/oнас">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+            <div className="fixed top-[43px] lg:top-[70px] left-0 flex flex-col h-[100vh] z-[999999] w-full bg-[#EDFCD6]">
+              <div className="flex justify-center items-center mt-8 w-[90%] flex-col mb-[5px]">
+                <Link to="/oнас" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     О нас
                   </p>
                 </Link>
 
-                <Link to="/букеты">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+                <Link to="/букеты" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     Букеты
                   </p>
                 </Link>
 
-                <Link to="/доставка">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+                <Link to="/доставка" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     Доставка
                   </p>
                 </Link>
-              </div>
 
-              <div className="flex w-[90%] justify-around">
-                <Link to="/oтзывы">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+                <Link to="/oтзывы" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     Отзывы
                   </p>
                 </Link>
 
-                <Link to="/блог">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+                <Link to="/блог" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     Блог
                   </p>
                 </Link>
-                <Link to="/контакт">
-                  <p className="font-montserrat text-[15px]  lg:text-[17px] xl:text-[18px] text-white">
+                <Link to="/контакт" onClick={() => setMenu(true)}>
+                  <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#8C5C38]  lg:text-[17px] xl:text-[18px]">
                     Контакт
                   </p>
                 </Link>
+
+                <div className="absolute bottom-[40px] flex justify-center">
+                  <p className="font-montserrat font-semibold mb-3 text-[#8C5C38] text-[12px] text-center w-[100%]">
+                    Букетная Мануфактура © 2023 Все права защищены
+                  </p>
+                </div>
               </div>
             </div>
           )}

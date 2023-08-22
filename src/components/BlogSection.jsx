@@ -67,9 +67,9 @@ function BlogSection() {
                     </div>
                     <div className="info-title h-[200px] my-4">
                       <h3 className="title">{item?.title}</h3>
-                      <p className="text"
+                      <p className="text line-clamp-5"
                       dangerouslySetInnerHTML={{
-                        __html: (item?.content.slice(0,150) )
+                        __html: (item?.content )
                       }}
                       />
                     </div>
@@ -112,7 +112,6 @@ export default BlogSection;
 
 const Wrapper = styled.section`
   padding: 80px 0;
-
   
 
   .title {
