@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
 import axios from "axios";
 import "./index.css";
 import { uri, url } from "../layout/config.js";
@@ -35,6 +35,10 @@ function Buket() {
 
   const [show, setShow] = useState(false);
   const { setstate } = useContext(ProductContext);
+
+  const sasa = useParams()
+  console.log(sasa)
+
   const location = useLocation();
   const plusHandler = () => {
     // setPrice1((prev) => prev + 2000);
@@ -100,6 +104,7 @@ function Buket() {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
       setCategory(data);
+      // console.log(data)
     } catch (error) {
       console.log(error);
     }
@@ -181,6 +186,21 @@ function Buket() {
       console.log(error);
     }
   };
+
+  const subHandler2 = async (id) => {
+    try {
+      setId(id);
+      const { data } = await axios.get(`${url}/sub_category_all_views/${sasa?.id}/`);
+      setSubCategory(data);
+      console.log(data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    subHandler2()
+  }, [sasa.id])
 
   useEffect(() => {
     categorySubHandler();

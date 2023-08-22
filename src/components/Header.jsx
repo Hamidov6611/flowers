@@ -97,7 +97,7 @@ function Header() {
         <div className="hidden xl:flex w-[55%] justify-start">
           <Link
             to="/oнас"
-            className={` md:mr-[10px] lg:mr-[40px] lg:ml-[40px] md:ml-[30px] `}
+            className={` md:mr-[10px] lg:mr-[40px] ml-4 `}
             onClick={active1}
           >
             <p
@@ -192,7 +192,7 @@ function Header() {
           </Link>
         </div>
 
-        <div className="md:w-[15%] w-[40%] sm:w-[60%] cursor-pointer">
+        <div className="md:w-[25%] w-[40%] sm:w-[60%] cursor-pointer">
           <Link to={"/"} onClick={clickHandler}>
             <div className="w-[113px] h-[46px] lg:w-[171px] lg:h-[70px]">
               <svg
@@ -227,7 +227,7 @@ function Header() {
           </Link>
         </div>
 
-        <div className="flex flex-row md:w-[30%] w-[60%] sm:w-[40%] justify-around items-center">
+        <div className="flex flex-row md:w-[20%] w-[60%] sm:w-[40%] justify-between items-center">
           <Link to={"tel: +79119276162"} className="flex items-center">
             <img
               src="../images/tel2.svg"
@@ -241,10 +241,10 @@ function Header() {
 
           <Link
             to={"/корзина"}
-            className="flex items-center"
+            className="flex items-center mr-4"
             onClick={clickHandler}
           >
-            <div className="w-[20px] h-[18px] md:w-[31.88px] md:h-[29px] ">
+            <div className="w-[20px] h-[18px] md:w-[31.88px] md:h-[29px]">
               <svg
                 viewBox="0 0 32 29"
                 fill="none"

@@ -29,6 +29,7 @@ export const routes = [
     {id:8, path:'/корзина/2', element:<Layout><Korzinka2 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
     {id:9, path:'/корзина/3', element: <Layout><Korzinka3 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
     {id:10, path:'/букеты', element: <Layout><Buket /></Layout>, logo:'', kor: '', title: 'Букеты',},
+    {id:10, path:'/букеты/категория/:id', element: <Layout><Buket /></Layout>, logo:'', kor: '', title: 'Букеты',},
     {id:11, path:'/букеты/:id', element:<Layout><BuketDetail /></Layout>, logo:logo, kor: kor, title: 'Букетная-мануфактура' },
     {id:12, path:'/корзина/4', element: <Layout><Korzinka4 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
     {id:13, path:'/корзина/5', element: <Layout><Korzinka5 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
