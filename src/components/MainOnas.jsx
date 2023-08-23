@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 function MainOnas() {
   return (
     <Wrapper>
-      <div className="container">
+      <div className="w-[94%] mx-auto">
         <p>O нас</p>
         <ul className="card1">
           <li className="card-item1">

@@ -15,6 +15,7 @@ import { A11y, Navigation, Pagination } from "swiper";
 import { useProduct } from "../config/context";
 import Pagination1 from "./pagination";
 import ProductContext from "../config/proontext";
+import { ProductsContext } from "../context/ProductContext";
 
 function Buket() {
   const [category, setCategory] = useState([]);
@@ -30,14 +31,14 @@ function Buket() {
   const [subId, setSubId] = useState(0);
   const [pageSize, setPageSize] = useState(Number);
   const [filt, setFilt] = useState([{id: 1, sum: 5000}, {id: 2, sum: 10000}, {id: 3, sum: 100000}])
-
+  const {state, setSate, getData} = useContext(ProductsContext)
   const [pageId, setPageId] = useState(1);
 
   const [show, setShow] = useState(false);
-  const { setstate } = useContext(ProductContext);
+  // const { setstate } = useContext(ProductContext);
 
   const sasa = useParams()
-  console.log(sasa)
+  console.log(state)
 
   const location = useLocation();
   const plusHandler = () => {
@@ -57,8 +58,9 @@ function Buket() {
     sortHandler()
   };
   const basketHandler = (id) => {
-    const products = JSON.parse(localStorage.getItem("basket")) || [];
-    const isProduct = products.find((c) => c.id == id);
+    let products = JSON.parse(localStorage.getItem("basket")) || [];
+    // getData(products)
+    let isProduct = products.find((c) => c.id == id);
     if (isProduct) {
       const updateProduct = products.map((item) => {
         if (item?.id == id) {
@@ -76,11 +78,13 @@ function Buket() {
           basket?.push({ ...item, count: 1, selected: false });
           localStorage.setItem("basket", JSON.stringify(basket));
 
-          console.log(basket);
+          getData(basket);
         }
       });
     }
   };
+
+  console.log(state)
 
   const minusHandler = () => {
     switch(price1) {
@@ -213,8 +217,8 @@ function Buket() {
   // console.log(flowers1);
   return (
     <Wrapper>
-      <div className="w-[90%] lg:w-[70%] mx-auto">
-        <p className="text-[48px] md:py-[40px] font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
+      <div className="w-[90%] lg:w-[94%] mx-auto">
+        <p className="text-[48px]  font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
           Букеты
         </p>
         <div className="flex pb-[40px] items-center flex-col md:flex-row">
@@ -279,13 +283,13 @@ function Buket() {
           </div>
         </div>
 
-        <div className="bgbgbg  rounded-3xl p-5 flex flex-row justify-between flex-wrap mb-[40px]">
+        <div className="bgbgbg  rounded-3xl p-5 grid grid-cols-1  lg:grid-cols-2 gap-x-4 gap-y-4 mb-[40px]">
           {flowers1.length > 0 ? (
             flowers1?.map((item, index) => {
               return (
                 ((location.pathname == "/" ? index < 4 : () => setPageId(1)) ||
                   show) && (
-                  <div key={index} className="md:w-[49%] w-[100%] mb-[20px] ">
+                  <div key={index} className=" mb-[20px] ">
                     <div className="bg-blue-350 border border-gray-200 rounded-lg ">
                       <Link to={`/букеты/${item.id}`}>
                         <Swiper
@@ -336,9 +340,9 @@ function Buket() {
                           <div>
                             <button
                               onClick={() => basketHandler(item.id)}
-                              className="mr-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#779243] rounded-lg hover:bg-lime-500 justify-center mb-3 md:mb-0"
+                              className="mr-4 inline-flex items-center px-4 rounded-2xl md:px-24 py-2 text-center text-white bg-[#779243] md:rounded-3xl hover:bg-lime-500 justify-center mb-3 md:mb-0"
                             >
-                              В корзину
+                              <p className="font-montserrat font-semibold text:[18px]">В корзину</p>
                             </button>
                             {/* <Link to={`/букеты/${item.id}`}>
                         <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#1e29ac] rounded-lg hover:bg-blue-500 justify-center mb-3 md:mb-0">
@@ -364,10 +368,11 @@ function Buket() {
               </p>
             </div>
           )}
+        </div>
           {location.pathname == "/" && (
-            <div className="btn1 w-[100%]" style={{ textAlign: "center" }}>
+            <div className="w-[100%] flex justify-center" >
               {
-                <Link to={location.pathname == "/" && "/букеты"}>
+                <Link to={location.pathname == "/" && "/букеты"} className="w-[100%] flex justify-center">
                   <button
                     className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]"
                     onClick={() => setShow(!show)}
@@ -378,7 +383,6 @@ function Buket() {
               }
             </div>
           )}
-        </div>
 
         {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
           <div className="flex justify-center my-8">

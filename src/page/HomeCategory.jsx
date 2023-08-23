@@ -21,7 +21,7 @@ const HomeCategory = () => {
   }, []);
 
   return (
-    <div className="flex flex-col my-4 p-1 sm:p-4">
+    <div className="flex flex-col my-4 p-1 sm:p-4 md:w-[96%] mx-auto">
       <div className="relative mb-4 flex flex-wrap justify-between md:flex-row flex-col">
         {category?.map((item, index) => (
           <Link

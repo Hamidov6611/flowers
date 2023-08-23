@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import Action from "../components/Action";
 import Buket from "../components/Buket";
@@ -20,6 +20,7 @@ import HomeCategory from "./HomeCategory";
 function Home() {
   const loction = useLocation();
   console.log(loction.pathname);
+ 
   return (
     <Wrapper>
       <Swiper
@@ -29,7 +30,7 @@ function Home() {
         pagination={{ clickable: true }}
       >
         <SwiperSlide>
-          <div className="w-[100%] h-[441px] md:h-[660px]">
+          <div className="md:w-[94%] mx-auto h-[441px] md:h-[660px]">
             <img
               src="./images/hero_bg.png"
               alt=""

@@ -5,7 +5,7 @@ import video from '../videos/20220219_175115.mp4'
 function MainDostavka() {
   return (
     <Wrapper>
-      <div className="container">
+      <div className="w-[94%] mx-auto">
         <p>Доставка</p>
 
         <div className="content">

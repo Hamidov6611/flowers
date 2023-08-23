@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
 import StickyBtns from "../components/stickyBtn";
 
 const Layout = ({ children, title, logo, kor, desc }) => {
+  const [len, setLen] = useState(0)
   return (
     <>
       <Helmet>
@@ -18,7 +19,7 @@ const Layout = ({ children, title, logo, kor, desc }) => {
         <meta property="og:type" content="website" /> */}
       </Helmet>
       <Header logo={logo} lay={kor} />
-      <main>{children}</main>
+      <main>{React.Children.map(children, child => React.cloneElement(child, { len, setLen }))}</main>
       <StickyBtns
        />
       <Footer />

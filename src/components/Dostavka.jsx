@@ -4,8 +4,11 @@ import Button from "./Button";
 
 function Dostavka() {
   return (
-    <Wrapper style={{ backgroundImage: `url(./images/dostavka_bg.png)` }}>
-      <div className="container dostavka">
+    <Wrapper className="w-[98%] mx-auto">
+      <div className=" relative w-[94%] mx-auto">
+        <div className="absolute right-0 top-0">
+          <img src="./images/dostavka_bg.png" alt="" />
+        </div>
         <div className="title-div">
           <p className="title">Доставка цветов</p>
           <div className="circle"></div>

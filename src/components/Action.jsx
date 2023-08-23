@@ -5,20 +5,17 @@ function Action() {
   return (
     <Wrapper>
       <div
-        className="mt-0  action w-[100%] h-[441px] md:h-[660px]"
-        // style={{ backgroundImage: `url(./images/action_bg.png)`}}
-      
+        className="mt-0  action w-[100%] md:w-[94%] mx-auto h-[441px] md:h-[660px]"
       >
-        <div className="w-[100%] h-[441px] md:h-[660px]">
+        <div className="w-[100%] mx-auto h-[441px] md:h-[660px]">
             <img
               src="./images/action_bg.png"
               alt=""
-              width={"100%"}
               height={"100%"}
-              className="absolute top-0 z-0"
+              className="absolute top-0 z-0 w-[100%]"
             />
           </div>
-        <div className="container z-20 absolute top-32">
+        <div className="container z-20 absolute top-16">
           <p className="title w-[40%]">Акция</p>
 
           <div className="card w-[40%]">

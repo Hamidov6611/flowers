@@ -42,13 +42,13 @@ function BlogSection() {
 
   return (
     <Wrapper>
-      <div className="md:w-[80%] w-[96%] mx-auto min-h-[40vh]" >
+      <div className="md:w-[94%] w-[96%] mx-auto min-h-[40vh]" >
         
         <div className="w-[100%] flex justify-center lg:justify-start">
         <p className="title">Блог</p>
         </div>
 
-        <ul className="blogs">
+        <ul className="blogs grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
           {data?.length > 0 &&
             data?.map((item, index) => {
               return (
@@ -94,7 +94,7 @@ function BlogSection() {
             })}
         </ul>
 
-        <div className="btn1" style={{ textAlign: "center" }}>
+        <div className="btn1 mb-9" style={{ textAlign: "center" }}>
           {
           <Link to={location.pathname == '/' && '/блог'}>
               <Button onClick={() => setShow(!show)}>
@@ -110,10 +110,7 @@ function BlogSection() {
 
 export default BlogSection;
 
-const Wrapper = styled.section`
-  padding: 80px 0;
-  
-
+const Wrapper = styled.section`  
   .title {
     font-family: "Cormorant";
     font-style: normal;
@@ -127,8 +124,8 @@ const Wrapper = styled.section`
     position: relative;
     z-index: 1;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
     gap: 10px;
     margin-top: 40px;

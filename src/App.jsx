@@ -5,18 +5,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { routes } from "./route.js";
 import Sitemap from './sitemap1.js'
-import ProductContext from "./config/proontext";
 import { useState } from "react";
+import { ProductsContext } from "./context/ProductContext";
 
 function App() {
   const location = useLocation()
   // console.log(location.pathname)
-   const [state, setstate] = useState([])
+   const [state, setstate] = useState(JSON.parse(localStorage.getItem('basket')) || [])
+
+
+   const getData = (data) => {
+    setstate(data)
+   }
   
   return (
       <Theme>
       <GlobalStyle />
-      <ProductContext.Provider value={{state, setstate}}>
+      <ProductsContext.Provider value={{state, setstate, getData}}>
 
       <Routes>
       {/*<Route exact path="/sitemap.xml" render={sitemap1} />*/}
@@ -33,7 +38,7 @@ function App() {
         ))}
 		  <Route path="/sitemap.xml" element={<Sitemap/>} />
       </Routes>
-      </ProductContext.Provider>
+      </ProductsContext.Provider>
       <ToastContainer />
     </Theme>
    

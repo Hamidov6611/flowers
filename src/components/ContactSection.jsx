@@ -31,7 +31,7 @@ function ContactSection() {
 
   return (
     <Wrapper>
-      <div className="md:w-[80%] w-[96%] mx-auto min-h-[40vh]">
+      <div className="md:w-[96%] w-[98%] mx-auto min-h-[40vh]">
         <div className="w-[100%] flex md:flex-row flex-col p-3">
           <div className="md:w-[50%] w-[100%]">
             <p className="title mb-3 md:mb-6 text-[#443926]">Контакт</p>
@@ -152,7 +152,7 @@ function ContactSection() {
           <iframe
             src="https://yandex.ru/map-widget/v1/org/buketnaya_manufaktura/117992422020/?ll=30.343557%2C59.965202&z=14"
             width={"100%"}
-            height={400}
+            height={600}
             frameBorder={1}
             allowFullScreen="true"
             style={{ position: "relative" }}

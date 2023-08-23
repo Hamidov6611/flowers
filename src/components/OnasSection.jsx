@@ -5,7 +5,7 @@ import MyCarousel from "./MyCarousel";
 function OnasSection() {
   return (
     <Wrapper>
-      <div className="container">
+      <div className="w-[98%] mx-auto">
         <p>О нас</p>
         <p className="pre">
           Мы- команда профессиональных флористов, работающая на цветочном рынке
@@ -22,7 +22,13 @@ function OnasSection() {
           Мы работаем с лучшими поставщиками, тщательно отбираем цветы и всегда
           стараемся держать в своем холодильнике самые необычные сорта.
         </p>
-        <img className="hero-img" src="./images/onas1.svg" alt="" />
+        <div className=" w-[100%] flex items-center justify-center mb-3 md:mb-6">
+                    <img src="./images/onas1.svg" alt="" className='h-full w-full'/>
+                    {/* <img className="card" src="./images/dostavka2.svg" alt="" /> */}
+                </div>
+        {/* <div className="w-[100%] flex items-center justify-center relative">
+          <img className="hero-img w-full h-full" src="./images/onas1.svg" alt="" />
+        </div> */}
         <h3>Наша миссия</h3>
         <p className="nash-p">
           Миссия нашего цветочного магазина в Санкт-Петербурге - создавать
@@ -156,7 +162,6 @@ function OnasSection() {
 export default OnasSection;
 
 const Wrapper = styled.section`
-  margin-top: 80px;
   p {
     font-style: normal;
     font-weight: 600;
@@ -176,7 +181,7 @@ const Wrapper = styled.section`
   }
 
   .hero-img {
-    width: 1110px;
+    // width: 1110px;
     height: 346px;
     margin-bottom: 80px;
     margin-top: 40px;

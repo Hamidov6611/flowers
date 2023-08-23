@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { uri } from "../../layout/config";
+import { ProductsContext } from "../../context/ProductContext";
 
 function Korzinka1() {
   const [defaultPrice, setDefaultPrice] = useState(0);
@@ -15,7 +16,7 @@ function Korzinka1() {
   const [tovar, setTovar] = useState(Number);
   const [selected, setSelected] = useState(true);
   const [id1, setId1] = useState(Number);
-
+  const {state, getData} = useContext(ProductsContext)
   const addHandler = (id) => {
     kor?.map((item) => {
       if (item.id === id) {
@@ -26,8 +27,21 @@ function Korzinka1() {
       }
     });
   };
-
+  
+  useEffect(() => {
+    const a = localStorage.getItem("basket");
+    if (a) {
+      const res = JSON.parse(a);
+      setKor(res);
+      // console.log(JSON.parse(a))
+      res?.map((item) => {
+        setSum((prev) => prev +( parseInt(item?.count) * parseInt(item?.price)));
+        setTovar((prev) => prev + parseInt(item?.count))
+      });
+    }
+  }, []);
   const removeHandler = (id) => {
+    getData(kor)
     kor?.map((item) => {
       if (item.id === id) {
        if(item?.count > 1) {
@@ -53,18 +67,6 @@ function Korzinka1() {
 
   const len = kor?.length;
 
-  useEffect(() => {
-    const a = localStorage.getItem("basket");
-    if (a) {
-      const res = JSON.parse(a);
-      setKor(res);
-      // console.log(JSON.parse(a))
-      res?.map((item) => {
-        setSum((prev) => prev +( parseInt(item?.count) * parseInt(item?.price)));
-        setTovar((prev) => prev + parseInt(item?.count))
-      });
-    }
-  }, []);
   const removeProduct = (id) => {
     let a = kor?.filter((i) => i?.id !== id);
     console.log(a);
