@@ -30,6 +30,11 @@ function Home() {
         pagination={{ clickable: true }}
       >
         <SwiperSlide>
+          <div className="w-[94%] h-[100%] mx-auto">
+          <Action />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
           <div className="md:w-[94%] mx-auto h-[441px] md:h-[660px]">
             <img
               src="./images/hero_bg.png"
@@ -38,9 +43,6 @@ function Home() {
               height={"100%"}
             />
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Action />
         </SwiperSlide>
       </Swiper>
       <HomeCategory />

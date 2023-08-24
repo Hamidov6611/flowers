@@ -5,9 +5,9 @@ function Action() {
   return (
     <Wrapper>
       <div
-        className="mt-0  action w-[100%] md:w-[94%] mx-auto h-[441px] md:h-[660px]"
+        className="mt-0  action w-[100%] md:w-[94%] mx-auto h-[441px] md:h-[660px] relative"
       >
-        <div className="w-[100%] mx-auto h-[441px] md:h-[660px]">
+        <div className="w-[100%] mx-auto h-[441px] md:h-[660px] absolute top-0">
             <img
               src="./images/action_bg.png"
               alt=""

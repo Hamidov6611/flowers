@@ -5,7 +5,7 @@ import video from '../videos/20220219_175115.mp4'
 function MainDostavka() {
   return (
     <Wrapper>
-      <div className="w-[94%] mx-auto">
+      <div className="w-[70%] mx-auto">
         <p>Доставка</p>
 
         <div className="content">
@@ -37,7 +37,7 @@ function MainDostavka() {
               src={video}
               title=""
               frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             ></iframe>
           </div>

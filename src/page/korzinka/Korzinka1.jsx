@@ -16,7 +16,7 @@ function Korzinka1() {
   const [tovar, setTovar] = useState(Number);
   const [selected, setSelected] = useState(true);
   const [id1, setId1] = useState(Number);
-  const {state, getData} = useContext(ProductsContext)
+  const {state, getData, removeData} = useContext(ProductsContext)
   const addHandler = (id) => {
     kor?.map((item) => {
       if (item.id === id) {
@@ -77,6 +77,7 @@ function Korzinka1() {
       }
     })
     localStorage.setItem("basket", JSON.stringify(a));
+    removeData()
   };
   return (
     <Wrapper>

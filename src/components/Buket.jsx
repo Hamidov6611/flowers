@@ -31,7 +31,7 @@ function Buket() {
   const [subId, setSubId] = useState(0);
   const [pageSize, setPageSize] = useState(Number);
   const [filt, setFilt] = useState([{id: 1, sum: 5000}, {id: 2, sum: 10000}, {id: 3, sum: 100000}])
-  const {state, setSate, getData} = useContext(ProductsContext)
+  const {state, setSate, getData, countData} = useContext(ProductsContext)
   const [pageId, setPageId] = useState(1);
 
   const [show, setShow] = useState(false);
@@ -78,6 +78,7 @@ function Buket() {
           basket?.push({ ...item, count: 1, selected: false });
           localStorage.setItem("basket", JSON.stringify(basket));
 
+          countData()
           getData(basket);
         }
       });
@@ -369,7 +370,7 @@ function Buket() {
             </div>
           )}
         </div>
-          {location.pathname == "/" && (
+          {location.pathname == "/" ? (
             <div className="w-[100%] flex justify-center" >
               {
                 <Link to={location.pathname == "/" && "/букеты"} className="w-[100%] flex justify-center">
@@ -382,13 +383,15 @@ function Buket() {
                 </Link>
               }
             </div>
-          )}
-
-        {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
+          ) :
+          
           <div className="flex justify-center my-8">
             <Pagination1 pageSize={pageSize} setPageId={setPageId} />
           </div>
-        )}
+          }
+
+        {/* {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
+        )} */}
       </div>
     </Wrapper>
   );
