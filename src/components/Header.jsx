@@ -10,10 +10,10 @@ import { useSelector } from "react-redux";
 import { url } from "../layout/config";
 import axios from "axios";
 import { ProductsContext } from "../context/ProductContext";
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { Divider, IconButton, ListItem, ListItemText } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import './header.css'
+import "./header.css";
 
 function Header() {
   const [menu, setMenu] = useState(true);
@@ -28,9 +28,9 @@ function Header() {
   const [id, setId] = useState([]);
   const [counter, setCounter] = useProduct();
   const [category, setCategory] = useState([]);
-  const [isCat, setIsCat] = useState(false)
+  const [isCat, setIsCat] = useState(false);
 
-  const {state, count} = useContext(ProductsContext)
+  const { state, count } = useContext(ProductsContext);
 
   useEffect(() => {
     const num = () => {
@@ -62,7 +62,7 @@ function Header() {
   };
 
   const active2 = () => {
-    setIsCat(prev => !prev)
+    setIsCat((prev) => !prev);
     setMenu2((prev) => !prev);
     setMenu1(false);
     setMenu3(false);
@@ -103,8 +103,6 @@ function Header() {
     setMenu5(false);
   };
 
-
-
   const categoryHandler = async () => {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
@@ -122,39 +120,44 @@ function Header() {
   return (
     <div className="w-[100%] bg-[#EDFCD6] shadow-xl mb-8">
       <div className="md:w-[96%] w-[90%] mx-auto h-[70px]  left-0 top-0 flex flex-row justify-between items-center">
-        <div className="hidden xl:flex w-[45%] justify-start">
-
+        <div className="hidden xl:flex w-[45%] justify-start items-center">
           <Link
-            
-            className="md:mr-[10px] lg:mr-[20px] ml-4 flex items-center"
-            onClick={active2}
+            class=" md:mr-[10px] lg:mr-[20px] group relative cursor-pointer py-2"
+            to={"/букеты"}
           >
-            <p
-              className={` ${
-                menu2
-                  ? "text-[#000] font-bold "
-                  : "text-[#000] font-semibold"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
-            >
-              Каталог
-            </p>
-            <div className="ml-1">
-              <img src="./images/Vector.svg" alt="" />
-            </div>
-
-          <div className="z-[888] border shadow-2xl">
-            {isCat && (
-              <div className="absolute left-3 top-[70px]  bg-[#EDFCD6] gap-x-4 border z-50 hidden xl:flex flex-col">
-                {category?.map((item) => (
-                <Link to={`/букеты/категория/${item?.id}`}>
-                  <p className="px-3 py-2 text-[#000] font-semibold ">{item?.title}</p>
-                </Link>
-                ))}
+            <div class="flex items-center justify-between space-x-1">
+              <a
+                class="menu-hover my-2 text-base font-medium text-black"
+                // onClick=""
+              >
+                <p
+                  className={` ${
+                    menu2
+                      ? "text-[#000] font-bold "
+                      : "text-[#000] font-semibold"
+                  } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+                >
+                  Каталог
+                </p>
+              </a>
+              <div className="ml-1">
+                <img src="./images/Vector.svg" alt="" />
               </div>
-            )}
-              </div> 
+            </div>
+            <div
+              class="invisible absolute z-50 flex flex-col bg-[#EDFCD6] boredr rounded-md py-1 px-4 text-[#000] w-[300px] shadow-xl group-hover:visible"
+              // onClick=""
+            >
+              {category?.map((item) => (
+                <Link to={`/букеты/категория/${item?.id}`}>
+                  <p className="px-3 py-2 text-[#000] font-semibold ">
+                    {item?.title}
+                  </p>
+                </Link>
+              ))}
+            </div>
           </Link>
-        
+
           <Link
             to="/oнас"
             className={` md:mr-[10px] lg:mr-[20px]`}
@@ -239,19 +242,22 @@ function Header() {
         <div className="md:w-[15%] w-[30%] sm:w-[60%] cursor-pointer">
           <Link to={"/"} onClick={clickHandler}>
             <div className="w-[113px] h-[46px] lg:w-[171px] lg:h-[70px] mt-1 flex items-center">
-            
-            <div className="w-[80px] lg:w-[200px] xl:w-[300px]">
-            <img src="./images/1.svg" alt="" className="w-[100%] h-[100%]" />
-            </div>
+              <div className="w-[80px] lg:w-[200px] xl:w-[300px]">
+                <img
+                  src="./images/1.svg"
+                  alt=""
+                  className="w-[100%] h-[100%]"
+                />
+              </div>
             </div>
           </Link>
         </div>
 
         <div className="flex flex-row md:w-[30%] w-[70%] sm:w-[40%] justify-end items-center">
           <Link to={"tel: +79119276162"} className="flex items-center md:mr-10">
-          <IconButton>
-                <LocalPhoneIcon sx={{color:"#000"}} />
-              </IconButton>
+            <IconButton>
+              <LocalPhoneIcon sx={{ color: "#000" }} />
+            </IconButton>
             <p className="text-[12px] sm:ml-2 mr-2  lg:text-[17px] xl:text-[18px] text-[#000] font-semibold font-montserrat">
               + 7 (911) 927-61-62
             </p>
@@ -276,7 +282,7 @@ function Header() {
             </div>
 
             {/* {id.length > 0 && ( */}
-              {/* <div className="bg-red-600  min-w-[16px] md:min-w-[30px] min-h-[15px] md:min-h-[20px] flex justify-center items-center rounded-full relative top-[-10px] ml-1 text-[12px] md:text-[14px]">
+            {/* <div className="bg-red-600  min-w-[16px] md:min-w-[30px] min-h-[15px] md:min-h-[20px] flex justify-center items-center rounded-full relative top-[-10px] ml-1 text-[12px] md:text-[14px]">
                 <p className=" text-white  md:p-1 font-montserrat">
                   {state?.length}
                 </p>
@@ -299,7 +305,7 @@ function Header() {
             <div className="md:w-[15%] w-[40%] sm:w-[60%] cursor-pointer ml-4">
               <Link to={"/"} onClick={clickHandler}>
                 <div className="w-[113px] lg:w-[171px] lg:h-[70px]">
-                 <img src="./images/1.svg" alt="" />
+                  <img src="./images/1.svg" alt="" />
                 </div>
               </Link>
             </div>
@@ -333,13 +339,13 @@ function Header() {
                   </svg>
                 </div>
 
-                {id.length > 0 && (
+                {/* {id.length > 0 && (
                   <div className="bg-red-600  min-w-[16px] md:min-w-[30px] min-h-[15px] md:min-h-[20px] flex justify-center items-center rounded-full relative top-[-10px] ml-1 text-[12px] md:text-[14px]">
                     <p className=" text-white  md:p-1 font-montserrat">
                       {count}
                     </p>
                   </div>
-                )}
+                )} */}
               </Link>
 
               <div className="xl:hidden flex text-[#000] ">
@@ -352,17 +358,40 @@ function Header() {
             </div>
           </div>
           <div className="flex justify-center items-center mt-8 w-[90%] flex-col mb-[5px]">
-            <Link to="/букеты" onClick={() => setMenu(true)}>
-              <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#000]  lg:text-[17px] xl:text-[18px]">
-              Каталог
-              </p>
+            <Link
+              // to="/букеты"
+
+              className="flex flex-col mb-3 items-center"
+            >
+              <div className="flex items-center">
+                <Link className="font-montserrat text-[24px] font-semibold  text-[#000]  lg:text-[17px] xl:text-[18px]">
+                  Каталог
+                </Link>
+                <div
+                  className="ml-3"
+                  onClick={(e) => {
+                    // e.stopPropagation();
+                    //  setMenu(true)
+                    setIsCat((prev) => !prev);
+                  }}
+                >
+                  <img src="./images/Vector.svg" alt="" />
+                </div>
+              </div>
+              {isCat &&
+                category?.map((item) => (
+                  <Link to={`/букеты/категория/${item?.id}`} onClick={() => setMenu(false)}>
+                    <p className="px-3 py-2 text-[#000] font-semibold ">
+                      {item?.title}
+                    </p>
+                  </Link>
+                ))}
             </Link>
             <Link to="/oнас" onClick={() => setMenu(true)}>
               <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#000]  lg:text-[17px] xl:text-[18px]">
                 О нас
               </p>
             </Link>
-
 
             <Link to="/доставка" onClick={() => setMenu(true)}>
               <p className="font-montserrat text-[24px] font-semibold mb-3 text-[#000]  lg:text-[17px] xl:text-[18px]">

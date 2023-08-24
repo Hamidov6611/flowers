@@ -37,6 +37,7 @@ function MainDostavka() {
               src={video}
               title=""
               frameborder="0"
+              style={{objectFit:"cover"}}
               allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
             ></iframe>
@@ -121,6 +122,7 @@ const Wrapper = styled.section`
     border-radius: 257.5px 257.5px 0px 0px;
     overflow: hidden;
     padding: 45px 39px;
+    
 
     iframe {
       width: 100%;

@@ -69,7 +69,7 @@ const StickyBtns = () => {
         <a
           target="_blank"
           rel="nofollow"
-        //   href="https://t.me/+79119276162"
+          href="https://t.me/buketmanuf"
           className="sticky-btns__item sticky-btns__item--blue"
         >
           <svg

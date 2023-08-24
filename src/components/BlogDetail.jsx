@@ -19,7 +19,7 @@ const BlogDetail = () => {
   }, []);
   return (
     <Wrapper>
-      <div className="w-[70%] mx-auto py-[40px] min-h-[60vh] flex justify-center">
+      <div className="w-[96%] md:w-[70%] mx-auto mb-6 sm:py-[40px] min-h-[60vh] flex justify-center">
         {data.map((item) => (
           <div className=" md:w-[800px] sm:w-[400px] w-[360px]  bg-white border border-gray-200 rounded-lg shadow-2xl">
             <div className="w-[100%] flex justify-center h-[300px] md:h-[600px]">

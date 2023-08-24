@@ -81,8 +81,8 @@ function Reviews() {
               <>
                 {index % 2 == 0 && (
                   <SwiperSlide>
-                    <li className="item1 px-8 py-8 md:p-12 w-[90%] sm:w-[99%]">
-                      <div className="w-[200px] sm:w-[400px] h-[100px] sm:h-[250px]">
+                    <li className="item1 px-8 py-8 md:p-12 w-[90%] sm:w-[99%] relative ">
+                      <div className="w-[200px] sm:w-[400px] md:w-[500px] h-[100px] md:h-[300px] sm:h-[250px]">
                         <img
                           src={`${uri}${item?.comment}`}
                           width={"100%"}
@@ -98,7 +98,7 @@ function Reviews() {
                 {index % 2 != 0 && (
                   <SwiperSlide>
                     <li className="item2 px-8  md:p-12 py-8 w-[99%]">
-                      <div className="w-[200px] sm:w-[400px] h-[100px] sm:h-[250px]">
+                      <div className="w-[200px] sm:w-[400px] md:w-[500px] h-[100px] md:h-[300px] sm:h-[250px]">
                         <img
                           src={`${uri}${item?.comment}`}
                           width={"100%"}
@@ -115,10 +115,10 @@ function Reviews() {
           </Swiper>
         </ul>
 
-        <div className="flex justify-center md:mb-[40px]">
+        <div className="flex justify-center md:mb-[80px]">
           <Link
             to={"/oтзывы"}
-            className="bg-[#443926] text-[16px] font-montserrat md:py-6 md:px-12 py-3 text-white rounded-lg px-5"
+            className="bg-[#443926] text-[16px] font-montserrat  md:py-6 md:px-12 py-3 text-white rounded-lg px-5"
           >
             Смотреть все отзывы
           </Link>
@@ -176,13 +176,13 @@ const Wrapper = styled.section`
     .item1 {
       border-radius: 0px 98.5px 98.5px 0px;
       display: flex;
-      justify-content: end;
+      justify-content: center;
     }
 
     .item2 {
       border-radius: 98.5px 0px 0px 98.5px;
       display: flex;
-      justify-content: start;
+      justify-content: center;
     }
   }
 
