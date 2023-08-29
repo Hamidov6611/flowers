@@ -19,7 +19,7 @@ function Action() {
           <p className="title w-[40%]">Акция</p>
 
           <div className="card w-[40%]">
-            <img src="./images/action.png" alt=""  />
+            <img src="./images/action.png" alt="" className=""  />
 
             <span>
               При самовывозе любой напиток из нашего меню в подарок, например

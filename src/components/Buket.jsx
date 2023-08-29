@@ -140,6 +140,18 @@ function Buket() {
     }
   }
 
+  const sortHandler2 = async (value) => {
+    // e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `${url}/AllProductSearchView/?search=${value}`
+      );
+      setFlowers(data?.results);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //get sub category
   const categorySubHandler = async () => {
     try {
@@ -224,7 +236,7 @@ function Buket() {
         </p>
         <div className="flex pb-[40px] items-center flex-col md:flex-row">
           <div className="flex mb-[20px] md:mb-0 relative">
-            <p className="text-[20px] font-medium text-[#656565] md:mr-4">
+            <p className="text-[16px] sm:text-[18px] md:text-[20px] font-medium text-[#656565] md:mr-4">
               до {price1}
             </p>
             <ArrowUpwardIcon className="cursor-pointer" onClick={plusHandler} />
@@ -237,6 +249,7 @@ function Buket() {
                   )
                 })}
             </div> */}
+           
           </div>
           <form onSubmit={filterHandler}>
             <input
@@ -247,6 +260,17 @@ function Buket() {
               placeholder="Введите цену или название"
             />
           </form>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 text-center w-[100%] md:w-[60%] my-3 md:my-0 ml-0 md:ml-8">
+              <p 
+              onClick={() => sortHandler2(5000)}
+              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 5 000 руб</p>
+              <p 
+               onClick={() => sortHandler2(10000)}
+              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 10 000 руб</p>
+              <p 
+               onClick={() => sortHandler2(100000)}
+              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">свыше 10 000 руб</p>
+            </div>
         </div>
         <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
           {category?.map((item) => (
@@ -372,7 +396,7 @@ function Buket() {
         </div>
           {location.pathname == "/" ? (
             <div className="w-[100%] flex justify-center" >
-              {
+              {/* {
                 <Link to={location.pathname == "/" && "/букеты"} className="w-[100%] flex justify-center">
                   <button
                     className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]"
@@ -381,7 +405,7 @@ function Buket() {
                     {show ? "Cократить" : "Смотреть все букеты"}
                   </button>
                 </Link>
-              }
+              } */}
             </div>
           ) :
           

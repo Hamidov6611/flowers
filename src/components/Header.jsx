@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import ClearIcon from "@mui/icons-material/Clear";
+
 import "./index.css";
 import { useEffect } from "react";
 import { useProduct } from "../config/context";
@@ -148,8 +149,8 @@ function Header() {
               class="invisible absolute z-50 flex flex-col bg-[#EDFCD6] boredr rounded-md py-1 px-4 text-[#000] w-[300px] shadow-xl group-hover:visible"
               // onClick=""
             >
-              {category?.map((item) => (
-                <Link to={`/букеты/категория/${item?.id}`}>
+              {category?.map((item, index) => (
+                <Link to={`/букеты/категория/${item?.id}`} className={`${index === category.length - 1 ? 'border-b-0' : `border-b border-green-400`}`}>
                   <p className="px-3 py-2 text-[#000] font-semibold ">
                     {item?.title}
                   </p>
@@ -380,7 +381,7 @@ function Header() {
               </div>
               {isCat &&
                 category?.map((item) => (
-                  <Link to={`/букеты/категория/${item?.id}`} onClick={() => setMenu(false)}>
+                  <Link to={`/букеты/категория/${item?.id}`} onClick={() => setMenu(false)} className="">
                     <p className="px-3 py-2 text-[#000] font-semibold ">
                       {item?.title}
                     </p>

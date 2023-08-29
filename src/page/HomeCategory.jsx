@@ -21,7 +21,7 @@ const HomeCategory = () => {
   }, []);
 
   return (
-    <div className="flex flex-col my-4 p-1 sm:p-4 md:w-[96%] mx-auto">
+    <div className="flex flex-col mb-4 p-1 sm:p-4 md:w-[96%] mx-auto mt-[40px]">
       <div className="relative mb-4 flex flex-wrap justify-between md:flex-row flex-col">
         {category?.map((item, index) => (
           <Link
@@ -47,6 +47,11 @@ const HomeCategory = () => {
             </div>
           </Link>
         ))}
+      </div>
+      <div className="w-[100%] flex justify-center">
+      <Link to={'/букеты'} className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]">
+        Смотреть все разделы
+      </Link>
       </div>
     </div>
   );
