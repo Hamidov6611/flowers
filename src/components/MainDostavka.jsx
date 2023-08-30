@@ -10,11 +10,11 @@ function MainDostavka() {
 
         <div className="content">
           <ul className="info">
-            <li className="item ">
-              <div className="image flex items-center">
+            <li className="item md:px-7">
+              <div className="image flex items-center ">
                 <img src="./images/korz.svg" alt="" />
                 {/* <span className="md:ml-3">Быстро</span> */}
-                <span className="md:ml-[10%]">Сделать заказ у нас очень легко</span>
+                <span className="md:ml-[10%] line-clamp-1">Сделать заказ у нас очень легко</span>
               </div>
               {/* <p className="text">Доставка до 3 часов по Санкт-Петербургу</p> */}
               <p className="text md:ml-[40%]">
@@ -24,7 +24,7 @@ function MainDostavka() {
               </p>
             </li>
 
-            <li className="item md:ml-24 mt-20 ">
+            <li className="item md:ml-24 md:px-7 mt-[18%]">
               <div className="image flex items-center">
                 <svg
                   width={61}
@@ -43,7 +43,7 @@ function MainDostavka() {
                 </svg>
 
                 {/* <span className="ml-3">Бесплатно</span> */}
-                <span className="ml-3">Премиальная, бережная упаковка</span>
+                <span className="ml-3 line-clamp-1">Премиальная, бережная упаковка</span>
               </div>
 
               <p className="text md:ml-24">
@@ -52,7 +52,7 @@ function MainDostavka() {
               </p>
             </li>
 
-            <li className="item mt-40 ">
+            <li className="item mt-[18%] md:px-7 ">
               <div className="image flex items-center">
                 <svg
                   width={73}
@@ -71,7 +71,7 @@ function MainDostavka() {
                 </svg>
 
                 {/* <span className="ml-3">Бесплатно</span> */}
-                <span className="ml-3">Фото/видео отчёт на всех этапах</span>
+                <span className="ml-3 line-clamp-1">Фото/видео отчёт на всех этапах</span>
               </div>
 
               <p className="text md:ml-24">
@@ -128,7 +128,7 @@ function MainDostavka() {
           </div>
         </div>
       </div>
-      <img className="bg" src="./images/dostavka1.png" alt="" />
+      <img className="bg" src="./images/dostavka1.png"   alt="" />
     </Wrapper>
   );
 }
@@ -136,7 +136,7 @@ function MainDostavka() {
 export default MainDostavka;
 
 const Wrapper = styled.section`
-  padding: 80px 0;
+  padding: 40px 0;
   position: relative;
 
   .content {
@@ -149,8 +149,8 @@ const Wrapper = styled.section`
     width: 337.5px;
     height: 800px;
     position: absolute;
-    top: 200px;
-    left: 290px;
+    top: 10%;
+    left: 17%;
     margin-top: 135px;
   }
 
@@ -177,7 +177,7 @@ const Wrapper = styled.section`
     font-size: 20px;
     color: #443926;
     padding-left: 45px;
-    max-width: 320px;
+    max-width: 500px;
     margin-top: 12px;
   }
 

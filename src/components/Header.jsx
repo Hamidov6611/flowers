@@ -121,7 +121,7 @@ function Header() {
   return (
     <div className="w-[100%] bg-[#EDFCD6] shadow-xl mb-8">
       <div className="md:w-[96%] w-[90%] mx-auto h-[70px]  left-0 top-0 flex flex-row justify-between items-center">
-        <div className="hidden xl:flex w-[45%] justify-start items-center">
+        <div className="hidden xl:flex w-[45%] justify-start items-center relative">
           <Link
             class=" md:mr-[10px] lg:mr-[20px] group relative cursor-pointer py-2"
             to={"/букеты"}
@@ -157,6 +157,7 @@ function Header() {
                 </Link>
               ))}
             </div>
+
           </Link>
 
           <Link

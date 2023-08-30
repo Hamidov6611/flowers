@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import Action from "../components/Action";
 import Buket from "../components/Buket";
 import Dostavka from "../components/Dostavka";
-import Blog from "../components/Blog";
 import MainOnas from "../components/MainOnas";
 import MainDostavka from "../components/MainDostavka";
 import Reviews from "../components/Reviews";
@@ -14,22 +13,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-// import navigations from './navigation.module.css'
 import { A11y, Navigation, Pagination } from "swiper";
 import HomeCategory from "./HomeCategory";
-import Hero from "./carousel";
-import Carousel from "./carousel";
+import NewHeros from "../components/NewHeros";
 
 function Home() {
   const loction = useLocation();
   console.log(loction.pathname);
   const [swiper, setSwiper] = useState(null);
-  const images = [
-    "https://static01.nyt.com/images/2022/12/30/multimedia/30soccer-ronaldo-1-76fd/30soccer-ronaldo-1-76fd-videoSixteenByNine3000.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSpI-1MMt4nQCcE-Vays5VPUlfIyo-4ay-JubDsm5OWJ6IsSEyd2sH3p93xVNugGoUd40&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2DYl7pipxnmP7k4CWQnqSyvqiJ552qQt6TgsX6qts3NEGzUGkb7aJheZ8wN0_Go2YlPw&usqp=CAU",
-    // Add more image paths here
-  ];
 
   return (
     <Wrapper>
@@ -46,12 +37,64 @@ function Home() {
         }}
         // navigation={true}
       >
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div className="w-[94%] h-[100%] mx-auto">
             <Action />
           </div>
+        </SwiperSlide> */}
+        <SwiperSlide>
+          <NewHeros
+            img={"./images/ban1.png"}
+            svg={"/images/ban1a.svg"}
+            heroTitle={
+              "Не упускайте возможность приобрести этот восхитительный букет прямо сейчас!"
+            }
+            cardTitle={
+              "Украсьте свою жизнь нежностью и красотой! Шляпная коробка с лизиантусом и розами - олицетворение элегантности и изящества!Вы можете подарить эту прекрасную композицию своим близким, друзьям или коллегам, и они наверняка оценят вашу заботу и хороший вкус. от 6 000 ₽ Смотреть все букеты"
+            }
+            price={6000}
+          />
         </SwiperSlide>
         <SwiperSlide>
+          <NewHeros
+            img={"./images/ban2.png"}
+            svg={"/images/ban2a.svg"}
+            heroTitle={
+              "Наша команда опытных флористов с любовью и вниманием соберет для вас любую композицию, гармонично сочетая цвета и формы."
+            }
+            cardTitle={
+              `Мечтаете о необычной и стильной композиции, которая поразит всех своей красотой? Тогда наша "Корзина с тыквой и розами" идеально подойдет для вас!  Она станет ярким акцентом в вашем интерьере, идеальным подарком или просто великолепным способом выразить свои чувства.`
+            }
+            price={5750}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <NewHeros
+            img={"./images/ban3.png"}
+            svg={"/images/ban3a.svg"}
+            heroTitle={
+              "Купите живое растение прямо сейчас и позвольте своему интерьеру расцвести вместе с нами!"
+            }
+            cardTitle={
+              `Подарите себе и своему дому неповторимый шарм с фантастическим растением Фикус эластика белиз! С его густой зеленью и оригинальным рисунком листьев, он станет идеальным украшением вашего интерьера. `
+            }
+            price={5750}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <NewHeros
+            img={"./images/ban4.png"}
+            svg={"/images/ban4a.svg"}
+            heroTitle={
+              "Приобретайте сегодня товары со скидками у нас и заботьтесь о себе и о своих близких. "
+            }
+            cardTitle={
+              `У нас вы найдете широкий выбор ваз, открыток, свечей и сертификатов, чтобы добавить нотку красоты в вашу жизнь. Наши прекрасные товары идеально подойдут для подарков или для создания атмосферы уюта в вашем доме. `
+            }
+            price={1150}
+          />
+        </SwiperSlide>
+        {/* <SwiperSlide>
           <div className="md:w-[94%] mx-auto h-[441px] md:h-[660px]">
             <img
               src="./images/hero_bg.png"
@@ -60,10 +103,13 @@ function Home() {
               height={"100%"}
             />
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
       <div className="mt-12 w-[100%] flex justify-center">
-        <button onClick={() => swiper.slidePrev()} className="mr-8 border-[3px] sm:border-[4px] border-[#343434] h-[40px] w-[40px] rounded-full flex justify-center items-center">
+        <button
+          onClick={() => swiper.slidePrev()}
+          className="mr-8 border-[3px] sm:border-[3px] border-[#343434] h-[40px] w-[40px] rounded-full flex justify-center items-center"
+        >
           <svg
             width="12"
             height="21"
@@ -80,7 +126,10 @@ function Home() {
             />
           </svg>
         </button>
-        <button onClick={() => swiper.slideNext()} className="border-[3px] sm:border-[4px] border-[#343434] h-[40px] w-[40px] rounded-full flex justify-center items-center">
+        <button
+          onClick={() => swiper.slideNext()}
+          className="border-[3px] sm:border-[3px] border-[#343434] h-[40px] w-[40px] rounded-full flex justify-center items-center"
+        >
           <svg
             width="12"
             height="21"

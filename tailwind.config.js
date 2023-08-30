@@ -15,7 +15,8 @@ module.exports = {
         tableGreey: '#74808C',
         lightBlue: '#1181D9',
         darkMode: "#fff",
-        modal:"rgba(0,0,0,.8)"
+        modal:"rgba(0,0,0,.8)",
+        modal2:"rgba(0,0,0,.5)",
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif']
