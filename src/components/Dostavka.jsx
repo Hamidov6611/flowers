@@ -46,7 +46,7 @@ function Dostavka() {
       </div>
 
       <div className="flex flex-col mt-8">
-        <p className="text-[#343434] w-[80%] md:w-[60%] lg:w-[40%] mx-auto text-[20px] sm:text-[24px] font-montserrat md:text-[32px] lg:text-[55px] md:font-medium">Доставка букетов и цветов по Санкт-Петербургу</p>
+        <p className="text-[#343434] w-[80%] mx-auto text-[20px] sm:text-[24px] font-montserrat md:text-[32px] lg:text-[55px] md:font-medium text-center">Доставка букетов и цветов <br /> по Санкт-Петербургу</p>
         <p className="text-[#343434] text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat mt-8 sm:text-[24px] md:text-[32px]">Доставка цветов от нашей студии в Санкт-Петербурге выручает множество людей ежедневно.Мы поможем Вам определиться с выбором цветов к любому событию!Если захотите что-то неповторимое, то флористы сделают абсолютно любой букет в соответствии с вашими пожеланиями.</p>
       </div>
 

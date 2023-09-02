@@ -38,7 +38,6 @@ function Buket() {
   // const { setstate } = useContext(ProductContext);
 
   const sasa = useParams()
-  console.log(state)
 
   const location = useLocation();
   const plusHandler = () => {
@@ -85,24 +84,23 @@ function Buket() {
     }
   };
 
-  console.log(state)
 
-  const minusHandler = () => {
-    switch(price1) {
-      case 5000: 
-        setPrice1(100000)
-        break
-      case 10000:
-        setPrice1(5000)
-        break
-      case 100000:
-        setPrice1(10000)
-        break
-      default: setPrice1(5000)
-    }
+  // const minusHandler = () => {
+  //   switch(price1) {
+  //     case 5000: 
+  //       setPrice1(100000)
+  //       break
+  //     case 10000:
+  //       setPrice1(5000)
+  //       break
+  //     case 100000:
+  //       setPrice1(10000)
+  //       break
+  //     default: setPrice1(5000)
+  //   }
 
-    sortHandler()
-  };
+  //   sortHandler()
+  // };
 
   // category handler
   const categoryHandler = async () => {
@@ -227,31 +225,88 @@ function Buket() {
     getFlowers();
   }, []);
 
-  // console.log(flowers1);
+  console.log(flowers1);
+  const SortBySum1 = () => {
+    const arr = [...flowers1]
+    let newArr = []
+    arr?.map((item) => {
+      if(parseInt(item?.price) < 5000) {
+        newArr.push(item)
+        console.log(newArr)
+      }
+    })
+    setFlowers(newArr)
+    setPageSize(newArr.length)
+  }
+
+  const SortBySum2 = () => {
+    const arr = [...flowers1]
+    let newArr = []
+    arr?.map((item) => {
+      if(parseInt(item?.price) < 10000) {
+        newArr.push(item)
+        console.log(newArr)
+      }
+    })
+    setFlowers(newArr)
+    setPageSize(newArr.length)
+  }
+  const SortBySum3 = () => {
+    const arr = [...flowers1]
+    let newArr = []
+    arr?.map((item) => {
+      if(parseInt(item?.price) < 100000) {
+        newArr.push(item)
+        console.log(newArr)
+      }
+    })
+    setFlowers(newArr)
+    setPageSize(newArr.length)
+  }
+
+
+  const blurDivs = document.querySelectorAll('.blur-div')
+  blurDivs.forEach(div => {
+    const img = div.querySelector("img")
+    const addImage = document.querySelectorAll('.blur-load')
+    function loaded() {
+      //show img
+      div.classList.add("loaded")
+    }
+    if(img.complete) {
+      loaded()
+      
+    } else {
+      img.addEventListener("load", loaded)
+
+    }
+  })
+
+
   return (
     <Wrapper>
       <div className="w-[90%] lg:w-[94%] mx-auto">
         <p className="text-[48px]  font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
           Букеты
         </p>
-        <div className="flex pb-[40px] items-center flex-col md:flex-row">
-          <div className="flex mb-[20px] md:mb-0 relative">
+        <div className="flex py-[40px] items-center flex-col md:flex-row">
+          {/* <div className="flex mb-[20px] md:mb-0 relative">
             <p className="text-[16px] sm:text-[18px] md:text-[20px] font-medium text-[#656565] md:mr-4">
               до {price1}
             </p>
             <ArrowUpwardIcon className="cursor-pointer" onClick={plusHandler} />
             <ArrowDownwardIcon onClick={minusHandler} />
 
-            {/* <div className="absolute top-8 left-0 h-25 w-28 flex flex-col">
+            <div className="absolute top-8 left-0 h-25 w-28 flex flex-col">
                 {filt?.map((item, index) => {
                   return (
                     <p key={item?.id} className="font-semibold text-[#15100C]">{item?.sum}</p>
                   )
                 })}
-            </div> */}
+            </div>
            
-          </div>
-          <form onSubmit={filterHandler}>
+          </div> */}
+          {/* <form onSubmit={filterHandler}>
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -259,16 +314,16 @@ function Buket() {
               className="bg-[#F5F5F5] border-2 border-slate-400 md:ml-4 px-4 rounded-lg py-2"
               placeholder="Введите цену или название"
             />
-          </form>
+          </form> */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 text-center w-[100%] md:w-[60%] my-3 md:my-0 ml-0 md:ml-8">
               <p 
-              onClick={() => sortHandler2(5000)}
+              onClick={SortBySum1}
               className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 5 000 руб</p>
               <p 
-               onClick={() => sortHandler2(10000)}
+               onClick={SortBySum2}
               className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 10 000 руб</p>
               <p 
-               onClick={() => sortHandler2(100000)}
+               onClick={SortBySum3}
               className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">свыше 10 000 руб</p>
             </div>
         </div>
@@ -326,9 +381,10 @@ function Buket() {
                           {item?.flowers?.map((c, index) => (
                             <SwiperSlide key={index}>
                               <div
-                                className={"h-[273px] sm:h-[440px] w-[100%]"}
+                                className={`h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${((uri + c?.img).length < 0 || c?.img?.length < 0) && "blurimage"}`}
                               >
                                 <img
+                                loading="lazy"  
                                   src={` ${
                                     c?.img?.includes(
                                       "https://buketyana-admin.ru"
@@ -337,6 +393,7 @@ function Buket() {
                                       : uri + c?.img
                                   } `}
                                   className="w-[100%] h-[100%]  object-cover rounded-t-lg"
+                                  
                                   alt={"flower"}
                                 />
                               </div>

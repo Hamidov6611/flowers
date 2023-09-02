@@ -25,7 +25,6 @@ function App() {
       localStorage.setItem("count", JSON.stringify(a))
       count = a
    }
-   console.log(count)
    const removeData = () => {
     let a = JSON.parse(localStorage.getItem("count")) || 0
     if( a > 0 ) {

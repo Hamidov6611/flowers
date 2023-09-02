@@ -77,6 +77,57 @@
 }
 
 
+.blur-load::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  animation: pulse 2.5s  infinite;
+  background-color: rgba(255, 255, 255, .1);
 
+}
 
+@keyframes pulse {
+  0% {
+    background-color: rgba(255, 255, 255, 0);
+  }
 
+  50% {
+    background-color: rgba(255, 255, 255, .1);
+  }
+
+  100% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+.loaded1 {
+  filter: blur(20px);
+}
+
+.blur-load {
+  background-image: url("../../public/images/img3.jpg");
+  background-position: center;
+  border-top-left-radius: 8px;
+  /* filter: blur(20px); */
+  border-top-right-radius: 8px;
+  background-size: cover;
+  object-fit: cover;
+  position: relative;
+}
+
+.blur-load.loaded::before {
+  content: none;
+}
+
+/* .blurimage {
+  filter: blur(20px);
+} */
+
+.blur-load.loaded > img {
+  opacity: 1;
+}
+
+.blur-load > img {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
