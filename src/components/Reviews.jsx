@@ -30,14 +30,7 @@ const responsive = {
     items: 1,
   },
 };
-// const CustomButtonGroup = ({ next, previous }) => {
-//   return (
-//     <div className="custom-button-group">
-//       <button onClick={previous}>Previous</button>
-//       <button onClick={next}>Next</button>
-//     </div>
-//   );
-// };
+
 function Reviews() {
   const [data, setData] = useState([]);
   const commentHandler = async () => {
