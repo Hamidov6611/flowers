@@ -118,7 +118,7 @@ function Reviews() {
         <div className="flex justify-center md:mb-[80px]">
           <Link
             to={"/oтзывы"}
-            className="bg-[#443926] text-[16px] font-montserrat  md:py-6 md:px-12 py-3 text-white rounded-lg px-5"
+            className="bg-[#C59A77] text-[16px] font-montserrat  md:py-6 md:px-12 py-3 text-white rounded-lg px-5"
           >
             Смотреть все отзывы
           </Link>
