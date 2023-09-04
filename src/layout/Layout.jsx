@@ -46,9 +46,9 @@ const Layout = ({ children, title, logo, kor, desc }) => {
             <div className="flex flex-col  absolute top-[-25px] gap-y-6 md:gap-y-8 left-4">
               <Link 
               to={`https://api.whatsapp.com/send?phone=79119276162`}
-              className="bg-[#41A96AF5] w-[210px] sm:w-[230px] md:w-[280px] flex items-center justify-between px-2 md:px-4 py-0 md:py-0 rounded-md ">
-                <p className="text-white tracking-[1px] line-clamp-1 sm:tracking-[2px] font-montserrat text-[14px] md:text-[18px]">Написать в Вотсап</p>
-                <div className="w-[36px] h-[36px]">
+              className="bg-[#41A96AF5] w-[230px] sm:w-[230px] md:w-[300px] flex items-center justify-between px-2 md:px-4 py-0 md:py-0 rounded-md ">
+                <p className="text-white tracking-[1px]  sm:tracking-[2px] font-montserrat text-[14px] md:text-[18px]">Написать в Вотсап</p>
+                <div className="w-[40px] h-[40px]">
                   <img
                     src={"../images/t2.svg"}
                     alt="message"
@@ -60,9 +60,9 @@ const Layout = ({ children, title, logo, kor, desc }) => {
               </Link>
               <Link 
               to={`https://t.me/+79119276162`}
-              className="bg-[#7DAAE5] w-[230px] sm:w-[250px] md:w-[300px] flex items-center justify-between px-2 md:px-4 py-0 md:py-0 rounded-md ">
-                <p className="text-white tracking-[1px] sm:tracking-[2px] line-clamp-1 font-montserrat text-[14px] md:text-[18px]">Написать в Телеграм</p>
-                <div className="w-[36px] h-[36px]">
+              className="bg-[#7DAAE5] w-[250px] sm:w-[250px] md:w-[350px] flex items-center justify-between px-2 md:px-4 py-0 md:py-0 rounded-md ">
+                <p className="text-white tracking-[1px] sm:tracking-[2px]  font-montserrat text-[14px] md:text-[18px]">Написать в Телеграм</p>
+                <div className="w-[40px] h-[40px]">
                   <img
                     src={"../images/t1.svg"}
                     alt="message"
