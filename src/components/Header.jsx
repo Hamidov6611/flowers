@@ -108,7 +108,7 @@ function Header() {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
       setCategory(data);
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +151,7 @@ function Header() {
             >
               {category?.map((item, index) => (
                 <Link to={`/букеты/категория/${item?.id}`} className={`${index === category.length - 1 ? 'border-b-0' : `border-b border-green-400`}`}>
-                  <p className="px-3 py-2 text-[#000] font-semibold ">
+                  <p className="px-3 py-2 text-[#000] font-semibold">
                     {item?.title}
                   </p>
                 </Link>
@@ -256,18 +256,18 @@ function Header() {
         </div>
 
         <div className="flex flex-row md:w-[30%] w-[70%] sm:w-[40%] justify-end items-center">
-          <Link to={"tel: +79119276162"} className="flex items-center md:mr-10">
+          <Link to={"tel: +79119276162"} className="flex items-center mr-3 md:mr-10">
             <IconButton>
               <LocalPhoneIcon sx={{ color: "#000" }} />
             </IconButton>
-            <p className="text-[12px] sm:ml-2 mr-2  lg:text-[17px] xl:text-[18px] text-[#000] font-semibold font-montserrat">
+            <p className="text-[12px] sm:ml-2 hidden  sm:flex mr-2  lg:text-[17px] xl:text-[18px] text-[#000] font-semibold font-montserrat">
               + 7 (911) 927-61-62
             </p>
           </Link>
 
           <Link
             to={"/корзина"}
-            className="flex items-center mr-1 sm:mr-4"
+            className="flex items-center mr-4 sm:mr-4"
             onClick={clickHandler}
           >
             <div className="w-[20px] h-[18px] md:w-[31.88px] md:h-[29px]">
