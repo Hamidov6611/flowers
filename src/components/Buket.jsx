@@ -207,7 +207,6 @@ function Buket() {
       setId(id);
       const { data } = await axios.get(`${url}/sub_category_all_views/${sasa?.id}/`);
       setSubCategory(data);
-      console.log(data)
     } catch (error) {
       console.log(error);
     }
@@ -225,14 +224,12 @@ function Buket() {
     getFlowers();
   }, []);
 
-  console.log(flowers1);
   const SortBySum1 = () => {
     const arr = [...flowers1]
     let newArr = []
     arr?.map((item) => {
       if(parseInt(item?.price) < 5000) {
         newArr.push(item)
-        console.log(newArr)
       }
     })
     setFlowers(newArr)
@@ -245,7 +242,6 @@ function Buket() {
     arr?.map((item) => {
       if(parseInt(item?.price) < 10000) {
         newArr.push(item)
-        console.log(newArr)
       }
     })
     setFlowers(newArr)
@@ -315,7 +311,7 @@ function Buket() {
               placeholder="Введите цену или название"
             />
           </form> */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-4 text-center w-[100%] md:w-[60%] my-3 md:my-0 ml-0 md:ml-8">
+          <div className="flex flex-wrap gap-x-3 gap-y-4 text-center w-[100%] md:w-[60%] my-3 md:my-0 ml-0 md:ml-8">
               <p 
               onClick={SortBySum1}
               className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 5 000 руб</p>
@@ -324,7 +320,7 @@ function Buket() {
               className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 10 000 руб</p>
               <p 
                onClick={SortBySum3}
-              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">свыше 10 000 руб</p>
+              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">свыше 100 000 руб</p>
             </div>
         </div>
         <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
@@ -369,7 +365,7 @@ function Buket() {
               return (
                 ((location.pathname == "/" ? index < 4 : () => setPageId(1)) ||
                   show) && (
-                  <div key={index} className=" mb-[20px] ">
+                  <div key={index} className="mb-[20px] ">
                     <div className="bg-blue-350 border border-gray-200 rounded-lg ">
                       <Link to={`/букеты/${item.id}`}>
                         <Swiper
@@ -401,7 +397,7 @@ function Buket() {
                           ))}
                         </Swiper>
                       </Link>
-                      <div className="p-5">
+                      <div className="p-3 sm:p-5">
                         <div>
                           <h5 className="mb-2 text-[16px] md:text-[18px] tracking-tight text-white dark:text-white font-montserrat line-clamp-1">
                             {item?.name}
@@ -424,14 +420,9 @@ function Buket() {
                               onClick={() => basketHandler(item.id)}
                               className="mr-4 inline-flex items-center px-4 rounded-2xl md:px-24 py-2 text-center text-white bg-[#779243] md:rounded-3xl hover:bg-lime-500 justify-center mb-3 md:mb-0"
                             >
-                              <p className="font-montserrat font-semibold text:[18px]">В корзину</p>
+                              <p className="font-montserrat font-semibold text-[16px] sm:text-[18px]">В корзину</p>
                             </button>
-                            {/* <Link to={`/букеты/${item.id}`}>
-                        <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#1e29ac] rounded-lg hover:bg-blue-500 justify-center mb-3 md:mb-0">
-                        Подробнее
-                        </button>
-                      
-                      </Link> */}
+                           
                           </div>
                           <p className="text-white text-[24px] font-montserrat">
                             {item?.price} ₽
