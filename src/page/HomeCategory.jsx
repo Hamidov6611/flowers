@@ -36,6 +36,8 @@ const HomeCategory = () => {
     console.log(widthCard)
   }, [])
 
+  
+
   return (
     <div className="flex flex-col mb-4 p-1 sm:p-4 md:w-[96%] mx-auto mt-[40px]">
       <div className="relative mb-4 flex flex-wrap justify-between md:flex-row flex-col">
