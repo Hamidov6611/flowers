@@ -4,9 +4,9 @@ import { styled } from "styled-components";
 function MainOnas() {
   return (
     <Wrapper>
-      <div className="w-[94%] mx-auto">
-        <p>O нас</p>
-        <ul className="card1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4">
+      <div className="w-[85%] sm:w-[70%] mx-auto">
+        {/* <p>O нас</p> */}
+        <ul className="card1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-4 gap-y-4">
           <li className="card-item1">
             <svg
               width={150}
@@ -118,16 +118,12 @@ const Wrapper = styled.section`
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
-    line-height: 58px;
+    line-height: 28px;
     color: #15100c;
     margin-bottom: 40px;
   }
 
-  .card1 {
-    // display: grid;
-    // grid-template-columns: repeat(4, 1fr);
-    // gap: 10px;
-  }
+
 
   .card-item1 {
     border: 2px solid #779243;
@@ -137,16 +133,20 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px 36px;
+    svg {
+      display: flex;
+      margin-top: 10px;
+      height: 60%;
+    }
 
     p {
+      height: 38%;
       text-align: start;
       width: 60%;
       margin-top: 10px;
       font-style: normal;
       font-weight: 500;
-      font-size: 20px;
-      line-height: 20px;
+      font-size: 18px;
       color: #443926;
     }
   }
@@ -175,6 +175,26 @@ const Wrapper = styled.section`
     }
     .card-item1 p {
       font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    
+    .result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-item1 {
+      padding: 10px;
+    }
+    .card-item1 p {
+      font-size: 18px;
+    }
+    p {
+      font-size: 28px;
+      text-align: center;
     }
   }
 `;
