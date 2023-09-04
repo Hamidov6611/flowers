@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import Button from "./Button";
+import ContactForm from "./ContactForm";
 
 function Dostavka() {
+  const [isOrder, setIsOrder] = useState(false);
   return (
     <Wrapper className="w-[98%] mx-auto flex flex-col">
       <div className=" relative w-[70%] mx-auto ">
@@ -20,36 +22,66 @@ function Dostavka() {
             получали цветы высочайшего качества. Наша главная цель - порадовать
             наших клиентов красивыми и свежими букетами в любой ситуации.
           </p>
-          <Button>Заказать букет</Button>
+          <Button onClick={() => setIsOrder(true)}>Заказать букет</Button>
         </div>
       </div>
-
+      {isOrder && <ContactForm setIsOrder={setIsOrder} />}
       <div className="flex flex-col mt-[20px] md:mt-[220px] w-[90%] mx-auto">
         <div className="flex md:flex-row gap-y-12 flex-col border-2 border-[#343434]">
           <div className="w-[100%] md:w-[55%] flex flex-col relative justify-center items-center">
             <div className="w-[80%] dm:w-[60%] z-20 flex justify-center items-center">
-              <p className="text-[#8DA15C] text-[20px] sm:text-[24px] md:text-[32px] lg:text-[48px] font-medium">Индивидуальный заказ букета / композиции</p>
+              <p className="text-[#8DA15C] text-[20px] sm:text-[24px] md:text-[32px] lg:text-[48px] font-medium">
+                Индивидуальный заказ <br /> букета / композиции
+              </p>
             </div>
             <div className="w-[80%] mt-3 flex justify-center items-center">
-              <p className="text-[#343434] text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-medium">Опишите пожелания и наши флористы соберут и рассчитают букет или композицию в соответствии в Вашими предпочтениями</p>
+              <p className="text-[#343434] text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-medium z-10">
+                Опишите пожелания и наши флористы соберут и рассчитают букет или
+                композицию в соответствии в Вашими предпочтениями
+              </p>
             </div>
             <div className="absolute left-[15%] top-[8%] w-[45%] box-border h-[500px]">
-              <img src="./images/newflo2.svg" alt="new flower" width={'100%'} height={'60%'} />
+              <img
+                src="./images/newflo2.svg"
+                alt="new flower"
+                width={"100%"}
+                height={"60%"}
+              />
             </div>
           </div>
-          <div className="w-[100%] md:w-[45%]">
+          <div className="w-[100%] md:w-[45%] relative ">
+            <div className="absolute  top-0 left-0 flex items-center justify-center w-full h-full ">
+              <button
+                onClick={() => setIsOrder(true)}
+                className="bg-[#ECCEB4] flex items-center justify-center py-[8px] md:py-[23px]  px-[48px] rounded-lg md:h-[72px] md:w-[283px] font-medium text-[18px] sm:text-[20px] md:text-[24px] text-[#50583B]"
+              >
+                Заказать букет
+              </button>
+            </div>
             <div className="w-[100%] h-[100%]">
-            <img src="./images/newflo.svg" alt="" width={'100%'} height={'100%'} className="object-cover" />
+              <img
+                src="./images/newflo.svg"
+                alt=""
+                width={"100%"}
+                height={"100%"}
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col mt-8">
-        <p className="text-[#343434] w-[80%] mx-auto text-[20px] sm:text-[24px] font-montserrat md:text-[32px] lg:text-[55px] md:font-medium text-center">Доставка букетов и цветов <br /> по Санкт-Петербургу</p>
-        <p className="text-[#343434] text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat mt-8 sm:text-[24px] md:text-[32px]">Доставка цветов от нашей студии в Санкт-Петербурге выручает множество людей ежедневно.Мы поможем Вам определиться с выбором цветов к любому событию!Если захотите что-то неповторимое, то флористы сделают абсолютно любой букет в соответствии с вашими пожеланиями.</p>
+        <p className="text-[#343434] w-[80%] mx-auto text-[18px] sm:text-[24px] font-montserrat md:text-[32px] lg:text-[55px] md:font-medium text-center">
+          Доставка букетов и цветов <br /> по Санкт-Петербургу
+        </p>
+        <p className="text-[#343434] text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat text-center mt-8 sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px]">
+          Доставка цветов от нашей студии в Санкт-Петербурге выручает множество
+          людей ежедневно. <br /> Мы поможем Вам определиться с выбором цветов к любому
+          событию! <br /> Если захотите что-то неповторимое, то флористы сделают
+          абсолютно любой букет в соответствии с вашими пожеланиями.
+        </p>
       </div>
-
     </Wrapper>
   );
 }
@@ -111,26 +143,3 @@ const Wrapper = styled.section`
     }
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
