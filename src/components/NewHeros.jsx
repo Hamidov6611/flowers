@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NewHeros = ({ img, svg, heroTitle, cardTitle, price }) => {
+const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
   return (
-    <div className="relative md:w-[94%] mx-auto">
+    <Link className="relative md:w-[94%] mx-auto" to={link}>
       <div className="w-full h-[441px] md:h-[660px]">
         <img src={img} alt={"NewHero"} width={"100%"} height={"100%"} />
       </div>
@@ -100,7 +100,7 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
