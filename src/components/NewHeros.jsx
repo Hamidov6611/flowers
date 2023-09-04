@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
+  const navigate = useNavigate()
   return (
-    <Link className="relative md:w-[94%] mx-auto" to={link}>
+    <div className="relative md:w-[94%] mx-auto" >
       <div className="w-full h-[441px] md:h-[660px]">
         <img src={img} alt={"NewHero"} width={"100%"} height={"100%"} />
       </div>
@@ -36,10 +37,10 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
             <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-start line-clamp-1">
               от {price} ₽
             </p>
-            <div className="flex items-center">
-              <Link className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[24px] font-montserrat">
+            <Link to={link} className="flex items-center">
+              <div className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[24px] font-montserrat">
                 Смотреть все букеты
-              </Link>
+              </div>
               <svg
                 width={59}
                 height={16}
@@ -52,7 +53,7 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
                   fill="white"
                 />
               </svg>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -80,10 +81,10 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
             <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-start line-clamp-1">
               от {price} ₽
             </p>
-            <div className="flex items-center mb-3">
-              <Link className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[20px] font-montserrat">
+            <button onClick={() => navigate(link)} className="flex items-center mb-3">
+              <p className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[20px] font-montserrat">
                 Смотреть все букеты
-              </Link>
+              </p>
               <svg
                 width={59}
                 height={16}
@@ -96,11 +97,11 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
                   fill="white"
                 />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
