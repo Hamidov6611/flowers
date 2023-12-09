@@ -1,58 +1,114 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { url } from "../../layout/config";
 import { toast } from "react-toastify";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import { uri } from "../../layout/config";
 
 function Korzinka5() {
+  const [swiper, setSwiper] = useState(null);
   const [data, setData] = useState([]);
+  const [storageProduct, setStorageProduct] = useState([]);
   const [comment, setComment] = useState("");
   const [finallyData, setFinallyData] = useState([]);
-  const [proId, setProID] = useState([])
-  const navigate = useNavigate()
+  const [proId, setProID] = useState([]);
+  const [id_size, setIdSize] = useState(2);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const isStepTrue = queryParams.get("quick") == "true";
+  const [image, setImage] = useState(null);
+  const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const res = localStorage.getItem("full");
     if (res) {
       const res2 = JSON.parse(res);
       setData(res2);
+      console.log(res2);
       const res3 = localStorage.getItem("id3");
       if (res3) {
         const res4 = JSON.parse(res3);
         setFinallyData(res4);
       }
     }
-    const idd = localStorage.getItem("basket")
-    if(idd) {
-      const res5 = JSON.parse(idd)
-      res5.map(item => setProID(prev => prev.concat(item.id)))
+    const idd = localStorage.getItem("basket");
+    if (idd != null) {
+      const res5 = JSON.parse(idd);
+      setStorageProduct(res5);
+      res5.map((item) => setProID((prev) => prev.concat(item.id)));
+    } else {
+      let product = localStorage.getItem("quick");
+      const res5 = JSON.parse(product);
+      setStorageProduct(res5);
+      setProID([parseInt(res5?.id)]);
+      console.log(res5);
+      setIdSize(res5?.id_size > 0 ? res5?.id_size : 2);
     }
   }, []);
   const postData = finallyData[0]?.[0];
-  
-  const submitData = {id_flowers:proId,prcie:postData?.data.sumFinally,id_type_delivery:parseInt(postData?.data?.id?.id),full_name:postData?.full_name,phone:postData?.phone,full_name_payee:postData?.full_name_payee,phone_payee:postData?.phone_payee,address_street_home:finallyData[1]?.address_street_home,address_addition:finallyData[1]?.address_addition,date_delivery:finallyData[1]?.date_delivery,time_delivery:finallyData[1]?.time_delivery,and_time:finallyData[1]?.and_time,comment}
+
   const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const submitData = {
+      flowers: storageProduct,
+      id_size,
+      id_flowers: proId,
+      prcie: postData?.data.sumFinally,
+      id_type_delivery: parseInt(postData?.data?.id?.id),
+      full_name: postData?.full_name,
+      phone: postData?.phone,
+      full_name_payee: postData?.full_name_payee,
+      phone_payee: postData?.phone_payee,
+      address_street_home: finallyData[1]?.address_street_home,
+      address_addition: finallyData[1]?.address_addition,
+      date_delivery: finallyData[1]?.date_delivery,
+      time_delivery: finallyData[1]?.time_delivery,
+      and_time: finallyData[1]?.and_time,
+      comment,
+    };
     try {
-     if(comment) {
-      const data = await axios.post(`${url}/flowers_delivery_sites_views/`,submitData)
-      console.log(data)
-      navigate('/оплата')
-      // toast.success("Ваш заказ принят")
-      
-    }else {
-      toast.error("Заполните все поля")
-    }
+      if (comment) {
+        const data = await axios.post(
+          `${url}/flowers_delivery_sites_views/`,
+          submitData
+        );
+        console.log(data);
+        navigate("/оплата");
+        // toast.success("Ваш заказ принят")
+      } else {
+        toast.error("Заполните все поля");
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+  console.log(storageProduct);
+
+  useEffect(() => {
+    if (isStepTrue) {
+      const pro = localStorage.getItem("quick");
+      if (pro) {
+        setProduct(JSON.parse(pro)[0]);
+      }
+    }
+    const basket = localStorage.getItem("basket");
+    setImage(JSON.parse(basket));
+  }, []);
   return (
     <Wrapper>
       <div class="container">
         <p className="title flex justify-center md:mb-6">Ваш заказ</p>
         <div class="wrap flex flex-col md:flex-row">
-          <form onSubmit={submitHandler} class="left w-[100%] md:w-[60%] mx-auto">
+          <form
+            onSubmit={submitHandler}
+            class="left w-[100%] md:w-[60%] mx-auto"
+          >
             <div className="flex flex-col p-4">
               <p className="leading-[24.38px] text-[20px] dark:text-slate-950 font-semibold font-montserrat my-3">
                 Комментарий к заказу
@@ -71,7 +127,9 @@ function Korzinka5() {
                 <Link to={"/корзина/4"} class="back">
                   Назад
                 </Link>
-                <button type="submit" className="next">Далее</button>
+                <button type="submit" className="next">
+                  Далее
+                </button>
               </div>
             </div>
           </form>
@@ -82,8 +140,107 @@ function Korzinka5() {
               <span>{data?.sumFinally} ₽</span>
             </div>
             <div className="price-1">
-              <img src="../images/korzinka11.svg" alt="+18" />
-              <h4>Букет с подсолнухами</h4>
+            <div className="w-full flex flex-col gap-y-3">
+                {isStepTrue ? (
+                  <div className="w-full">
+                    <Swiper
+                      spaceBetween={20}
+                      className="w-full"
+                      slidesPerView={1}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(s) => {
+                        setSwiper(s);
+                      }}
+                    >
+                      {product?.flowers?.map((c) => (
+                        <SwiperSlide>
+                          <div className="flex w-full gap-x-4 items-center">
+                            <div className="w-[109px]">
+                              <img
+                                src={`${uri}${c?.img}`}
+                                alt=""
+                                className="w-full h-[106px] rounded-md"
+                              />
+                            </div>
+                            <h4 className="text-center w-[159px]">
+                              {product?.name}
+                            </h4>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    <Swiper
+                      spaceBetween={20}
+                      className="w-full"
+                      slidesPerView={1}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(s) => {
+                        setSwiper(s);
+                      }}
+                    >
+                      {image?.map((c) => (
+                        <SwiperSlide>
+                          <div className="flex w-full gap-x-4 items-center">
+                            <div className="w-[109px]">
+                              <img
+                                src={`${uri}${c?.flowers[0]?.img}`}
+                                alt=""
+                                className="w-full h-[106px] rounded-md"
+                              />
+                            </div>
+                            <h4 className="text-center w-[159px]">{c?.name}</h4>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                )}
+                <div className="mt-3 w-[100%] w-full flex justify-center z-50">
+                  <button
+                    onClick={() => swiper.slidePrev()}
+                    className="mr-8 border-[3px] sm:border-[3px] border-[#fff] h-[30px] w-[30px] rounded-full flex justify-center items-center"
+                  >
+                    <svg
+                      width="6"
+                      height="21"
+                      viewBox="0 0 12 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.962"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10.3369 0.622048C11.6547 0.561208 12.0991 1.15361 11.6699 2.39939C8.98018 5.07771 6.30275 7.76656 3.63769 10.4658C6.30275 13.165 8.98018 15.8539 11.6699 18.5322C11.8978 18.988 11.8978 19.4436 11.6699 19.8994C11.1952 20.3484 10.6597 20.4282 10.0635 20.1386C7.06708 17.1423 4.07061 14.1458 1.07422 11.1494C0.846375 10.6936 0.846375 10.238 1.07422 9.7822C4.13371 6.68846 7.2213 3.63506 10.3369 0.622048Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => swiper.slideNext()}
+                    className="border-[3px] sm:border-[3px] border-[#fff] h-[30px] w-[30px] rounded-full flex justify-center items-center"
+                  >
+                    <svg
+                      width="6"
+                      height="21"
+                      viewBox="0 0 12 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.962"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.66309 20.378C0.345255 20.4388 -0.099081 19.8464 0.33008 18.6006C3.01982 15.9223 5.69725 13.2334 8.36231 10.5342C5.69725 7.83496 3.01982 5.14612 0.330082 2.4678C0.102239 2.01204 0.102239 1.55636 0.330082 1.10061C0.804837 0.651555 1.3403 0.57178 1.93653 0.86135C4.93292 3.85775 7.92939 6.85421 10.9258 9.85061C11.1536 10.3064 11.1536 10.762 10.9258 11.2178C7.86629 14.3115 4.7787 17.3649 1.66309 20.378Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
 
             <hr className="border-bottom" />

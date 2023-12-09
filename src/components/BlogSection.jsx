@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import Button from "./Button";
 import axios from "axios";
@@ -11,6 +11,14 @@ function BlogSection() {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(Number)
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const navigateRide = (id) => {
+    navigate(`/блог/${id}`)
+    window.scrollTo({
+      top: 0
+    })
+  }
   
   const getBlogDataHandler = async () => {
     try {
@@ -53,7 +61,7 @@ function BlogSection() {
             data?.map((item, index) => {
               return (
                 (index < 3 || show) && (
-                  <li className="blog-item overflow-hidden flex-wrap" key={index}>
+                  <li key={index} className="blog-item overflow-hidden flex-wrap" >
                     <span className="date">
                       {item?.create_date?.substr(0, 10)}
                     </span>
@@ -86,7 +94,7 @@ function BlogSection() {
                         </div>
                       </div>
 
-                      <Link to={`/блог/${item?.id}`}>Читать</Link>
+                      <button onClick={() => navigateRide(item?.id)} className="text-white">Читать</button>
                     </div>
                   </li>
                 )
@@ -94,7 +102,13 @@ function BlogSection() {
             })}
         </ul>
 
-        <div className="btn1 mb-9" style={{ textAlign: "center" }}>
+        <div className="btn1 mb-9" style={{ textAlign: "center" }}
+        onClick={() => {
+          window.scrollTo({
+            top: 0
+          })
+        }}
+        >
           {
           <Link to={location.pathname == '/' && '/блог'}>
               <Button onClick={() => setShow(!show)}>

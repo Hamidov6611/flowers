@@ -16,14 +16,25 @@ function Korzinka1() {
   const [tovar, setTovar] = useState(Number);
   const [selected, setSelected] = useState(true);
   const [id1, setId1] = useState(Number);
-  const {state, getData, removeData} = useContext(ProductsContext)
+  // const {state, getData, removeData} = useContext(ProductsContext)
   const addHandler = (id) => {
     kor?.map((item) => {
       if (item.id === id) {
         item.count = item.count >= 0 && item.count + 1;
-        console.log(item.count);
+        console.log(item);
         setSum((prev) => prev + parseInt(item.price));
         setTovar((prev) => prev + 1);
+        const storageProduct = localStorage.getItem("basket");
+        const updateProduct = JSON.parse(storageProduct)
+        updateProduct.map(c => {
+          console.log(c)
+          if(c?.id == id) {
+            c.count = c?.count + 1
+            localStorage.setItem("basket", JSON.stringify(updateProduct))
+          }
+        })
+        console.log("updateProduct", updateProduct)
+
       }
     });
   };
@@ -41,7 +52,7 @@ function Korzinka1() {
     }
   }, []);
   const removeHandler = (id) => {
-    getData(kor)
+    // getData(kor)
     kor?.map((item) => {
       if (item.id === id) {
        if(item?.count > 1) {
@@ -51,6 +62,16 @@ function Korzinka1() {
           setTovar((prev) => prev - 1);
           setSelected(item.selected);
         }
+        const storageProduct = localStorage.getItem("basket");
+        const updateProduct = JSON.parse(storageProduct)
+        updateProduct.map(c => {
+          console.log(c)
+          if(c?.id == id) {
+            c.count = c?.count - 1
+            localStorage.setItem("basket", JSON.stringify(updateProduct))
+          }
+        })
+        console.log(updateProduct)
        }
       }
     });
@@ -77,20 +98,20 @@ function Korzinka1() {
       }
     })
     localStorage.setItem("basket", JSON.stringify(a));
-    removeData()
+    // removeData()
   };
   return (
     <Wrapper>
       <div className="container">
-        <p className="title flex justify-center md:mb-6">Ваш заказ</p>
+        <p className="text-[#343434] text-[24px] md:text-[32px] mb-6 md:mb-12 font-semibold font-montserrat flex justify-center ">Ваш заказ</p>
 
         <div className="wrap flex flex-col md:flex-row">
           <div className="flex flex-col left w-[100%] md:w-[60%]">
             {kor &&
               kor?.map((item, index) => (
-                <div key={index} className="">
+                <div key={index} className="w-full">
                   <hr className="w-[100%]" />
-                  <div className="container-section gap-[5px] sm:gap-[30px] md:gap-[60px] flex lg:flex-row flex-col items-center">
+                  <div className="container-section gap-[5px] sm:gap-[30px] md:gap-[60px] flex flex-row  items-center">
                     <div className="container1 p-2">
                       <button onClick={() => removeProduct(item.id)}>
                         <img
@@ -109,7 +130,7 @@ function Korzinka1() {
                         />
                       </div>
                     </div>
-                    <div className="container2 mb-[10px] sm:mb-0">
+                    <div className="container2 gap-2 md:gap-8 mb-[10px] sm:mb-0">
                       <div className="count">
                         <button
                           className="plus cursor-pointer"
@@ -131,9 +152,9 @@ function Korzinka1() {
                           </button>
                         )}
                       </div>
-                      <h4 className="flex">
-                        {item.price} <p className="ml-1">₽</p>
-                      </h4>
+                      <h5 className="flex text-[17px] text-[#343434] font-semibold">
+                        {item.price} <p className="ml-1 ">₽</p>
+                      </h5>
                     </div>
                   </div>
                   <hr />
@@ -160,9 +181,12 @@ function Korzinka1() {
 
             <Link
               to={tovar > 0 && "/корзина/2"}
+              onClick={() => {
+                window.scrollTo({top: 0})
+              }}
               className="btn1 flex justify-center my-4"
             >
-              <Button>Оформить заказ</Button>
+              <button className="bg-[#8c5c38] py-4 px-4 rounded-3xl w-full text-[18px] text-white">Оформить заказ</button>
             </Link>
 
             <span className="btn-p">
@@ -236,7 +260,6 @@ const Wrapper = styled.section`
 
   .container2 {
     display: flex;
-    gap: 38px;
     align-items: center;
   }
 

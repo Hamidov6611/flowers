@@ -1,0 +1,14 @@
+.youtube {
+    margin-top: 20px;
+    width: 400px;
+    height: 709px;
+    left: 782px;
+    top: 3700.58px;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 150px  0px 150px 0px;
+      overflow: hidden;
+    }
+  }

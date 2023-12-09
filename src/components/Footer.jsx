@@ -3,12 +3,17 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
 function Footer() {
+  const topFunction = () => {
+    window.scrollTo({
+      top: 0
+    })
+  }
   return (
-    <div className="w-[100%] bg-[#8C5C38]">
+    <div style={{background:"rgba(88, 94, 80, 1)"}} className="w-[100%]">
       <div className="w-[90%] mx-auto flex md:flex-row flex-col md:p-[40px]">
         <div className="flex flex-row md:w-[55%] justify-between mr-[50px]">
           <div className="w-[40%] md:mr-[40px] mt-[20px]">
-            <Link to={"/"}>
+            <Link to={"/"} onClick={topFunction}>
               <div className="lg:w-[202px] lg:h-[96px] w-[140px] h-[67px]">
 				  <svg   viewBox="0 0 171 70" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
 					  <rect width={"100%"} height={"100%"} fill="url(#pattern0)" />
@@ -23,8 +28,8 @@ function Footer() {
             </Link>
           </div>
 
-          <p className="w-[60%] lg:text-[16px] hidden md:flex text-[12px] font-montserrat text-white leading-[40px]">
-            Мы обожаем цветы и чувствуемих особую роль в жизни города. Воплощаем
+          <p className="w-[60%] lg text-[14px]:md:text-[16px] hidden md:flex text-[12px] font-montserrat text-white leading-[40px]">
+            Мы обожаем цветы и чувствуем особую роль в жизни города. Воплощаем в
             современных букетах чувства современных людей.
           </p>
         </div>
@@ -32,19 +37,19 @@ function Footer() {
         <div className="md:w-[45%] w-[100%] flex flex-row justify-between">
           <div className="w-[100%] flex md:flex-row flex-col">
             <div className="md:w-[50%] w-[100%] justify-between ">
-              <Link to="/oнас">
+              <Link to="/oнас" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
                   О нас
                 </p>
               </Link>
 
-              <Link to="/букеты">
+              <Link to="/букеты/категории/46" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
                   Букеты
                 </p>
               </Link>
 
-              <Link to="/доставка">
+              <Link to="/доставка" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
                   Доставка
                 </p>
@@ -52,59 +57,47 @@ function Footer() {
             </div>
 
             <div>
-              <Link to="/oтзывы">
+              <Link to="/oтзывы" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
                   Отзывы
                 </p>
               </Link>
-              <Link to="/блог">
+              <Link to="/блог" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
                   Блог
                 </p>
               </Link>
-              <Link to="/контакт">
+              <Link to="/контакт" onClick={topFunction}>
                 <p className="mb-[20px] text-white font-montserrat text-[20px]">
-                  Контакт
+                Контакты
                 </p>
               </Link>
             </div>
           </div>
 
           <div className="ul-list contact w-[100%]">
-            <ul className="nav">
-              <li className="nav-item flex">
-                <img src="./images/mail.svg" alt="" />
-                <Link to={"mail: info@"}>
-                  <p className="ml-3 text-white font-montserrat text-[16px]">
+            <ul className="nav gap-y-4 space-y-4">
+              <li className="nav-item flex items-center">
+                <img className="w-5 h-5" src="./images/mail.svg" alt="" />
+                <Link to={"mail: info@"} onClick={topFunction}>
+                  <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
                     info@exapmle.com
                   </p>
                 </Link>
                 <span></span>
               </li>
-
-              <li className="nav-item flex">
-                <img src="./images/tel.svg" alt="" />
-                <Link to={"tel: +79119276162"}>
-                  <p className="ml-3 text-white font-montserrat text-[16px]">
-                    + 7 (911) 927-61-62
+              <li className="nav-item flex items-center">
+                <img className="w-5 h-5" src="./images/tel.svg" alt="" />
+                <Link to={"tel: +79119276162"} onClick={topFunction}>
+                  <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
+                    +79119276162
                   </p>
                 </Link>
               </li>
-
-              {/* <li className="nav-item flex">
-                <img src="./images/location.svg" alt="" />
-                <Link to={"tel: +79119276162"} style={{ maxWidth: "228px" }}>
-                  <p className="ml-3 text-white font-montserrat text-[16px]">
-                    {" "}
-                    г. Санкт-Петербург, адрес адрес адрес
-                  </p>
-                </Link>
-               
-              </li> */}
-              <li className="nav-item flex items-center">
-                <img src="./images/location.svg" alt="" />
-                <Link to={"tel: +79119276162"} style={{ maxWidth: "228px" }}>
-                  <p className="ml-3 text-white font-montserrat text-[16px]">
+              <li className="nav-item flex items-center ">
+                <img className="w-5 h-5" src="./images/location.svg" alt="" />
+                <Link to={"tel: +79119276162"} onClick={topFunction} style={{ maxWidth: "228px" }}>
+                  <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
                     Большой Сампсониевский проспект, д. 25
                   </p>
                 </Link>
@@ -114,10 +107,11 @@ function Footer() {
                   <Link
                     className="mr-6 fill-white"
                     to={`https://www.instagram.com/buketmanuf/`}
+                    onClick={topFunction}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      height="50px"
+                      height="30px"
                       viewBox="0 0 448 512"
                     >
                       <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
@@ -129,7 +123,7 @@ function Footer() {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      height="50px"
+                      height="30px"
                       viewBox="0 0 448 512"
                     >
                       {/*! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. */}
@@ -144,7 +138,7 @@ function Footer() {
       </div>
 
       <div className="w-[85%] pb-4 mx-auto">
-        <p className="text-white">
+        <p className="text-white text-center sm:text-start">
           Букетная Мануфактура © 2023 Все права защищены
         </p>
       </div>

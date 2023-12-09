@@ -9,6 +9,11 @@ const Pagination1 = ({pageSize, setPageId}) => {
        onChange={(e, value) => setPageId(value)}
        variant="outlined"
        color="primary"
+       onClick={() => {
+        window.scrollTo({
+          top: 0
+        })
+       }}
         />
     </div>
   );

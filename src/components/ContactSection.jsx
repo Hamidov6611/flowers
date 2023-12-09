@@ -34,7 +34,7 @@ function ContactSection() {
       <div className="md:w-[96%] w-[98%] mx-auto min-h-[40vh]">
         <div className="w-[100%] flex md:flex-row flex-col p-3">
           <div className="md:w-[50%] w-[100%]">
-            <p className="title mb-3 md:mb-6 text-[#443926]">Контакт</p>
+            <p className="title mb-3 md:mb-6 text-[#443926]">Контакты</p>
 
             <p className="title2 text-[#443926]">
               Большой Сампсониевский проспект, д. 25

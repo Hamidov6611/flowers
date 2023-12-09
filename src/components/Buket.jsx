@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "./index.css";
 import { uri, url } from "../layout/config.js";
@@ -11,51 +9,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { A11y, Navigation, Pagination } from "swiper";
-import { useProduct } from "../config/context";
+import { A11y, Pagination } from "swiper";
 import Pagination1 from "./pagination";
-import ProductContext from "../config/proontext";
-import { ProductsContext } from "../context/ProductContext";
+import Layout from "../layout/Layout";
+import { toast } from "react-toastify";
 
 function Buket() {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [flowers1, setFlowers] = useState([]);
-  const [isShow, setIsShow] = useState(false)
-  const [price1, setPrice1] = useState(5000);
+  const [ceo, setCeo] = useState({ title: "", desc: "" });
   const [basket, setBasket] = useState(
     JSON.parse(localStorage.getItem("basket")) || []
   );
+  const [fullData, setFullData] = useState(null);
   const [title, setTitle] = useState("");
   const [id, setId] = useState(Number);
   const [subId, setSubId] = useState(0);
   const [pageSize, setPageSize] = useState(Number);
-  const [filt, setFilt] = useState([{id: 1, sum: 5000}, {id: 2, sum: 10000}, {id: 3, sum: 100000}])
-  const {state, setSate, getData, countData} = useContext(ProductsContext)
+
   const [pageId, setPageId] = useState(1);
 
   const [show, setShow] = useState(false);
-  // const { setstate } = useContext(ProductContext);
 
-  const sasa = useParams()
-
+  const navigate = useNavigate();
   const location = useLocation();
-  const plusHandler = () => {
-    // setPrice1((prev) => prev + 2000);
-    switch(price1) {
-      case 5000: 
-        setPrice1(price1 * 2)
-        break
-      case 10000:
-        setPrice1(price1 * 10)
-        break
-      case 100000:
-        setPrice1(5000)
-        break
-      default: setPrice1(5000)
-    }
-    sortHandler()
-  };
+  const sasa = useParams();
+
+
   const basketHandler = (id) => {
     let products = JSON.parse(localStorage.getItem("basket")) || [];
     // getData(products)
@@ -76,87 +57,28 @@ function Buket() {
         if (item.id === id) {
           basket?.push({ ...item, count: 1, selected: false });
           localStorage.setItem("basket", JSON.stringify(basket));
-
-          countData()
-          getData(basket);
         }
       });
     }
+
+    toast.success("Добавлен в корзину")
+    navigate("/корзина")
   };
 
-
-  // const minusHandler = () => {
-  //   switch(price1) {
-  //     case 5000: 
-  //       setPrice1(100000)
-  //       break
-  //     case 10000:
-  //       setPrice1(5000)
-  //       break
-  //     case 100000:
-  //       setPrice1(10000)
-  //       break
-  //     default: setPrice1(5000)
-  //   }
-
-  //   sortHandler()
-  // };
-
-  // category handler
   const categoryHandler = async () => {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
       setCategory(data);
-      // console.log(data)
     } catch (error) {
       console.log(error);
     }
   };
 
-  //filter handler
-  const filterHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.get(
-        `${url}/AllProductSearchView/?search=${title}`
-      );
-      setFlowers(data?.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const sortHandler = async () => {
-    // e.preventDefault();
-    try {
-      const { data } = await axios.get(
-        `${url}/AllProductSearchView/?search=${price1}`
-      );
-      setFlowers(data?.results);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const sortHandler2 = async (value) => {
-    // e.preventDefault();
-    try {
-      const { data } = await axios.get(
-        `${url}/AllProductSearchView/?search=${value}`
-      );
-      setFlowers(data?.results);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  //get sub category
   const categorySubHandler = async () => {
     try {
       const { data } = await axios.get(
         `${url}/flowers_category_deteile/${id}/`
       );
-      // setSubCategory(data);
       setFlowers(data);
     } catch (error) {
       console.log(error);
@@ -165,10 +87,13 @@ function Buket() {
 
   const subHandlerCat = async (id) => {
     try {
-      const { data } = await axios.get(
-        `${url}/flowers_sub_category_deteile/${id}/`
-      );
-      setFlowers(data);
+      if(id) {
+        const { data } = await axios.get(
+          `${url}/flowers_sub_category_deteile/${id}/`
+        );
+        // console.log(data)
+        setFlowers(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -205,7 +130,9 @@ function Buket() {
   const subHandler2 = async (id) => {
     try {
       setId(id);
-      const { data } = await axios.get(`${url}/sub_category_all_views/${sasa?.id}/`);
+      const { data } = await axios.get(
+        `${url}/sub_category_all_views/${sasa?.id}/`
+      );
       setSubCategory(data);
     } catch (error) {
       console.log(error);
@@ -213,8 +140,8 @@ function Buket() {
   };
 
   useEffect(() => {
-    subHandler2()
-  }, [sasa.id])
+    subHandler2();
+  }, [sasa.id]);
 
   useEffect(() => {
     categorySubHandler();
@@ -225,225 +152,342 @@ function Buket() {
   }, []);
 
   const SortBySum1 = () => {
-    const arr = [...flowers1]
-    let newArr = []
+    const arr = [...flowers1];
+    let newArr = [];
     arr?.map((item) => {
-      if(parseInt(item?.price) < 5000) {
-        newArr.push(item)
+      if (parseInt(item?.price) < 5000) {
+        newArr.push(item);
       }
-    })
-    setFlowers(newArr)
-    setPageSize(newArr.length)
-  }
+    });
+    setFlowers(newArr);
+    setPageSize(newArr.length);
+  };
 
   const SortBySum2 = () => {
-    const arr = [...flowers1]
-    let newArr = []
+    const arr = [...flowers1];
+    let newArr = [];
     arr?.map((item) => {
-      if(parseInt(item?.price) < 10000) {
-        newArr.push(item)
+      if (parseInt(item?.price) < 10000) {
+        newArr.push(item);
       }
-    })
-    setFlowers(newArr)
-    setPageSize(newArr.length)
-  }
+    });
+    setFlowers(newArr);
+    setPageSize(newArr.length);
+  };
   const SortBySum3 = () => {
-    const arr = [...flowers1]
-    let newArr = []
+    const arr = [...flowers1];
+    let newArr = [];
     arr?.map((item) => {
-      if(parseInt(item?.price) < 100000) {
-        newArr.push(item)
-        console.log(newArr)
+      if (parseInt(item?.price) > 10000) {
+        newArr.push(item);
+        console.log(newArr);
       }
-    })
-    setFlowers(newArr)
-    setPageSize(newArr.length)
-  }
+    });
+    setFlowers(newArr);
+    setPageSize(newArr.length);
+  };
 
-
-  const blurDivs = document.querySelectorAll('.blur-div')
-  blurDivs.forEach(div => {
-    const img = div.querySelector("img")
-    const addImage = document.querySelectorAll('.blur-load')
+  const blurDivs = document.querySelectorAll(".blur-div");
+  blurDivs.forEach((div) => {
+    const img = div.querySelector("img");
+    const addImage = document.querySelectorAll(".blur-load");
     function loaded() {
-      //show img
-      div.classList.add("loaded")
+      div.classList.add("loaded");
     }
-    if(img.complete) {
-      loaded()
-      
+    if (img.complete) {
+      loaded();
     } else {
-      img.addEventListener("load", loaded)
-
+      img.addEventListener("load", loaded);
     }
-  })
+  });
 
+  const toggleCard = (item) => {
+    setFullData(item);
+    setFlowers((prevCards) =>
+      prevCards.map((card) =>
+        card?.id === item?.id ? { ...card, visible: !card.visible } : card
+      )
+    );
+  };
+
+  const toggleCardOver = (item) => {
+    setFlowers((prevCards) =>
+      prevCards.map((card) =>
+        card?.id === item?.id ? { ...card, visible: false } : card
+      )
+    );
+  };
+  const handleQuickDelivery = (data) => {
+    navigate(`/корзина/2?quick=true`);
+    localStorage.setItem("quick", JSON.stringify([data]));
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
+  const getAndSetCeo = () => {
+    switch (sasa.id) {
+      case "46":
+        setCeo({
+          title: "Осень",
+          desc: "Дарите тепло с осенними цветами! Наша коллекция осенних букетов и композиций позволит вам насладиться теплыми оттенками и уютной атмосферой. У нас есть идеальный букет для создания осеннего настроения.",
+        });
+        break;
+      case "47":
+        setCeo({
+          title: "Зима",
+          desc: "Отправьте волшебство зимы вместе с нашими зимними композициями. Снежные белые розы, голубые эустомы, серебристые декорации - наши букеты передадут белоснежную красоту зимы и создадут атмосферу праздника и волшебства. ",
+        });
+        break;
+      case "48":
+        setCeo({
+          title: "Весна",
+          desc: "Добро пожаловать в цветущий мир весны! От ярких тюльпанов до нежных пионов и ароматных фрезий, наши весенние букеты наполнят ваш дом свежестью и радостью. Пусть каждый весенний день будет полон цветов и веселья!",
+        });
+        break;
+      case "45":
+        setCeo({
+          title: "Лето",
+          desc: "Яркие цветы и солнечное настроение - вот что предлагает наша коллекция летних букетов. От свежих полей лаванды до ярких подсолнухов, наши букеты принесут радость и веселье в самые жаркие дни лета.",
+        });
+        break;
+      case "52":
+        setCeo({
+          title: "Вазы",
+          desc: "Украшайте свои цветы в наших стильных и элегантных вазах. Выбирайте из различных форм и дизайнов, чтобы создать уникальную и привлекательную композицию. Наши вазы станут стильным аксессуаром для вашего интерьера и подчеркнут красоту и изысканность цветов.",
+        });
+        break;
+      case "49":
+        setCeo({
+          title: "Сухоцветы",
+          desc: "Изысканные и богатые текстурой, сухоцветы создают особенную атмосферу. Наши сухоцветы подчеркнут настроение и стиль вашего интерьера, привнесут уют и природную красоту.",
+        });
+        break;
+      case "53":
+        setCeo({
+          title: "Открытки",
+          desc: "Выразите свои чувства с помощью наших уникальных открыток. Они станут идеальным дополнением к вашему цветочному подарку и позволят передать теплые слова и пожелания.",
+        });
+        break;
+      case "54":
+        setCeo({
+          title: "Свечи",
+          desc: "Создайте мягкий и романтический свет с нашей коллекцией свечей. Они добавят атмосферу уюта и спокойствия, а также подчеркнут красоту и аромат цветов.",
+        });
+        break;
+      case "55":
+        setCeo({
+          title: "Сертификаты",
+          desc: "Подарите возможность выбора с нашими сертификатами. Они станут идеальным подарком для тех, кто ценит красоту цветов и хочет самостоятельно выбрать букет или композицию.",
+        });
+        break;
+      case "50":
+        setCeo({
+          title: "Авторские букеты",
+          desc: "Добро пожаловать в мир уникальных авторских букетов! Наши флористы создают яркие и оригинальные композиции из изысканных цветов. Каждый букет - это произведение искусства, призванное порадовать и удивить своего владельца.",
+        });
+        break;
+      case "51":
+        setCeo({
+          title: "Монобукеты",
+          desc: "Простота и элегантность в каждом букете. Монобукеты - это идеальный способ подчеркнуть красоту и нежность каждого цветка. Они станут великолепным подарком для любого случая и позволят цветам выразить свою прелесть в полной мере.",
+        });
+        break;
+    }
+  };
+
+  useEffect(() => {
+    getAndSetCeo();
+  }, [sasa.id]);
+
+  const handleClick = () => {
+    window.scrollTo({top: 0})
+  }
 
   return (
     <Wrapper>
-      <div className="w-[90%] lg:w-[94%] mx-auto">
-        <p className="text-[48px]  font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
-          Букеты
-        </p>
-        <div className="flex py-[40px] items-center flex-col md:flex-row">
-          {/* <div className="flex mb-[20px] md:mb-0 relative">
-            <p className="text-[16px] sm:text-[18px] md:text-[20px] font-medium text-[#656565] md:mr-4">
-              до {price1}
-            </p>
-            <ArrowUpwardIcon className="cursor-pointer" onClick={plusHandler} />
-            <ArrowDownwardIcon onClick={minusHandler} />
-
-            <div className="absolute top-8 left-0 h-25 w-28 flex flex-col">
-                {filt?.map((item, index) => {
-                  return (
-                    <p key={item?.id} className="font-semibold text-[#15100C]">{item?.sum}</p>
-                  )
-                })}
-            </div>
-           
-          </div> */}
-          {/* <form onSubmit={filterHandler}>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              className="bg-[#F5F5F5] border-2 border-slate-400 md:ml-4 px-4 rounded-lg py-2"
-              placeholder="Введите цену или название"
-            />
-          </form> */}
-          <div className="flex flex-wrap gap-x-3 gap-y-4 text-center w-[100%] md:w-[60%] my-3 md:my-0 ml-0 md:ml-8">
-              <p 
-              onClick={SortBySum1}
-              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 5 000 руб</p>
-              <p 
-               onClick={SortBySum2}
-              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">до 10 000 руб</p>
-              <p 
-               onClick={SortBySum3}
-              className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1">свыше 100 000 руб</p>
-            </div>
-        </div>
-        <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
-          {category?.map((item) => (
-            <>
-              <button
-                key={item?.id}
-                onClick={() => subHandler(item?.id)}
-                className={`bg-white text-[#443926] border-2 border-[#443926]
-               py-1 md:py-2 mb-[20px] px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+      <>
+        <div className="w-[90%] lg:w-[94%] mx-auto">
+          <p className="text-[48px]  font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
+            Букеты
+          </p>
+          <div className="flex py-[40px] items-center flex-col md:flex-row">
+            <div className="flex md:flex-row flex-col gap-x-3 md:gap-x-6 gap-y-4 text-center my-3 md:my-0 ml-0 md:ml-5">
+              <p
+                onClick={SortBySum1}
+                className="bg-white  rounded-2xl font-medium  text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer  text-center text-[#343434] md:px-2 border-2"
               >
-                {item?.title}
-              </button>
-            </>
-          ))}
-        </div>
-
-        <div className="flex pb-[30px] flex-col md:flex-row">
-          <div className="flex flex-wrap">
-            <button
-              className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
-              onClick={() => getFlowers()}
-            >
-              Все
-            </button>
-            {subCategory?.map((item) => (
-              <button
-                key={item?.id}
-                className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
-                onClick={() => subHandlerCat(item?.id)}
+                до 5000 руб
+              </p>
+              <p
+                onClick={SortBySum2}
+                className="bg-white mr-0 md:mr-5 rounded-2xl font-medium  text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer  text-center text-[#343434] md:px-2 border-2"
               >
-                {/* {item?.id} */}
-                {item?.title}
-              </button>
+                до 10000 руб
+              </p>
+              <p
+                onClick={SortBySum3}
+                className="bg-white mr-0 md:mr-5 rounded-2xl font-medium  text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer  text-center text-[#343434] md:px-2 border-2"
+              >
+                свыше 10000 руб
+              </p>
+            </div>
+          </div>
+          <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
+            {category?.map((item) => (
+              <>
+                <button
+                  key={item?.id}
+                  onClick={() => subHandler(item?.id)}
+                  className={`bg-white text-[#443926] border-2 border-[#443926]
+               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+                >
+                  {item?.title}
+                </button>
+              </>
             ))}
           </div>
-        </div>
 
-        <div className="bgbgbg  rounded-3xl p-5 grid grid-cols-1  lg:grid-cols-2 gap-x-4 gap-y-4 mb-[40px]">
-          {flowers1.length > 0 ? (
-            flowers1?.map((item, index) => {
-              return (
-                ((location.pathname == "/" ? index < 4 : () => setPageId(1)) ||
-                  show) && (
-                  <div key={index} className="mb-[20px] ">
-                    <div className="bg-blue-350 border border-gray-200 rounded-lg ">
-                      <Link to={`/букеты/${item.id}`}>
-                        <Swiper
-                          modules={[Pagination, A11y]}
-                          spaceBetween={50}
-                          slidesPerView={1}
-                          pagination={{ clickable: true }}
+          <div className="flex pb-[30px] flex-col md:flex-row">
+            <div className="flex flex-wrap">
+              <button
+                className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
+                onClick={() => getFlowers()}
+              >
+                Все
+              </button>
+              {subCategory?.map((item) => (
+                <button
+                  key={item?.id}
+                  className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
+                  onClick={() => subHandlerCat(item?.id)}
+                >
+                  {/* {item?.id} */}
+                  {item?.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl relative p-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px]">
+            {flowers1.length > 0 ? (
+              flowers1?.map((item, index) => {
+                return (
+                  ((location.pathname == "/"
+                    ? index < 4
+                    : () => setPageId(1)) ||
+                    show) && (
+                    <div
+                      onMouseLeave={() => toggleCardOver(item)}
+                      onMouseEnter={() => toggleCard(item)}
+                      key={index}
+                      className={`${
+                        item?.visible
+                          ? "min-h-max left-0 sticky z-[99999]"
+                          : "h-[380px] md:h-[570px]"
+                      } z-[8]  mb-[20px] ${
+                        !(index % 2 == 0)
+                          ? "w-full md:w-[55%]"
+                          : "w-full md:w-[43%]"
+                      } sticky z-0 card-shadow border rounded-lg`}
+                    >
+                      <div className="bg-blue-350 rounded-lg">
+                        <Link
+                          to={`/букеты/${item.id}`}
+                          onClick={() => {
+                            window.scrollTo({
+                              top: 0,
+                            });
+                          }}
                         >
-                          {item?.flowers?.map((c, index) => (
-                            <SwiperSlide key={index}>
-                              <div
-                                className={`h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${((uri + c?.img).length < 0 || c?.img?.length < 0) && "blurimage"}`}
-                              >
-                                <img
-                                loading="lazy"  
-                                  src={` ${
-                                    c?.img?.includes(
-                                      "https://buketyana-admin.ru"
-                                    )
-                                      ? c?.img
-                                      : uri + c?.img
-                                  } `}
-                                  className="w-[100%] h-[100%]  object-cover rounded-t-lg"
-                                  
-                                  alt={"flower"}
+                          <Swiper
+                            modules={[Pagination, A11y]}
+                            spaceBetween={50}
+                            slidesPerView={1}
+                            pagination={{ clickable: true }}
+                          >
+                            {item?.flowers?.map((c, index) => (
+                              <SwiperSlide key={index}>
+                                <div
+                                  className={`h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${
+                                    ((uri + c?.img).length < 0 ||
+                                      c?.img?.length < 0) &&
+                                    "blurimage"
+                                  }`}
+                                >
+                                  <img
+                                    loading="lazy"
+                                    src={` ${
+                                      c?.img?.includes(
+                                        "https://buketyana-admin.ru"
+                                      )
+                                        ? c?.img
+                                        : uri + c?.img
+                                    } `}
+                                    className="w-[100%] h-[100%]  object-cover rounded-t-lg"
+                                    alt={"flower"}
+                                  />
+                                </div>
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        </Link>
+                        <div className="p-3 sm:p-5">
+                          <div>
+                            <h5 className="mb-2 uppercase lg:font-semibold text-[16px] text-center md:text-[24px] tracking-tight text-[#000] font-montserrat font-normal line-clamp-1">
+                              {item?.name}
+                            </h5>
+                          </div>
+
+                          <div className="flex justify-center md:flex-row">
+                            <p className="text-[#000] font-semibold text-[24px] md:text-[32px] font-montserrat">
+                              {item?.price} ₽
+                            </p>
+                          </div>
+
+                          {item?.visible && (
+                            <>
+                              <div className="flex flex-wrap items-start font-semibold text-[17px] md:text-[20px] font-montserrat text-[#000]">
+                              {item?.rank && <p className="inline m-0 p-0">Цветы:</p>}
+                                <p
+                                  className="font-normal inline m-0 p-0 text-[#000] font-montserrat"
+                                  dangerouslySetInnerHTML={{
+                                    __html: item?.rank
+                                  }}
                                 />
                               </div>
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                      </Link>
-                      <div className="p-3 sm:p-5">
-                        <div>
-                          <h5 className="mb-2 text-[16px] md:text-[18px] tracking-tight text-white dark:text-white font-montserrat line-clamp-1">
-                            {item?.name}
-                          </h5>
-                        </div>
-                        {/* <div className="flex">
-                          <p className="mb-3 text-[14px] font-medium min-h-[20px] text-[#443926] mr-3 md:text-[16px] ">
-                            В составе:
-                          </p>{" "}
-                          <p
-                            className="mb-3 text-[14px] font-medium line-clamp-1 md:text-[16px] text-[#443926] md:text-[16px]"
-                            dangerouslySetInnerHTML={{
-                              __html: item?.rank,
-                            }}
-                          />
-                        </div> */}
-                        <div className="flex justify-between md:flex-row">
-                          <div>
-                            <button
-                              onClick={() => basketHandler(item.id)}
-                              className="mr-4 inline-flex items-center px-4 rounded-2xl md:px-24 py-2 text-center text-white bg-[#779243] md:rounded-3xl hover:bg-lime-500 justify-center mb-3 md:mb-0"
-                            >
-                              <p className="font-montserrat font-semibold text-[16px] sm:text-[18px]">В корзину</p>
-                            </button>
-                           
-                          </div>
-                          <p className="text-white text-[24px] font-montserrat">
-                            {item?.price} ₽
-                          </p>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-3 mt-6">
+                                <button
+                                  onClick={() => basketHandler(item.id)}
+                                  className="bg-[#585E50]  rounded-xl text-white py-[10px]  text-[18px] md:text-[20px] font-medium font-montserrat"
+                                >
+                                  В КОРЗИНУ
+                                </button>
+                                <button
+                                  onClick={() => handleQuickDelivery(item)}
+                                  className="border-2 border-[#585E50] rounded-xl text-[#585E50] py-[10px]  text-[18px] md:text-[20px] font-medium font-montserrat"
+                                >
+                                  БЫСТРЫЙ ЗАКАЗ
+                                </button>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
-                  </div>
-                )
-              );
-            })
-          ) : (
-            <div className="w-[100%] flex justify-center">
-              <p className="font-montserrat text-[24px] text-white">
-                Нет таких цветов
-              </p>
-            </div>
-          )}
-        </div>
+                  )
+                );
+              })
+            ) : (
+              <div className="w-[100%] flex justify-center">
+                <p className="font-montserrat text-[24px] text-white">
+                  Нет таких цветов
+                </p>
+              </div>
+            )}
+          </div>
           {location.pathname == "/" ? (
-            <div className="w-[100%] flex justify-center" >
+            <div className="w-[100%] flex justify-center">
               {/* {
                 <Link to={location.pathname == "/" && "/букеты"} className="w-[100%] flex justify-center">
                   <button
@@ -455,16 +499,16 @@ function Buket() {
                 </Link>
               } */}
             </div>
-          ) :
-          
-          <div className="flex justify-center my-8">
-            <Pagination1 pageSize={pageSize} setPageId={setPageId} />
-          </div>
-          }
+          ) : (
+            <div className="flex justify-center my-8">
+              <Pagination1 pageSize={pageSize} setPageId={setPageId} />
+            </div>
+          )}
 
-        {/* {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
+          {/* {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
         )} */}
-      </div>
+        </div>
+      </>
     </Wrapper>
   );
 }

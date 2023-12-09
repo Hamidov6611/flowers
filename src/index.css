@@ -3,6 +3,16 @@ body{
   
 }
 
+.second-page {
+  margin-top: 0; /* Yuqorigacha sozlashtirgan kerakli o'qim */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,500;0,700;0,800;1,600&display=swap');
 @tailwind base;
 @tailwind components;

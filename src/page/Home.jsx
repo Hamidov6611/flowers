@@ -8,7 +8,7 @@ import MainDostavka from "../components/MainDostavka";
 import Reviews from "../components/Reviews";
 import BlogSection from "../components/BlogSection";
 import { useLocation } from "react-router-dom";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -18,97 +18,74 @@ import HomeCategory from "./HomeCategory";
 import NewHeros from "../components/NewHeros";
 
 function Home() {
-  const loction = useLocation();
   const [swiper, setSwiper] = useState(null);
 
   return (
     <Wrapper>
-      {/* <Hero /> */}
-      <Swiper
-        // className={navigations[`swiper-button-next`]}
-        modules={[Pagination, A11y, Navigation]}
-        spaceBetween={3}
-        slidesPerView={1}
-        pagination={{ clickable: true }}
-        onSwiper={(s) => {
-          // console.log("initialize swiper", s);
-          setSwiper(s);
-        }}
-        // navigation={true}
-      >
-        {/* <SwiperSlide>
-          <div className="w-[94%] h-[100%] mx-auto">
-            <Action />
-          </div>
-        </SwiperSlide> */}
-        <SwiperSlide>
-          <NewHeros
-            img={"./images/ban1.png"}
-            svg={"/images/ban1a.svg"}
-            heroTitle={
-              "Не упускайте возможность приобрести этот восхитительный букет прямо сейчас!"
-            }
-            cardTitle={
-              "Украсьте свою жизнь нежностью и красотой! Шляпная коробка с лизиантусом и розами - олицетворение элегантности и изящества!Вы можете подарить эту прекрасную композицию своим близким, друзьям или коллегам, и они наверняка оценят вашу заботу и хороший вкус. от 6 000 ₽ Смотреть все букеты"
-            }
-            price={6000}
-            link={'/букеты/категория/43'}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <NewHeros
-            img={"./images/ban2.png"}
-            svg={"/images/ban2a.svg"}
-            heroTitle={
-              "Наша команда опытных флористов с любовью и вниманием соберет для вас любую композицию, гармонично сочетая цвета и формы."
-            }
-            cardTitle={
-              `Мечтаете о необычной и стильной композиции, которая поразит всех своей красотой? Тогда наша "Корзина с тыквой и розами" идеально подойдет для вас!  Она станет ярким акцентом в вашем интерьере, идеальным подарком или просто великолепным способом выразить свои чувства.`
-            }
-            price={5750}
-            link={'/букеты/категория/42'}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <NewHeros
-            img={"./images/ban3.png"}
-            svg={"/images/ban3a.svg"}
-            heroTitle={
-              "Купите живое растение прямо сейчас и позвольте своему интерьеру расцвести вместе с нами!"
-            }
-            cardTitle={
-              `Подарите себе и своему дому неповторимый шарм с фантастическим растением Фикус эластика белиз! С его густой зеленью и оригинальным рисунком листьев, он станет идеальным украшением вашего интерьера. `
-            }
-            price={5750}
-            link={'/букеты/категория/41'}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <NewHeros
-            img={"./images/ban4.png"}
-            svg={"/images/ban4a.svg"}
-            heroTitle={
-              "Приобретайте сегодня товары со скидками у нас и заботьтесь о себе и о своих близких. "
-            }
-            cardTitle={
-              `У нас вы найдете широкий выбор ваз, открыток, свечей и сертификатов, чтобы добавить нотку красоты в вашу жизнь. Наши прекрасные товары идеально подойдут для подарков или для создания атмосферы уюта в вашем доме. `
-            }
-            price={1150}
-            link={'/букеты/категория/40'}
-          />
-        </SwiperSlide>
-        {/* <SwiperSlide>
-          <div className="md:w-[94%] mx-auto h-[441px] md:h-[660px]">
-            <img
-              src="./images/hero_bg.png"
-              alt=""
-              width={"100%"}
-              height={"100%"}
+      <div className="relative">
+        <Swiper
+          className="my-0 py-0"
+          modules={[Pagination, A11y, Navigation]}
+          spaceBetween={3}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          onSwiper={(s) => {
+            setSwiper(s);
+          }}
+        >
+          <SwiperSlide>
+            <NewHeros
+              img={"./images/ban1.png"}
+              svg={"/images/ban1a.svg"}
+              heroTitle={
+                "Не упускайте возможность приобрести этот восхитительный букет прямо сейчас!"
+              }
+              cardTitle={
+                "Украсьте свою жизнь нежностью и красотой! Шляпная коробка с лизиантусом и розами - олицетворение элегантности и изящества!Вы можете подарить эту прекрасную композицию своим близким, друзьям или коллегам, и они наверняка оценят вашу заботу и хороший вкус. от 6 000 ₽ Смотреть все букеты"
+              }
+              price={6000}
+              link={"/букеты/категория/43"}
             />
-          </div>
-        </SwiperSlide> */}
-      </Swiper>
-      <div className="mt-12 w-[100%] flex justify-center">
+          </SwiperSlide>
+          <SwiperSlide>
+            <NewHeros
+              img={"./images/ban2.png"}
+              svg={"/images/ban2a.svg"}
+              heroTitle={
+                "Наша команда опытных флористов с любовью и вниманием соберет для вас любую композицию, гармонично сочетая цвета и формы."
+              }
+              cardTitle={`Мечтаете о необычной и стильной композиции, которая поразит всех своей красотой? Тогда наша "Корзина с тыквой и розами" идеально подойдет для вас!  Она станет ярким акцентом в вашем интерьере, идеальным подарком или просто великолепным способом выразить свои чувства.`}
+              price={5750}
+              link={"/букеты/категория/42"}
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <NewHeros
+              img={"./images/ban3.png"}
+              svg={"/images/ban3a.svg"}
+              heroTitle={
+                "Купите живое растение прямо сейчас и позвольте своему интерьеру расцвести вместе с нами!"
+              }
+              cardTitle={`Подарите себе и своему дому неповторимый шарм с фантастическим растением Фикус эластика белиз! С его густой зеленью и оригинальным рисунком листьев, он станет идеальным украшением вашего интерьера. `}
+              price={5750}
+              link={"/букеты/категория/41"}
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <NewHeros
+              img={"./images/ban4.png"}
+              svg={"/images/ban4a.svg"}
+              heroTitle={
+                "Приобретайте сегодня товары со скидками у нас и заботьтесь о себе и о своих близких. "
+              }
+              cardTitle={`У нас вы найдете широкий выбор ваз, открыток, свечей и сертификатов, чтобы добавить нотку красоты в вашу жизнь. Наши прекрасные товары идеально подойдут для подарков или для создания атмосферы уюта в вашем доме. `}
+              price={1150}
+              link={"/букеты/категория/40"}
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
+      <div className="mt-12 w-[100%] hidden md:flex justify-center">
         <button
           onClick={() => swiper.slidePrev()}
           className="mr-8 border-[3px] sm:border-[3px] border-[#343434] h-[40px] w-[40px] rounded-full flex justify-center items-center"
@@ -151,13 +128,15 @@ function Home() {
         </button>
       </div>
       <HomeCategory />
-      <div className="mt-8 md:mt-[50px]">
+      <div className="mt-8 hidden md:block md:mt-[50px] ">
         <Buket />
       </div>
       <Dostavka />
       <MainOnas />
       <MainDostavka />
-      <Reviews />
+      <div className="md:block hidden">
+        <Reviews />
+      </div>
       <BlogSection />
     </Wrapper>
   );

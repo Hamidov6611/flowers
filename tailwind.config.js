@@ -18,18 +18,20 @@ module.exports = {
         modal:"rgba(0,0,0,.8)",
         modal2:"rgba(0,0,0,.5)",
         modal3:"rgba(0,0,0,.3)",
+        end: "#ECCEB4"
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif']
       }
     },
     screen: {
+      'mob': '360px',
       'xs': '480px',
       'ss': '620px',
       'sm': '768px',
       'md': '921px',
       'lg': '1200px',
-      men: '1262px',
+      'men': '1262px',
       'xl': '1700px',
       '2xl': '1980px'
     }

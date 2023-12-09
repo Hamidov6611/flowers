@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -8,6 +8,28 @@ import { url, uri } from "../layout/config";
 const BlogDetail = () => {
   const [data, setData] = useState([]);
   const { id } = useParams();
+  const [contentHover, setContentHover] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+
+    const handleScrolling = (event) => {
+      if(contentRef !== null) {
+        if(contentHover === false) {
+          contentRef.current.scrollTop= 0;
+        }
+      }
+    }
+
+    window.addEventListener("wheel", handleScrolling);
+
+    return () => {
+      window.removeEventListener("wheel", handleScrolling);
+    }
+  })
+
+
+
   const getblogDetail = async () => {
     const { data } = await axios.get(
       `${url}/blogs_deteiles_sites_views/${id}/`
@@ -17,9 +39,10 @@ const BlogDetail = () => {
   useEffect(() => {
     getblogDetail();
   }, []);
+
   return (
     <Wrapper>
-      <div className="w-[96%] md:w-[70%] mx-auto mb-6 sm:py-[40px] min-h-[60vh] flex justify-center">
+      <div ref={contentRef} className="w-[96%] md:w-[70%] second-page mx-auto mb-6 sm:py-[40px] min-h-[60vh] flex justify-center">
         {data.map((item) => (
           <div className=" md:w-[800px] sm:w-[400px] w-[360px]  bg-white border border-gray-200 rounded-lg shadow-2xl">
             <div className="w-[100%] flex justify-center h-[300px] md:h-[600px]">

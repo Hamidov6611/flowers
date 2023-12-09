@@ -1,11 +1,18 @@
 import { Checkbox } from "@mui/material";
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { styled } from "styled-components";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import { uri } from "../../layout/config";
 
 function Korzinka4() {
+  const [swiper, setSwiper] = useState(null);
   const [data, setData] = useState([]);
   const [adress, setAddress] = useState("");
   const [fullData, setFullData] = useState("");
@@ -13,6 +20,12 @@ function Korzinka4() {
   const [time, setTime] = useState(Number);
   const [andTime, setAndTime] = useState(Number);
   const [allData, setAllData] = useState([]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const isStepTrue = queryParams.get("quick") == "true";
+  const [image, setImage] = useState(null);
+  const [product, setProduct] = useState([]);
+
   useEffect(() => {
     const res = localStorage.getItem("full");
     if (res) {
@@ -25,6 +38,14 @@ function Korzinka4() {
       setAllData(res3);
       console.log(allData);
     }
+    if(isStepTrue) {
+      const pro = localStorage.getItem("quick");
+      if (pro) {
+        setProduct(JSON.parse(pro)[0]);
+      }
+    }
+    const basket = localStorage.getItem("basket");
+    setImage(JSON.parse(basket));
   }, []);
   const navigate = useNavigate()
 
@@ -44,7 +65,8 @@ function Korzinka4() {
 
   const next = () => {
     if(adress && fullData && date && time && andTime) {
-      navigate("/корзина/5")
+      isStepTrue ? navigate(`/корзина/5?quick=true`) : navigate("/корзина/5")
+      window.scrollTo({top: 0})
     }else {
       toast.error("Заполните все поля")
     }
@@ -52,7 +74,7 @@ function Korzinka4() {
   return (
     <Wrapper>
       <div class="container">
-        <p className="title flex justify-center md:mb-6">Ваш заказ</p>
+      <p className="title flex justify-center md:mb-6">Ваш заказ</p>
         <div class="wrap flex flex-col md:flex-row">
           <div class="left w-[100%] md:w-[60%] mx-auto">
             <div class="box">
@@ -100,7 +122,7 @@ function Korzinka4() {
                     <div class="time-time">
                       <h4>Время доставки</h4>
                       <input
-                        class="main-input-2 mr-[20px] dark:bg-white p-2 dark:text-slate-950"
+                        class="main-input-2 mr-[20px] dark:bg-white mb-4 sm:mb-0 p-2 dark:text-slate-950"
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
@@ -137,8 +159,107 @@ function Korzinka4() {
               <span>{data?.sumFinally} ₽</span>
             </div>
             <div class="price-1">
-              <img src="../images/korzinka11.svg" alt="+18" />
-              <h4>Букет с подсолнухами</h4>
+            <div className="w-full flex flex-col gap-y-3">
+                {isStepTrue ? (
+                  <div className="w-full">
+                    <Swiper
+                      spaceBetween={20}
+                      className="w-full"
+                      slidesPerView={1}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(s) => {
+                        setSwiper(s);
+                      }}
+                    >
+                      {product?.flowers?.map((c) => (
+                        <SwiperSlide>
+                          <div className="flex w-full gap-x-4 items-center">
+                            <div className="w-[109px]">
+                              <img
+                                src={`${uri}${c?.img}`}
+                                alt=""
+                                className="w-full h-[106px] rounded-md"
+                              />
+                            </div>
+                            <h4 className="text-center w-[159px]">
+                              {product?.name}
+                            </h4>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                ) : (
+                  <div className="w-full">
+                    <Swiper
+                      spaceBetween={20}
+                      className="w-full"
+                      slidesPerView={1}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(s) => {
+                        setSwiper(s);
+                      }}
+                    >
+                      {image?.map((c) => (
+                        <SwiperSlide>
+                          <div className="flex w-full gap-x-4 items-center">
+                            <div className="w-[109px]">
+                              <img
+                                src={`${uri}${c?.flowers[0]?.img}`}
+                                alt=""
+                                className="w-full h-[106px] rounded-md"
+                              />
+                            </div>
+                            <h4 className="text-center w-[159px]">{c?.name}</h4>
+                          </div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                )}
+                <div className="mt-3 w-[100%] w-full flex justify-center z-50">
+                  <button
+                    onClick={() => swiper.slidePrev()}
+                    className="mr-8 border-[3px] sm:border-[3px] border-[#fff] h-[30px] w-[30px] rounded-full flex justify-center items-center"
+                  >
+                    <svg
+                      width="6"
+                      height="21"
+                      viewBox="0 0 12 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.962"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10.3369 0.622048C11.6547 0.561208 12.0991 1.15361 11.6699 2.39939C8.98018 5.07771 6.30275 7.76656 3.63769 10.4658C6.30275 13.165 8.98018 15.8539 11.6699 18.5322C11.8978 18.988 11.8978 19.4436 11.6699 19.8994C11.1952 20.3484 10.6597 20.4282 10.0635 20.1386C7.06708 17.1423 4.07061 14.1458 1.07422 11.1494C0.846375 10.6936 0.846375 10.238 1.07422 9.7822C4.13371 6.68846 7.2213 3.63506 10.3369 0.622048Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => swiper.slideNext()}
+                    className="border-[3px] sm:border-[3px] border-[#fff] h-[30px] w-[30px] rounded-full flex justify-center items-center"
+                  >
+                    <svg
+                      width="6"
+                      height="21"
+                      viewBox="0 0 12 21"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.962"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.66309 20.378C0.345255 20.4388 -0.099081 19.8464 0.33008 18.6006C3.01982 15.9223 5.69725 13.2334 8.36231 10.5342C5.69725 7.83496 3.01982 5.14612 0.330082 2.4678C0.102239 2.01204 0.102239 1.55636 0.330082 1.10061C0.804837 0.651555 1.3403 0.57178 1.93653 0.86135C4.93292 3.85775 7.92939 6.85421 10.9258 9.85061C11.1536 10.3064 11.1536 10.762 10.9258 11.2178C7.86629 14.3115 4.7787 17.3649 1.66309 20.378Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
 
             <hr class="border-bottom" />

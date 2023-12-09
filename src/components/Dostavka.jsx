@@ -7,7 +7,7 @@ function Dostavka() {
   const [isOrder, setIsOrder] = useState(false);
   return (
     <Wrapper className="w-[98%] mx-auto flex flex-col">
-      <div className=" relative w-[70%] mx-auto ">
+      <div className="hidden md:block relative w-[70%] mx-auto ">
         <div className="absolute right-0 top-0">
           <img src="./images/dostavka_bg.png" alt="" />
         </div>
@@ -26,7 +26,7 @@ function Dostavka() {
         </div>
       </div>
       {isOrder && <ContactForm setIsOrder={setIsOrder} />}
-      <div className="flex flex-col mt-[20px] md:mt-[220px] w-[90%] mx-auto">
+      <div className="flex flex-col md:mt-[220px] w-[90%] mx-auto">
         <div className="flex md:flex-row gap-y-12 flex-col border-2 border-[#343434]">
           <div className="w-[100%] md:w-[55%] flex flex-col relative justify-center items-center">
             <div className="w-[80%] dm:w-[60%] z-20 flex justify-center items-center">
@@ -75,10 +75,16 @@ function Dostavka() {
         <p className="text-[#343434] w-[80%] mx-auto text-[18px] sm:text-[24px] font-montserrat md:text-[32px] lg:text-[55px] md:font-medium text-center">
           Доставка букетов и цветов <br /> по Санкт-Петербургу
         </p>
-        <p className="text-[#343434] text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat text-center mt-8 sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px]">
+        <p className="text-[#343434] hidden sm:flex text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat text-center mt-8 sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px]">
           Доставка цветов от нашей студии в Санкт-Петербурге выручает множество
-          людей ежедневно. <br /> Мы поможем Вам определиться с выбором цветов к любому
-          событию! <br /> Если захотите что-то неповторимое, то флористы сделают
+          людей ежедневно. <br /> Мы поможем Вам определиться с выбором цветов к
+          любому событию! <br /> Если захотите что-то неповторимое, то флористы
+          сделают абсолютно любой букет в соответствии с вашими пожеланиями.
+        </p>
+        <p className="text-[#343434] sm:hidden text-center  text-[14px] w-[90%] md:w-[80%] mx-auto font-montserrat mt-8 sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px]">
+          Доставка цветов от нашей студии в Санкт-Петербурге выручает множество
+          людей ежедневно. Мы поможем Вам определиться с выбором цветов к любому
+          событию! Если захотите что-то неповторимое, то флористы сделают
           абсолютно любой букет в соответствии с вашими пожеланиями.
         </p>
       </div>

@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 function Dostavka() {
     return (
         <Wrapper>
-            <div class="w-[98%] md:w-[94%] mx-auto">
-                <h3>Доставка</h3>
-                <p>Мы находимся в Санкт-Петербурге по адресу <strong>Большой Сампсониевский проспект, д. 25</strong> Вы можете оформить самовывоз любого понравившегося на сайте букета
+            <div class="w-[98%] md:w-[94%] my-6 mx-auto p-2 md:p-0">
+                <h3 className='text-[#15100C] font-montserrat mb-5 md:mb-[40px] lg:text-[48px] text-[24px] font-semibold md:text-start text-center'>Доставка</h3>
+                <p className='text-[#15100C] mb-5 md:mb-[40px] text-[16px] lg:text-[24px] font-medium md:text-start text-center'>Мы находимся в Санкт-Петербурге по адресу <strong>Большой Сампсониевский проспект, д. 25</strong> Вы можете оформить самовывоз любого понравившегося на сайте букета
                     из магазина или подобрать самостоятельно уже на месте.
-                    График работы Вы можете посмотреть в разделе <ins>контакты</ins> или проконсультироваться с менеджером по номеру телефона
+                    График работы Вы можете посмотреть в разделе <Link to='/контакт' className='underline border-b-2 border-black'>контакты</Link> или проконсультироваться с менеджером по номеру телефона
                     <b><Link to={"tel: +79119276162"}>+ 7 (911) 927-61-62</Link></b></p>
-                <p><b>БЕСПЛАТНО</b>  с доставкой до дома и офиса во все районы Санкт-Петербурга в пределах КАДа, а также в ближайшие
+                <p className='text-[#15100C] mb-5 md:mb-[40px] text-[16px] lg:text-[24px] font-medium md:text-start text-center'><b>БЕСПЛАТНО</b>  с доставкой до дома и офиса во все районы Санкт-Петербурга в пределах КАДа, а также в ближайшие
                     пригороды.</p>
                 <div className="images w-[100%] flex items-center justify-center mb-3 md:mb-6">
                     <img src="./images/dostavka1.svg" alt="" className='h-full w-full'/>
@@ -34,24 +34,8 @@ const Wrapper = styled.section`
         padding-left: 8px; 
     }
     
-    h3 {
-        margin-bottom: 40px;
-        font-family: 'Cormorant';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 48px;
-        line-height: 58px;
-        color: #15100C;
-    }
+    
 
-    p {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 31px;
-        color: #443926;
-        margin-bottom: 40px;
-    }
 
     .images {
         position: relative;

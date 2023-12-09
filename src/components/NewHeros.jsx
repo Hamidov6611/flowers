@@ -2,11 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <div className="relative md:w-[94%] mx-auto" >
+    <div className="relative w-full md:w-[94%] mx-auto my-0 py-0">
       <div className="w-full h-[441px] md:h-[660px]">
-        <img src={img} alt={"NewHero"} width={"100%"} height={"100%"} />
+        <img src={img} alt={"NewHero"} className="h-full w-full" />
       </div>
       <div className="absolute left-[8%] top-[15%] hidden md:flex w-[40%] text-start">
         <p className="text-white lg:text-[40px] font-bold line-clamp-3">
@@ -14,11 +14,7 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
         </p>
       </div>
       <div className="absolute md:top-[10%] md:hidden  top-0 left-0 md:right-[6%] p-4 md:p-0 w-[100%] md:w-[40%] h-full md:h-[400px] bg-modal2 md:rounded-xl border">
-        <div className="absolute bottom-4 right-4 flex md:hidden items-center justify-center">
-          <div className="md:w-[66px]  md:h-[66px] flex items-center justify-center">
-            <img src={svg} alt={"NewHero"} width={"100%"} height={"100%"} />
-          </div>
-        </div>
+       
         <div className="md:hidden flex text-start">
           <p className="text-white lg:text-[40px] font-bold line-clamp-4">
             {heroTitle}
@@ -53,6 +49,9 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
                   fill="white"
                 />
               </svg>
+              <div className="md:w-[66px] ml-6 md:h-[66px] flex items-center justify-center">
+                <img src={svg} alt={"NewHero"} width={"100%"} height={"100%"} />
+              </div>
             </Link>
           </div>
         </div>
@@ -81,7 +80,10 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
             <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-start line-clamp-1">
               от {price} ₽
             </p>
-            <button onClick={() => navigate(link)} className="flex items-center mb-3">
+            <button
+              onClick={() => navigate(link)}
+              className="flex items-center mb-3"
+            >
               <p className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[20px] font-montserrat">
                 Смотреть все букеты
               </p>

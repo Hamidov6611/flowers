@@ -33,7 +33,6 @@ const HomeCategory = () => {
   };
   useEffect(() => {
     shuffleBg(widthCard)
-    console.log(widthCard)
   }, [])
 
   
@@ -44,12 +43,17 @@ const HomeCategory = () => {
         {category?.map((item, index) => (
           <Link
             to={`/букеты/категория/${item?.id}`}
+            onClick={() => {
+              window.scrollTo({
+                top: 0
+              })
+            }}
             key={item?.id}
             className={`w-[100%] ${
               index % 2 == 0 ? "md:w-[60%]" : "md:w-[38%]"
             } relative mb-4`}
           >
-            <div className="w-[100%] h-[500px]">
+            <div className="w-[100%] h-[300px] md:h-[500px]">
               <img
                 src={`${uri}${item?.img}`}
                 className="w-[100%] h-[100%] object-cover"
@@ -68,7 +72,7 @@ const HomeCategory = () => {
         ))}
       </div>
       <div className="w-[100%] flex justify-center">
-      <Link to={'/букеты'} className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#C59A77]">
+      <Link to={'/букеты/категории/46'} className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#C59A77]">
         Смотреть все разделы
       </Link>
       </div>
