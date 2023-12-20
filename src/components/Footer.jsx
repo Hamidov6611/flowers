@@ -78,7 +78,7 @@ function Footer() {
           <div className="ul-list contact w-[100%]">
             <ul className="nav gap-y-4 space-y-4">
               <li className="nav-item flex items-center">
-                <img className="w-5 h-5" src="./images/mail.svg" alt="" />
+                <img className="w-5 h-5" src="/mail.svg" alt="" />
                 <Link to={"mail: info@"} onClick={topFunction}>
                   <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
                     info@exapmle.com
@@ -87,7 +87,7 @@ function Footer() {
                 <span></span>
               </li>
               <li className="nav-item flex items-center">
-                <img className="w-5 h-5" src="./images/tel.svg" alt="" />
+                <img className="w-5 h-5" src="/tel.svg" alt="" />
                 <Link to={"tel: +79119276162"} onClick={topFunction}>
                   <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
                     +79119276162
@@ -95,7 +95,7 @@ function Footer() {
                 </Link>
               </li>
               <li className="nav-item flex items-center ">
-                <img className="w-5 h-5" src="./images/location.svg" alt="" />
+                <img className="w-5 h-5" src="/location.svg" alt="" />
                 <Link to={"tel: +79119276162"} onClick={topFunction} style={{ maxWidth: "228px" }}>
                   <p className="ml-3 text-white font-montserrat text-[14px] md:text-[16px]">
                     Большой Сампсониевский проспект, д. 25

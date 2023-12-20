@@ -26,7 +26,7 @@ function Dostavka() {
         </div>
       </div>
       {isOrder && <ContactForm setIsOrder={setIsOrder} />}
-      <div className="flex flex-col md:mt-[220px] w-[90%] mx-auto">
+      <div className="flex flex-col md:mt-[220px] w-[96%] mx-auto">
         <div className="flex md:flex-row gap-y-12 flex-col border-2 border-[#343434]">
           <div className="w-[100%] md:w-[55%] flex flex-col relative justify-center items-center">
             <div className="w-[80%] dm:w-[60%] z-20 flex justify-center items-center">

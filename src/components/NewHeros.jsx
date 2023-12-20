@@ -15,7 +15,7 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
       </div>
       <div className="absolute md:top-[10%] md:hidden  top-0 left-0 md:right-[6%] p-4 md:p-0 w-[100%] md:w-[40%] h-full md:h-[400px] bg-modal2 md:rounded-xl border">
        
-        <div className="md:hidden flex text-start">
+        <div className="md:hidden flex text-center md:text-start">
           <p className="text-white lg:text-[40px] font-bold line-clamp-4">
             {heroTitle}
           </p>
@@ -27,14 +27,14 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
             </div>
           </div>
           <div className="w-[95%] md:w-[80%] mr-4">
-            <p className="font-medium md:font-semibold text-[14px]  mt-4 text-start md:text-[17px] lg:text-[20px] font-montserrat text-white">
+            <p className="font-medium md:font-semibold text-[14px]  mt-4 text-center md:text-start md:text-[17px] lg:text-[20px] font-montserrat text-white">
               {cardTitle}
             </p>
-            <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-start line-clamp-1">
+            <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-center md:text-start line-clamp-1">
               от {price} ₽
             </p>
-            <Link to={link} className="flex items-center">
-              <div className="text-white mr-3 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[24px] font-montserrat">
+            <Link to={link} className="flex items-center justify-center gap-x-3">
+              <div className="text-white mr-1 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[24px] font-montserrat">
                 Смотреть все букеты
               </div>
               <svg
@@ -49,7 +49,7 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
                   fill="white"
                 />
               </svg>
-              <div className="md:w-[66px] ml-6 md:h-[66px] flex items-center justify-center">
+              <div className="w-[66px] md:ml-6 h-[66px] flex items-center justify-center">
                 <img src={svg} alt={"NewHero"} width={"100%"} height={"100%"} />
               </div>
             </Link>

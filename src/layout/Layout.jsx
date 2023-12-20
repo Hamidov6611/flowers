@@ -25,7 +25,7 @@ const Layout = ({ children, title, logo, kor, desc }) => {
         )}
       </main>
       <div
-        className="bg-slate-500 h-[50px] md:h-[50px] w-[50px] md:w-[50px] rounded-full fixed flex items-center justify-center z-50 left-2 top-[76%] md:top-[83%] cursor-pointer"
+        className="bg-slate-800 z-50 h-[50px] md:h-[50px] w-[50px] md:w-[50px] rounded-full fixed flex items-center justify-center z-50 left-2 top-[76%] md:top-[83%] cursor-pointer"
         onClick={() => setIsMessage((prev) => !prev)}
       >
        
@@ -35,7 +35,7 @@ const Layout = ({ children, title, logo, kor, desc }) => {
             className="relative flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex flex-col  absolute top-[-25px] gap-y-6 md:gap-y-8 left-4">
+            <div className="flex flex-col  absolute top-[-55px] gap-y-6 md:gap-y-8 left-4">
               <Link
                 to={`https://api.whatsapp.com/send?phone=79119276162`}
                 className="bg-[#41A96AF5] w-[230px] sm:w-[230px] md:w-[300px] flex items-center justify-between px-2 md:px-4 py-0 md:py-0 rounded-md "

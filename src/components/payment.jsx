@@ -1,78 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
 import "./index.css";
-import { uri, url } from "../layout/config.js";
 
 function Payment() {
-  const [sum, setSum] = useState("")
-  const [name, setName] = useState("")
+  const [sum, setSum] = useState("");
+  const [name, setName] = useState("");
   useEffect(() => {
-    let a = localStorage.getItem('full')
-    if(a) {
-      let b = JSON.parse(a)
-      setSum(b.sumFinally)
+    let a = localStorage.getItem("full");
+    if (a) {
+      let b = JSON.parse(a);
+      setSum(b.sumFinally);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    let a = localStorage.getItem('id1')
-    if(a) {
-      let b = JSON.parse(a)
-      setName(b[0].full_name)
+    let a = localStorage.getItem("id1");
+    if (a) {
+      let b = JSON.parse(a);
+      setName(b[0].full_name);
     }
-  }, [])
+  }, []);
   return (
     <Wrapper>
       <div className="w-[100%]">
-        <div >
-          {/* <div className={`w-[50%] mx-auto flex justify-center `}>
-            <iframe
-              src="https://buketnayamanufaktura.server.paykeeper.ru/form/"
-              className="w-[100%] h-[800px] bg-red-500 border-0"
-            ></iframe>
-          </div> */}
-          {/* <form
-            method="POST"
-            action="https://demo.paykeeper.ru/create/"
-            className="w-[100%] lg:w-[40%] h-[60vh] flex flex-col justify-center items-center text-[#443926]"
-          >
-            <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] mb-[20px] lg:mb-[40px] items-center">
-              <p className="text-[24px] mr-[20px] font-montserrat">
-                Введите сумму оплаты:
-              </p>
-              <input
-                type="text"
-                name="sum"
-                defaultValue={100}
-                className="dark:bg-white rounded-lg p-3"
-              />
-              <br />
-            </div>
-            <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] mb-[20px] lg:mb-[40px]">
-              <p className="text-[24px] mr-[20px] font-montserrat">
-                Введите номер заказа:
-              </p>
-              <input
-                type="text"
-                name="orderid"
-                defaultValue={123456}
-                className="dark:bg-white rounded-lg p-3"
-              />
-              <br />
-            </div>
-            <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px]">
-              <p className="text-[24px] mr-[20px] font-montserrat"> Введите название услуги:</p>
-              <input
-                type="text"
-                name="service_name"
-                className="dark:bg-white rounded-lg p-3"
-              />{" "}
-              <br />
-            </div>
-            <input type="submit" defaultValue="Перейти к оплате" />
-          </form> */}
+        <div>
           <div class="container">
             <p className="text-[#15100C] font-montserrat text-[48px] flex justify-center md:mb-6">
               Ваш заказ
@@ -80,12 +31,15 @@ function Payment() {
             <div class="wrap flex flex-col md:flex-row">
               <div class="left w-[100%] md:w-[60%] mx-auto">
                 <div className="flex flex-col p-4">
-                  <form className="p-4"
+                  <form
+                    className="p-4"
                     method="POST"
                     action="https://buketnayamanufaktura.server.paykeeper.ru/create/"
                   >
                     <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] items-center">
-                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">Введите имя</p>
+                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">
+                        Введите имя
+                      </p>
                       <input
                         type="text"
                         name="clientid"
@@ -94,9 +48,10 @@ function Payment() {
                       />
                     </div>
                     <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] items-center">
-                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">Введите сумму оплаты:</p>
+                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">
+                        Введите сумму оплаты:
+                      </p>
                       <input
-
                         type="text"
                         name="sum"
                         value={sum}
@@ -104,9 +59,10 @@ function Payment() {
                       />
                     </div>
                     <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] items-center">
-                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">Введите номер заказа:</p>
+                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">
+                        Введите номер заказа:
+                      </p>
                       <input
-
                         className="main-input w-[100%] lg:w-[48%] dark:bg-white p-2"
                         type="text"
                         name="orderid"
@@ -115,20 +71,24 @@ function Payment() {
                       <br />
                     </div>
                     <div className="flex lg:flex-row flex-col mb-[20px] lg:mb-[40px] items-center">
-                    <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">Введите название услуги:</p>
-                    <input
-                     className="main-input w-[100%] lg:w-[48%] dark:bg-white p-2"
-                      type="text"
-                      name="service_name"
-                      value="Тестовая оплата"
-                    />
+                      <p className="title mr-3 w-[100%] mb-[20px] lg:mb-0  lg:w-[48%]">
+                        Введите название услуги:
+                      </p>
+                      <input
+                        className="main-input w-[100%] lg:w-[48%] dark:bg-white p-2"
+                        type="text"
+                        name="service_name"
+                        value="Тестовая оплата"
+                      />
                     </div>
                     <br />
-                   <div className="w-[100%] flex justify-center">
-                   <input type="submit" value="Перейти к оплате" 
-                    className="bg-[#443926] py-2 px-4 text-white rounded-lg cursor-pointer text-[16px] md:text-[20px] focus:underline mr-4"
-                    />
-                   </div>
+                    <div className="w-[100%] flex justify-center">
+                      <input
+                        type="submit"
+                        value="Перейти к оплате"
+                        className="bg-[#443926] py-2 px-4 text-white rounded-lg cursor-pointer text-[16px] md:text-[20px] focus:underline mr-4"
+                      />
+                    </div>
                   </form>
                 </div>
               </div>

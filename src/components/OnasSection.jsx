@@ -277,4 +277,16 @@ const Wrapper = styled.section`
       font-size: 12px;
     }
   }
+  @media screen and (max-width: 420px) {
+    h3 {
+      font-family: "Cormorant";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 24px;
+      color: #15100c;
+      margin-bottom: 40px;
+      text-align: center
+    } 
+  }
 `;
