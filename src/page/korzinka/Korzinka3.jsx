@@ -58,7 +58,7 @@ function Korzinka3() {
   console.log(id1);
   const next = () => {
     if (firstName && phone) {
-      isStepTrue ? navigate(`/корзина/4?quick=true`) : navigate("/корзина/4");
+      isStepTrue ? navigate(`/basket/4?quick=true`) : navigate("/basket/4");
       window.scrollTo({top: 0})
     } else {
       toast.error("Заполните имя и телефон");
@@ -137,7 +137,7 @@ function Korzinka3() {
             <div class="left-footer">
               <span>2/4</span>
               <div class="btn1">
-                <Link to={"/корзина"} class="back">
+                <Link to={"/basket"} class="back">
                   Назад
                 </Link>
                 <button class="next" onClick={() => next()}>

@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import ClearIcon from "@mui/icons-material/Clear";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import "./index.css";
 import { useEffect } from "react";
-import { url, url2 } from "../layout/config";
+import { uri, url, url2 } from "../layout/config";
 import axios from "axios";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { IconButton } from "@mui/material";
@@ -15,6 +15,7 @@ import "./header.css";
 function Header() {
   const [menu, setMenu] = useState(true);
   const menuHandler = () => setMenu((prev) => !prev);
+  const [data, setData] = useState([]);
   const [isView, setIsView] = useState(true);
   const [menu1, setMenu1] = useState(false);
   const [menu2, setMenu2] = useState(false);
@@ -25,6 +26,7 @@ function Header() {
   const [id, setId] = useState([]);
   const [category, setCategory] = useState([]);
   const [isCat, setIsCat] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const num = () => {
@@ -111,6 +113,23 @@ function Header() {
     subHandlerCat();
   }, []);
 
+  const searchFlowers = async () => {
+    try {
+      if (search.length > 0) {
+        const { data } = await axios.get(
+          `${url}/AllProductSearchView/?name=${search}`
+        );
+        setData(data?.data);
+        console.log(data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    searchFlowers();
+  }, [search]);
+
   return (
     <div
       style={{ backgroundColor: "rgba(88, 94, 80, 1)" }}
@@ -120,7 +139,7 @@ function Header() {
         <div className="hidden xl:flex w-[45%] justify-start items-center relative">
           <Link
             class=" md:mr-[10px] lg:mr-[20px] group relative cursor-pointer py-2"
-            // to={"/букеты"}
+            // to={"/bouquets"}
           >
             <div class="flex items-center justify-between space-x-1">
               <a class="menu-hover my-2 text-base font-medium text-white">
@@ -142,7 +161,7 @@ function Header() {
             >
               {category?.map((item, index) => (
                 <Link
-                  to={`/букеты/категории/${item?.id}`}
+                  to={`/bouquets/categories/${item?.id}`}
                   className={`${
                     index === category.length - 1
                       ? "border-b-0"
@@ -158,7 +177,7 @@ function Header() {
           </Link>
 
           <Link
-            to="/oнас"
+            to="/about-us"
             className={` md:mr-[10px] lg:mr-[20px]`}
             onClick={active1}
           >
@@ -172,7 +191,7 @@ function Header() {
           </Link>
 
           <Link
-            to="/доставка"
+            to="/delivery"
             className="md:mr-[10px] lg:mr-[20px]"
             onClick={active3}
           >
@@ -186,7 +205,7 @@ function Header() {
           </Link>
 
           <Link
-            to="/oтзывы"
+            to="/reviews"
             className="md:mr-[10px] lg:mr-[20px]"
             onClick={active4}
           >
@@ -200,7 +219,7 @@ function Header() {
           </Link>
 
           <Link
-            to="/блог"
+            to="/blog"
             className="md:mr-[10px] lg:mr-[20px]"
             onClick={active5}
           >
@@ -214,7 +233,7 @@ function Header() {
           </Link>
 
           <Link
-            to="/контакт"
+            to="/contact"
             onClick={active6}
             className="md:mr-[10px] lg:mr-[20px]"
           >
@@ -245,11 +264,8 @@ function Header() {
           </Link>
         </div>
 
-        <div className="flex flex-row md:w-[30%] w-[60%] sm:w-[40%] justify-end items-center">
-          <Link
-            to={"tel: +79119276162"}
-            className="flex items-center mr-3 md:mr-10"
-          >
+        <div className="flex flex-row md:w-[30%] gap-x-3 w-[60%] sm:w-[40%] justify-end items-center">
+          <Link to={"tel: +79119276162"} className="flex items-center">
             <IconButton>
               <LocalPhoneIcon sx={{ color: "#fff" }} />
             </IconButton>
@@ -257,9 +273,43 @@ function Header() {
               + 7 (911) 927-61-62
             </p>
           </Link>
-
+          <div className="mr-1 relative md:inline-block hidden">
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              className="bg-white py-1 rounded-md px-2 outline-none placeholder:text-[#000] text-black font-medium"
+              placeholder="поиск цветов..."
+            />
+            {data?.length > 0 && search?.length > 0 && (
+              <div className="w-full h-[60vh] over bg-white overflow-y-auto absolute border p-3 rounded-md left-0 top-[40px] z-20 flex flex-col">
+                <>
+                  {data?.map((c, i) => (
+                    <div key={i} className="z-30 border-b border-navcolor">
+                      <div className="w-24 h-24">
+                        <img
+                          src={uri + c?.flowers[0]?.img}
+                          alt=""
+                          className="w-full h-full"
+                        />
+                      </div>
+                      <Link
+                        to={`/bouquets/${c.id}`}
+                        onClick={() => setSearch("")}
+                        className="text-[14px] font-montserrat text-blue-700 cursor-pointer"
+                      >
+                        {c?.name}
+                      </Link>
+                      {/* <p className="text-[12px] font-normal line-clamp-6 mb-3">{c?.description}</p> */}
+                    </div>
+                    // <div>{c?.name}</div>
+                  ))}
+                </>
+              </div>
+            )}
+          </div>
           <Link
-            to={"/корзина"}
+            to={"/basket"}
             className="flex items-center mr-4 sm:mr-4"
             onClick={clickHandler}
           >
@@ -287,7 +337,7 @@ function Header() {
         </div>
       </div>
       {!menu && (
-        <div className="absolute top-0 left-0 flex flex-col min-h-[40vh]  overflow-auto z-[999999]  w-full bg-[#758867] xl:hidden">
+        <div className={`absolute top-0 left-0 flex flex-col ${(data?.length > 0 && search?.length > 0) ? 'min-h-[80vh]' : "min-h-[40vh]"} overflow-auto z-[999999]  w-full bg-[#758867] xl:hidden`}>
           <div className="flex justify-between h-[70px] w-[100%] items-center ">
             <div className="xl:hidden flex ml-[2%] text-[#fff] ">
               {menu ? (
@@ -309,7 +359,7 @@ function Header() {
               </Link>
 
               <Link
-                to={"/корзина"}
+                to={"/basket"}
                 className="flex items-center mr-3"
                 onClick={clickHandler}
               >
@@ -328,44 +378,93 @@ function Header() {
               </Link>
             </div>
           </div>
+          <div className="mb-4 relative md:hidden  mt-2 w-[90%] mx-auto" >
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              className="bg-white py-1 w-full rounded-md px-2 outline-none placeholder:text-[#000] text-black font-medium"
+              placeholder="поиск цветов..."
+            />
+            {data?.length > 0 && search?.length > 0 && (
+              <div className="w-full h-[60vh] over bg-white overflow-y-auto absolute border p-3 rounded-md left-0 top-[40px] z-20 flex flex-col">
+                <>
+                  {data?.map((c, i) => (
+                    <div key={i} className="z-30 border-b border-navcolor">
+                      <div className="w-24 h-24">
+                        <img
+                          src={uri + c?.flowers[0]?.img}
+                          alt=""
+                          className="w-full h-full"
+                        />
+                      </div>
+                      <Link
+                        to={`/bouquets/${c.id}`}
+                        onClick={() => {
+                          setMenu(true)
+                          setSearch("")
+                        }
+                        }
+                        className="text-[14px] font-montserrat text-blue-700 cursor-pointer"
+                      >
+                        {c?.name}
+                      </Link>
+                      {/* <p className="text-[12px] font-normal line-clamp-6 mb-3">{c?.description}</p> */}
+                    </div>
+                  ))}
+                  <div className="flex w-full justify-end text-white">
+                <IconButton onClick={() => {
+                  setIsView(true)
+                  setSearch("")
+                }}>
+                  <ChevronLeftIcon fontSize="large" sx={{ color: "black" }} />
+                </IconButton>
+              </div>
+                </>
+              </div>
+            )}
+          </div>
           {isView ? (
-            <div className="flex  mt-8 w-[90%] mx-auto flex-col mb-[5px]">
-              <Link className="flex flex-col mb-3 " onClick={() => setIsView(false)}>
+            <div className="flex  mt-2 w-[90%] mx-auto flex-col mb-[5px]">
+              <Link
+                className="flex flex-col mb-3 w-full"
+                onClick={() => setIsView(false)}
+              >
                 <div className="flex items-center justify-start">
                   <Link className="font-montserrat flex items-center text-[24px] font-semibold  text-[#fff]  lg:text-[17px] xl:text-[18px]">
                     {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                     Каталог
                   </Link>
-                 </div>
+                </div>
               </Link>
-              <Link to="/oнас" onClick={() => setMenu(true)}>
+              <Link to="/about-us" onClick={() => setMenu(true)}>
                 <p className="font-montserrat flex items-center text-[24px] font-semibold mb-3 text-[#fff]  lg:text-[17px] xl:text-[18px]">
                   {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                   О нас
                 </p>
               </Link>
 
-              <Link to="/доставка" onClick={() => setMenu(true)}>
+              <Link to="/delivery" onClick={() => setMenu(true)}>
                 <p className="font-montserrat flex items-center text-[24px] font-semibold mb-3 text-[#fff]  lg:text-[17px] xl:text-[18px]">
                   {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                   Доставка
                 </p>
               </Link>
 
-              <Link to="/oтзывы" onClick={() => setMenu(true)}>
+              <Link to="/reviews" onClick={() => setMenu(true)}>
                 <p className="font-montserrat text-[24px] flex items-center font-semibold mb-3 text-[#fff]  lg:text-[17px] xl:text-[18px]">
                   {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                   Отзывы
                 </p>
               </Link>
 
-              <Link to="/блог" onClick={() => setMenu(true)}>
+              <Link to="/blog" onClick={() => setMenu(true)}>
                 <p className="font-montserrat flex items-center text-[24px] font-semibold mb-3 text-[#fff]  lg:text-[17px] xl:text-[18px]">
                   {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                   Блог
                 </p>
               </Link>
-              <Link to="/контакт" onClick={() => setMenu(true)}>
+              <Link to="/contact" onClick={() => setMenu(true)}>
                 <p className="font-montserrat flex items-center text-[24px] font-semibold mb-3 text-[#fff]  lg:text-[17px] xl:text-[18px]">
                   {/* <div className="w-[15px] mr-3 h-[3px] bg-white"></div> */}
                   Контакты
@@ -377,22 +476,22 @@ function Header() {
               {category?.map((item) => (
                 <div className="flex flex-col gap-y-2 relative">
                   <Link
-                  to={`/букеты/категории/${item?.id}`}
-                  onClick={() => setMenu(true)}
-                  className="ml-[10%]"
-                >
-                  <p className="px-3 flex items-center py-2 text-[#fff] font-semibold ">
-                    <div className="w-[10px] mr-3 h-[2px] bg-white"></div>{" "}
-                    {item?.title}
-                  </p>
-                </Link>
+                    to={`/bouquets/categories/${item?.id}`}
+                    onClick={() => setMenu(true)}
+                    className="ml-[10%]"
+                  >
+                    <p className="px-3 flex items-center py-2 text-[#fff] font-semibold ">
+                      <div className="w-[10px] mr-3 h-[2px] bg-white"></div>{" "}
+                      {item?.title}
+                    </p>
+                  </Link>
                 </div>
               ))}
-                <div className="flex w-full justify-end text-white">
-                  <IconButton onClick={() => setIsView(true)}>
-                    <ChevronLeftIcon fontSize="large" sx={{color:"white"}} />
-                  </IconButton>
-                </div>
+              <div className="flex w-full justify-end text-white">
+                <IconButton onClick={() => setIsView(true)}>
+                  <ChevronLeftIcon fontSize="large" sx={{ color: "white" }} />
+                </IconButton>
+              </div>
             </div>
           )}
         </div>

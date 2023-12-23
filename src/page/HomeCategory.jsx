@@ -42,7 +42,7 @@ const HomeCategory = () => {
       <div className="relative mb-4 flex flex-wrap justify-between md:flex-row flex-col">
         {category?.map((item, index) => (
           <Link
-            to={`/букеты/категория/${item?.id}`}
+            to={`/bouquets/category/${item?.id}`}
             onClick={() => {
               window.scrollTo({
                 top: 0
@@ -72,7 +72,7 @@ const HomeCategory = () => {
         ))}
       </div>
       <div className="w-[100%] flex justify-center">
-      <Link to={'/букеты/категории/46'} className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#C59A77]">
+      <Link to={'/bouquets/categories/46'} className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#C59A77]">
         Смотреть все разделы
       </Link>
       </div>

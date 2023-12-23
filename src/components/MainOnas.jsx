@@ -19,7 +19,7 @@ function MainOnas() {
           </div>
           <div className="flex items-center justify-center flex-col border-2 px-6 py-6 gap-y-4 md:py-12 rounded-tl-[70px] md:rounded-tl-[150px] rounded-br-[70px]  md:rounded-br-[150px] border-[#779243]">
             <div className="h-[50%]">
-              <div className="w-16 h-16 md:w-32 md:h-32 ">
+              <div className="w-16 h-16 md:w-32 md:h-32 md:ml-9 ml-4">
                 <img src="/aa2.svg" alt="" />
               </div>
             </div>

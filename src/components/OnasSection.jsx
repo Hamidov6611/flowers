@@ -6,9 +6,11 @@ function OnasSection() {
   return (
     <Wrapper>
       <div className="w-[98%] md:w-[90%] mx-auto">
-        <p>О нас</p>
+        <div className="my-8 w-full flex justify-center md:justify-start">
+        <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center md:text-start">О нас</b>
+        </div>
         <p className="pre">
-          Мы- команда профессиональных флористов, работающая на цветочном рынке
+          Мы - команда профессиональных флористов, работающая на цветочном рынке
           уже несколько лет. За это время у нас сформировалась база клиентов,
           которые доверяют нам воплощение любых флористических идей, передачу
           своих чувств к любимым получателям на языке цветов. Наша миссия-
@@ -107,7 +109,9 @@ function OnasSection() {
           мы собрали для Вас лучшие композии мировой флористики. Мы импортируем
           более 2500 разновидностей цветов.
         </p>
-        <h3>Мы доставляем больше чем цветы...</h3>
+        <div className="my-8 w-full flex justify-center md:justify-start">
+        <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center md:text-start">Мы доставляем больше чем цветы...</b>
+        </div>
         <p className="nash-p">
           За весь наш многолетний опыт – наша компания научилась давать больше
           чем цветы, наши курьеры и менеджеры дарят позитивное настроение и

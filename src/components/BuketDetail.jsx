@@ -141,7 +141,7 @@ const BuketDetail = () => {
   const a = { ...data, id_size: sizeId };
 
   const handleQuickDelivery = () => {
-    navigate(`/корзина/2?quick=true`);
+    navigate(`/basket/2?quick=true`);
     localStorage.setItem("quick", JSON.stringify([a]));
   };
   return (
@@ -303,7 +303,7 @@ const BuketDetail = () => {
                 } z-[8]  mb-[20px]  sticky card-shadow border rounded-lg`}
               >
                 <div className="bg-blue-350 rounded-lg">
-                  <Link to={`/букеты/${item.id}`}>
+                  <Link to={`/bouquets/${item.id}`}>
                     <Swiper
                       modules={[Pagination, A11y]}
                       spaceBetween={50}

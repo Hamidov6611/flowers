@@ -65,7 +65,7 @@ function Korzinka4() {
 
   const next = () => {
     if(adress && fullData && date && time && andTime) {
-      isStepTrue ? navigate(`/корзина/5?quick=true`) : navigate("/корзина/5")
+      isStepTrue ? navigate(`/basket/5?quick=true`) : navigate("/basket/5")
       window.scrollTo({top: 0})
     }else {
       toast.error("Заполните все поля")
@@ -143,7 +143,7 @@ function Korzinka4() {
             <div class="left-footer">
               <span>3/4</span>
               <div class="btn1">
-                <Link to={'/корзина'} class="back">
+                <Link to={'/basket'} class="back">
                   Назад
                 </Link>
                 <button onClick={() => next()} class="next">

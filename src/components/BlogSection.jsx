@@ -14,7 +14,7 @@ function BlogSection() {
   const navigate = useNavigate()
 
   const navigateRide = (id) => {
-    navigate(`/блог/${id}`)
+    navigate(`/blog/${id}`)
     window.scrollTo({
       top: 0
     })
@@ -110,7 +110,7 @@ function BlogSection() {
         }}
         >
           {
-          <Link to={location.pathname == '/' && '/блог'}>
+          <Link to={location.pathname == '/' && '/blog'}>
               <Button onClick={() => setShow(!show)}>
               {show ? "Cократить" : "Все статьи"}
             </Button>

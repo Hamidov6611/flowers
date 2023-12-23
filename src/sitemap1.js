@@ -9,6 +9,7 @@ const Sitemap = () => {
       (route) =>
         `<url>
         <loc>${window.location.origin}${route.path}</loc>
+        <priority>${route.priority || "0.5"}</priority>
       </url>`
     );
 

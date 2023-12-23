@@ -32,10 +32,5 @@ function App() {
   );
 }
 
-// const robotsTxt = `
-// User-agent: admin
-// Disallow:
-// Sitemap: https://buketyana-admin.ru/api/sayts/sitemap.xml
-// `;
 
 export default App;

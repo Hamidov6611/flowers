@@ -19,7 +19,11 @@ function Buket2() {
   const [subCategory, setSubCategory] = useState([]);
   const [flowers1, setFlowers] = useState([]);
   const [ceo, setCeo] = useState({ title: "", desc: "" });
-
+  const [newSum, setNewSum] = useState([
+    {id: 1, name:"до 5000 руб", visible: false},
+    {id: 2, name:"до 10000 руб", visible: false},
+    {id: 3, name:"до 100000 руб", visible: false},
+  ])
   const [basket, setBasket] = useState(
     JSON.parse(localStorage.getItem("basket")) || []
   );
@@ -64,7 +68,7 @@ function Buket2() {
     }
 
     toast.success("Добавлен в корзину")
-    navigate("/корзина")
+    navigate("/basket")
   };
 
   const categoryHandler = async () => {
@@ -222,7 +226,7 @@ function Buket2() {
     );
   };
   const handleQuickDelivery = (data) => {
-    navigate(`/корзина/2?quick=true`);
+    navigate(`/basket/2?quick=true`);
     localStorage.setItem("quick", JSON.stringify([data]));
     window.scrollTo({
       top: 0,
@@ -315,14 +319,16 @@ function Buket2() {
     return yangiMatn;
   }
 
+ 
+
   return (
     <Wrapper>
       <Layout title={ceo.title} desc={ceo.desc}>
         <div className="w-[100%] px-4 lg:w-[94%] mx-auto">
-          <p className="text-[48px]  font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
+          <p className="text-[48px] pt-[30px] font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
             Букеты
           </p>
-          <div className="flex py-[40px] items-center flex-col md:flex-row">
+          {/* <div className="flex py-[40px] items-center flex-col md:flex-row">
             <div className="flex md:flex-row flex-col gap-x-3 gap-y-4 text-center w-[93%]  my-3 md:my-0 ml-0 md:ml-5">
               <p
                 onClick={SortBySum1}
@@ -343,6 +349,19 @@ function Buket2() {
                 свыше 10000 руб
               </p>
             </div>
+          </div> */}
+          <div className="w-[100%] flex py-[40px] flex-col md:flex-row flex-wrap">
+            {newSum?.map((item) => (
+              <>
+                <button
+                 onClick={(item?.id == 1 && SortBySum1) || (item?.id == 2 && SortBySum2) || (item?.id == 3 && SortBySum3)}
+                  className={`bg-white text-[#443926] border-2 border-[#443926]
+               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+                >
+                  {item?.name}
+                </button>
+              </>
+            ))}
           </div>
           <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
             {category?.map((item) => (
@@ -404,7 +423,7 @@ function Buket2() {
                     >
                       <div className="bg-blue-350 rounded-lg">
                         <Link
-                          to={`/букеты/${item.id}`}
+                          to={`/bouquets/${item.id}`}
                           onClick={() => {
                             window.scrollTo({
                               top: 0,
@@ -458,12 +477,16 @@ function Buket2() {
 
                           {item?.visible && (
                             <>
-                              <div className="flex flex-wrap items-start font-semibold text-[17px] md:text-[20px] font-montserrat text-[#000]">
-                              {item?.rank && <p className="inline m-0 p-0">Цветы:</p>}
+                              <div className="flex gap-x-3 font-semibold text-[17px] md:text-[20px] font-montserrat text-[#000]">
+                                <p className="inline">
+                                  {item?.rank && (
+                                    <p className="inline m-0 p-0">Цветы:</p>
+                                  )}
+                                </p>
                                 <p
                                   className="font-normal inline m-0 p-0 text-[#000] font-montserrat"
                                   dangerouslySetInnerHTML={{
-                                    __html: item?.rank
+                                    __html: item?.rank,
                                   }}
                                 />
                               </div>
@@ -500,7 +523,7 @@ function Buket2() {
           {location.pathname == "/" ? (
             <div className="w-[100%] flex justify-center">
               {/* {
-                <Link to={location.pathname == "/" && "/букеты"} className="w-[100%] flex justify-center">
+                <Link to={location.pathname == "/" && "/bouquets"} className="w-[100%] flex justify-center">
                   <button
                     className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]"
                     onClick={() => setShow(!show)}

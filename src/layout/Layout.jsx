@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
-import StickyBtns from "../components/stickyBtn";
-import {BiMessageDetail} from 'react-icons/bi'
+import { BiMessageDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Layout = ({ children, title, logo, kor, desc }) => {
@@ -17,7 +16,7 @@ const Layout = ({ children, title, logo, kor, desc }) => {
         <meta name="description" content={desc} />
       </Helmet>
       <header>
-      <Header logo={logo} lay={kor} />
+        <Header logo={logo} lay={kor} />
       </header>
       <main>
         {React.Children.map(children, (child) =>
@@ -28,7 +27,6 @@ const Layout = ({ children, title, logo, kor, desc }) => {
         className="bg-slate-800 z-50 h-[50px] md:h-[50px] w-[50px] md:w-[50px] rounded-full fixed flex items-center justify-center z-50 left-2 top-[76%] md:top-[83%] cursor-pointer"
         onClick={() => setIsMessage((prev) => !prev)}
       >
-       
         <BiMessageDetail fontSize={24} />
         {isMessage && (
           <div

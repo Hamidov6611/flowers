@@ -44,7 +44,7 @@ function Korzinka2() {
       );
       isStepTrue &&
         localStorage.setItem("basket", JSON.stringify(quickProduct));
-      isStepTrue ? navigate(`/корзина/3?quick=true`) : navigate("/корзина/3");
+      isStepTrue ? navigate(`/basket/3?quick=true`) : navigate("/basket/3");
       window.scrollTo({top: 0})
     } else if (next) {
       localStorage.setItem(
@@ -60,7 +60,7 @@ function Korzinka2() {
       isStepTrue &&
         localStorage.setItem("basket", JSON.stringify(quickProduct));
 
-        isStepTrue ? navigate(`/корзина/3?quick=true`) : navigate("/корзина/3");
+        isStepTrue ? navigate(`/basket/3?quick=true`) : navigate("/basket/3");
         window.scrollTo({top: 0})
     }
   };
@@ -132,7 +132,7 @@ function Korzinka2() {
             <div className="left-footer">
               <span>1/4</span>
               <div className="btn1">
-                <Link to={"/корзина"} className="back">
+                <Link to={"/basket"} className="back">
                   Назад
                 </Link>
                 <button className="next" onClick={nextStep}>

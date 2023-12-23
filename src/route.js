@@ -28,23 +28,24 @@ const otziv = {title: "Букетнаямануфактура - отзывы н�
 const contact = {title:"Букетнаямануфактура - наша контактная информация для связи с нами! СПБ", desc:"Вы можете связаться с нами и задать свои вопросы! Работаем в Санкт-Петербурге"}
 
 export const routes = [
-    {id:1, path:'/', element: <Layout title={home.title} desc={home.title}><Home /></Layout>, logo:'', kor: '', title: 'Букетная-мануфактура', },
-    {id:2, path:'/oнас', element:<Layout title={onas.title} desc={onas.desc}><Onas /></Layout>, logo:'', kor: '', title: 'Онас',},
-    {id:3, path:'/доставка', element:<Layout title={dostavka.title} desc={dostavka.desc}><Dostavka /></Layout>, logo:'', kor: '', title: 'Доставка',},
-    {id:4, path:'/блог', element: <Layout title={blog.title} desc={blog.desc}><Blog /></Layout>, logo:'', kor: '', title: 'Блог',},
-    {id:5, path:'/блог/:id', element: <Layout title={blog.title} desc={blog.desc}><BlogDetail /></Layout>, logo:logo, kor: kor, title:'Букетная-мануфактура' },
-    {id:6, path:'/oтзывы', element: <Layout title={otziv.title} desc={otziv.desc}><Otziv /></Layout>, logo:'', kor: '', title: 'Отзывы',},
-    {id:7, path:'/корзина', element: <Layout><Korzinka1 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-    {id:8, path:'/корзина/2', element:<Layout><Korzinka2 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-    {id:9, path:'/корзина/3', element: <Layout><Korzinka3 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-    // {id:10, path:'/букеты', element: <Buket />, logo:'', kor: '', title: 'Букеты',},
-    {id:10, path:'/букеты/категории/:id', element: <Buket2 />, logo:'', kor: '', title: 'Букеты',},
-    {id:11, path:'/букеты/категория/:id', element: <Buket3 />, logo:'', kor: '', title: 'Букеты',},
-    {id:12, path:'/букеты/:id', element:<Layout><BuketDetail /></Layout>, logo:logo, kor: kor, title: 'Букетная-мануфактура' },
-    {id:13, path:'/корзина/4', element: <Layout><Korzinka4 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-    {id:14, path:'/корзина/5', element: <Layout><Korzinka5 /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-	{id:15, path:'/контакт', element: <Layout title={contact.title} desc={contact.desc}><Contact /></Layout>, logo:logo, kor: kor, title: 'Корзина',},
-	{id:16, path:'/оплата', element: <Layout><Payment /></Layout>, logo:logo, kor: kor, title: 'Оплата',},
-    {id: 17, path: "*", element: <ErrorPage />}
-]
+    { id: 1, path: '/', element: <Layout title={home.title} desc={home.title}><Home /></Layout>, logo:'', kor: '', title: 'Букетная-мануфактура', priority: "1.0" },
+    { id: 2, path:'/about-us', element:<Layout title={onas.title} desc={onas.desc}><Onas /></Layout>, logo:'', kor: '', title: 'Онас', priority: "0.8" },
+    { id: 3, path:'/delivery', element:<Layout title={dostavka.title} desc={dostavka.desc}><Dostavka /></Layout>, logo:'', kor: '', title: 'Доставка', priority: "0.7" },
+    { id: 4, path:'/blog', element: <Layout title={blog.title} desc={blog.desc}><Blog /></Layout>, logo:'', kor: '', title: 'Блог', priority: "0.6" },
+    { id: 5, path:'/blog/:id', element: <Layout title={blog.title} desc={blog.desc}><BlogDetail /></Layout>, logo:logo, kor: kor, title:'Букетная-мануфактура', priority: "0.6" },
+    { id: 6, path:'/reviews', element: <Layout title={otziv.title} desc={otziv.desc}><Otziv /></Layout>, logo:'', kor: '', title: 'Отзывы', priority: "0.5" },
+    { id: 7, path:'/basket', element: <Layout><Korzinka1 /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    { id: 8, path:'/basket/2', element:<Layout><Korzinka2 /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    { id: 9, path:'/basket/3', element: <Layout><Korzinka3 /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    // { id:10, path:'/bouquets', element: <Buket />, logo:'', kor: '', title: 'Букеты', priority: "0.5" },
+    { id:10, path:'/bouquets/categories/:id', element: <Buket2 />, logo:'', kor: '', title: 'Букеты', priority: "0.6" },
+    { id:11, path:'/bouquets/category/:id', element: <Buket3 />, logo:'', kor: '', title: 'Букеты', priority: "0.6" },
+    { id:12, path:'/bouquets/:id', element:<Layout><BuketDetail /></Layout>, logo:logo, kor: kor, title: 'Букетная-мануфактура', priority: "0.6" },
+    { id:13, path:'/basket/4', element: <Layout><Korzinka4 /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    { id:14, path:'/basket/5', element: <Layout><Korzinka5 /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    { id:15, path:'/contact', element: <Layout title={contact.title} desc={contact.desc}><Contact /></Layout>, logo:logo, kor: kor, title: 'Корзина', priority: "0.7" },
+    { id:16, path:'/pay', element: <Layout><Payment /></Layout>, logo:logo, kor: kor, title: 'Оплата', priority: "0.7" },
+    { id: 17, path: "*", element: <ErrorPage />, priority: "0.5" }
+  ]
+  
 

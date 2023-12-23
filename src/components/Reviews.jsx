@@ -110,7 +110,7 @@ function Reviews() {
 
         <div className="flex justify-center md:mb-[80px]">
           <Link
-            to={"/oтзывы"}
+            to={"/reviews"}
             onClick={() => {
               window.scrollTo({
                 top: 0

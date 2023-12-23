@@ -79,7 +79,7 @@ function Korzinka5() {
           submitData
         );
         console.log(data);
-        navigate("/оплата");
+        navigate("/pay");
         // toast.success("Ваш заказ принят")
       } else {
         toast.error("Заполните все поля");
@@ -124,7 +124,7 @@ function Korzinka5() {
             <div className="left-footer">
               <span>4/4</span>
               <div className="btn1">
-                <Link to={"/корзина/4"} class="back">
+                <Link to={"/basket/4"} class="back">
                   Назад
                 </Link>
                 <button type="submit" className="next">

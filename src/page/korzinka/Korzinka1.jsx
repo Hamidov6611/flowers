@@ -180,7 +180,7 @@ function Korzinka1() {
             </div>
 
             <Link
-              to={tovar > 0 && "/корзина/2"}
+              to={tovar > 0 && "/basket/2"}
               onClick={() => {
                 window.scrollTo({top: 0})
               }}
