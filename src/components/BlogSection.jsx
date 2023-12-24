@@ -53,7 +53,7 @@ function BlogSection() {
       <div className="md:w-[94%] w-[96%] mx-auto min-h-[40vh]" >
         
         <div className="w-[100%] flex justify-center lg:justify-start">
-        <p className="title">Блог</p>
+        <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center md:text-start mt-[30px]">Блог</b>
         </div>
 
         <ul className="blogs grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4">
