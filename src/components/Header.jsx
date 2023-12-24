@@ -23,21 +23,11 @@ function Header() {
   const [menu4, setMenu4] = useState(false);
   const [menu5, setMenu5] = useState(false);
   const [menu6, setMenu6] = useState(false);
-  const [id, setId] = useState([]);
   const [category, setCategory] = useState([]);
   const [isCat, setIsCat] = useState(false);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    const num = () => {
-      const a = localStorage.getItem("basket");
-      if (a) {
-        const res = JSON.parse(a);
-        setId(res);
-      }
-    };
-    num();
-  }, []);
+  
 
   const clickHandler = () => {
     setMenu1(false);
@@ -296,7 +286,7 @@ function Header() {
                       <Link
                         to={`/bouquets/${c.id}`}
                         onClick={() => setSearch("")}
-                        className="text-[14px] font-montserrat text-blue-700 cursor-pointer"
+                        className="text-[14px] font-montserrat text-black cursor-pointer p-0 m-0"
                       >
                         {c?.name}
                       </Link>
@@ -405,7 +395,7 @@ function Header() {
                           setSearch("")
                         }
                         }
-                        className="text-[14px] font-montserrat text-blue-700 cursor-pointer"
+                        className="text-[14px] font-montserrat text-black cursor-pointer"
                       >
                         {c?.name}
                       </Link>
