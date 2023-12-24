@@ -136,9 +136,9 @@ function Header() {
       className="w-[100%] shadow-xl"
     >
       <div className="md:w-[96%] w-[90%] mx-auto p-0 m-0 h-[70px]  left-0 top-0 flex flex-row justify-between items-center">
-        <div className="hidden xl:flex w-[45%] justify-start items-center relative">
+        <div className="hidden xl:flex w-[35%] justify-start items-center relative">
           <Link
-            class=" md:mr-[10px] lg:mr-[20px] group relative cursor-pointer py-2"
+            class=" md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px] group relative cursor-pointer py-2"
             // to={"/bouquets"}
           >
             <div class="flex items-center justify-between space-x-1">
@@ -146,7 +146,7 @@ function Header() {
                 <p
                   className={` ${
                     menu2 ? "text-white font-bold " : "text-white font-semibold"
-                  } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+                  } font-montserrat text-[14px]  lg:text-[15px] xl:text-[18px]  `}
                 >
                   Каталог
                 </p>
@@ -178,7 +178,7 @@ function Header() {
 
           <Link
             to="/about-us"
-            className={` md:mr-[10px] lg:mr-[20px]`}
+            className={` md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px]`}
             onClick={active1}
           >
             <p
@@ -192,13 +192,13 @@ function Header() {
 
           <Link
             to="/delivery"
-            className="md:mr-[10px] lg:mr-[20px]"
+            className="md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px]"
             onClick={active3}
           >
             <p
               className={` ${
                 menu3 ? "text-white font-bold " : "text-white font-semibold"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+              } font-montserrat text-[14px]  lg:text-[15px] xl:text-[18px]  `}
             >
               Доставка
             </p>
@@ -206,13 +206,13 @@ function Header() {
 
           <Link
             to="/reviews"
-            className="md:mr-[10px] lg:mr-[20px]"
+            className="md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px]"
             onClick={active4}
           >
             <p
               className={` ${
                 menu4 ? "text-white font-bold " : "text-white font-semibold"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+              } font-montserrat text-[14px]  lg:text-[15px] xl:text-[18px]  `}
             >
               Отзывы
             </p>
@@ -220,13 +220,13 @@ function Header() {
 
           <Link
             to="/blog"
-            className="md:mr-[10px] lg:mr-[20px]"
+            className="md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px]"
             onClick={active5}
           >
             <p
               className={` ${
                 menu5 ? "text-white font-bold " : "text-white font-semibold"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+              } font-montserrat text-[14px]  lg:text-[15px] xl:text-[18px]  `}
             >
               Блог
             </p>
@@ -235,12 +235,12 @@ function Header() {
           <Link
             to="/contact"
             onClick={active6}
-            className="md:mr-[10px] lg:mr-[20px]"
+            className="md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px]"
           >
             <p
               className={` ${
                 menu6 ? "text-white font-bold " : "text-white font-semibold"
-              } font-montserrat text-[14px]  lg:text-[17px] xl:text-[18px]  `}
+              } font-montserrat text-[14px]  lg:text-[15px] xl:text-[18px]  `}
             >
               Контакты
             </p>
@@ -264,7 +264,7 @@ function Header() {
           </Link>
         </div>
 
-        <div className="flex flex-row md:w-[30%] gap-x-3 w-[60%] sm:w-[40%] justify-end items-center">
+        <div className="flex flex-row xl:w-[41%] gap-x-2 2xl:gap-x-3 w-[60%] sm:w-[60%] justify-end items-center">
           <Link to={"tel: +79119276162"} className="flex items-center">
             <IconButton>
               <LocalPhoneIcon sx={{ color: "#fff" }} />
