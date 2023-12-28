@@ -346,7 +346,7 @@ function Buket() {
                     (item?.id == 2 && SortBySum2) ||
                     (item?.id == 3 && SortBySum3)
                   }
-                  className={`bg-white text-[#443926] border-2 border-[#443926]
+                  className={`bg-white text-[#443926] border-2 sm:w-auto border-[#443926]
                py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
                 >
                   {item?.name}

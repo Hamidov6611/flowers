@@ -325,9 +325,9 @@ function Buket2() {
     <Wrapper>
       <Layout title={ceo.title} desc={ceo.desc}>
         <div className="w-[100%] px-4 lg:w-[94%] mx-auto">
-          <p className="text-[48px] pt-[30px] font-semibold leading-[58px] text-[#15100C] flex justify-center md:justify-start">
+          <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center flex justify-center mt-[20px] md:text-start">
             Букеты
-          </p>
+          </b>
           {/* <div className="flex py-[40px] items-center flex-col md:flex-row">
             <div className="flex md:flex-row flex-col gap-x-3 gap-y-4 text-center w-[93%]  my-3 md:my-0 ml-0 md:ml-5">
               <p
@@ -350,27 +350,27 @@ function Buket2() {
               </p>
             </div>
           </div> */}
-          <div className="w-[100%] flex py-[40px] flex-col md:flex-row flex-wrap">
+          <div className="w-[100%] grid grid-cols-3 space-x-2 py-[10px] pt-[30px]">
             {newSum?.map((item) => (
               <>
                 <button
                  onClick={(item?.id == 1 && SortBySum1) || (item?.id == 2 && SortBySum2) || (item?.id == 3 && SortBySum3)}
                   className={`bg-white text-[#443926] border-2 border-[#443926]
-               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+               py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[14px] px-1 md:text-[20px] font-medium rounded-3xl`}
                 >
                   {item?.name}
                 </button>
               </>
             ))}
           </div>
-          <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
+          <div className="mx-auto sm:w-[100%]  pb-[40px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 py-[40px] ">
             {category?.map((item) => (
               <>
                 <button
                   key={item?.id}
                   onClick={() => subHandler(item?.id)}
                   className={`bg-white text-[#443926] border-2 border-[#443926]
-               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+                  py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[12px] px-1 md:text-[20px] font-normal md:font-medium rounded-3xl`}
                 >
                   {item?.title}
                 </button>

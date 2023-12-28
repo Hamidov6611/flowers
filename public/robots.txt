@@ -1,6 +1,2 @@
 User-agent: *
-Allow: /puplic
-Allow: /src
-Disallow: /build/
-Disallow: /node_modules/
-Sitemap: https://Букетнаямануфактура.рф/sitemap.xml
+Sitemap: https://www.xn--80aaaaby8aepid2bsheido8r.xn--p1ai/sitemap.xml

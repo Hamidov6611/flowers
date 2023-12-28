@@ -24,7 +24,7 @@ const Layout = ({ children, title, logo, kor, desc }) => {
         )}
       </main>
       <div
-        className="bg-slate-800 z-50 h-[50px] md:h-[50px] w-[50px] md:w-[50px] rounded-full fixed flex items-center justify-center z-50 left-2 top-[76%] md:top-[83%] cursor-pointer"
+        className="bg-slate-800 h-[50px] md:h-[50px] w-[50px] md:w-[50px] rounded-full fixed flex items-center justify-center z-50 left-2 top-[76%] md:top-[83%] cursor-pointer"
         onClick={() => setIsMessage((prev) => !prev)}
       >
         <BiMessageDetail fontSize={24} />
