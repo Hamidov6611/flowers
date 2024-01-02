@@ -67,27 +67,27 @@ function Korzinka3() {
 
   return (
     <Wrapper>
-      <div class="container">
+      <div className="container">
         <p className="title flex justify-center md:mb-6">Ваш заказ</p>
-        <div class="wrap flex flex-col md:flex-row">
-          <div class="left w-[100%] md:w-[60%] mx-auto">
-            <div class="box">
+        <div className="wrap flex flex-col md:flex-row">
+          <div className="left w-[100%] md:w-[60%] mx-auto">
+            <div className="box">
               <p>Введите контактные данные</p>
-              <div class="input-label flex flex-col md:flex-row">
-                <div class="input-label-1">
+              <div className="input-label flex flex-col md:flex-row">
+                <div className="input-label-1">
                   <h4>Ваше имя</h4>
                   <input
-                    class="main-input dark:bg-white p-2 dark:text-slate-950"
+                    className="main-input dark:bg-white p-2 dark:text-slate-950"
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                   <label for=""></label>
                 </div>
-                <div class="input-label-2">
+                <div className="input-label-2">
                   <h4>Ваш телефон</h4>
                   <input
-                    class="main-input dark:bg-white p-2 dark:text-slate-950"
+                    className="main-input dark:bg-white p-2 dark:text-slate-950"
                     type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -95,7 +95,7 @@ function Korzinka3() {
                   <label for=""></label>
                 </div>
               </div>
-              <div class="checkbox1 flex items-center">
+              <div className="checkbox1 flex items-center">
                 {/* <input type="checkbox" className="dark:bg-indigo-50" />
                 <label for="">Я сам получу заказ</label> */}
                 <Checkbox />
@@ -103,21 +103,21 @@ function Korzinka3() {
                   Я сам получу заказ
                 </label>
               </div>
-              <div class="input-label flex flex-col md:flex-row">
-                <div class="input-label-1">
+              <div className="input-label flex flex-col md:flex-row">
+                <div className="input-label-1">
                   <h4>Имя получателя</h4>
                   <input
-                    class="main-input dark:text-slate-950 dark:bg-white p-2"
+                    className="main-input dark:text-slate-950 dark:bg-white p-2"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                   <label for=""></label>
                 </div>
-                <div class="input-label-2">
+                <div className="input-label-2">
                   <h4>Телефон получателя</h4>
                   <input
-                    class="main-input dark:bg-white p-2 dark:text-slate-950"
+                    className="main-input dark:bg-white p-2 dark:text-slate-950"
                     type="text"
                     value={sendPhone}
                     onChange={(e) => setSendPhone(e.target.value)}
@@ -125,7 +125,7 @@ function Korzinka3() {
                   <label for=""></label>
                 </div>
               </div>
-              <div class="checkbox2 flex items-center">
+              <div className="checkbox2 flex items-center">
                 <Checkbox />
                 {/* <label for="" className="dark:text-slate-950">Добавить в заказ открыткуз</label> */}
                 <label for="" className="dark:text-black">
@@ -134,25 +134,25 @@ function Korzinka3() {
               </div>
             </div>
 
-            <div class="left-footer">
+            <div className="left-footer">
               <span>2/4</span>
-              <div class="btn1">
-                <Link to={"/basket"} class="back">
+              <div className="btn1">
+                <Link to={"/basket"} className="back">
                   Назад
                 </Link>
-                <button class="next" onClick={() => next()}>
+                <button className="next" onClick={() => next()}>
                   Далее
                 </button>
               </div>
             </div>
           </div>
-          <div class="right w-[100%] md:w-[40%] mx-auto">
-            <p class="title-p">Итого:</p>
-            <div class="price">
+          <div className="right w-[100%] md:w-[40%] mx-auto">
+            <p className="title-p">Итого:</p>
+            <div className="price">
               <h4>{data?.countFinally} товар</h4>
               <span>{data?.sumFinally} ₽</span>
             </div>
-            <div class="price-1">
+            <div className="price-1">
             <div className="w-full flex flex-col gap-y-3">
                 {isStepTrue ? (
                   <div className="w-full">
@@ -255,13 +255,13 @@ function Korzinka3() {
                 </div>
               </div>            </div>
 
-            <hr class="border-bottom" />
+            <hr className="border-bottom" />
 
-            <div class="price-2">
+            <div className="price-2">
               <h4>Доставка</h4>
               <span>{data?.delivery} ₽</span>
             </div>
-            <div class="price-3">
+            <div className="price-3">
               <h4>К оплате</h4>
               <span>{data?.sumFinally} ₽</span>
             </div>

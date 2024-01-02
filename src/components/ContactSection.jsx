@@ -69,27 +69,27 @@ function ContactSection() {
           </div>
 
           <div className="md:w-[50%] w-[100%] mt-6 md:mt-0">
-            <form class="left w-[100%]" onSubmit={submitForm}>
-              <div class="box p-6">
+            <form className="left w-[100%]" onSubmit={submitForm}>
+              <div className="box p-6">
                 <h3 className="w-[100%] flex justify-center title2">
                   Введите контактные данные
                 </h3>
-                <div class="input-label flex flex-col ">
+                <div className="input-label flex flex-col ">
                   <div className="flex md:flex-row flex-col md:justify-between">
-                    <div class="input-label-1 md:w-[48%] w-[100%]">
+                    <div className="input-label-1 md:w-[48%] w-[100%]">
                       <h4>Ваше имя и фамилия</h4>
                       <input
-                        class="main-input  w-[100%] p-3 dark:bg-white"
+                        className="main-input  w-[100%] p-3 dark:bg-white"
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                       />
                       <label for=""></label>
                     </div>
-                    <div class="input-label-2 md:w-[48%] w-[100%]">
+                    <div className="input-label-2 md:w-[48%] w-[100%]">
                       <h4>Ваш телефон</h4>
                       <input
-                        class="main-input dark:bg-white  w-[100%]  p-3"
+                        className="main-input dark:bg-white  w-[100%]  p-3"
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}

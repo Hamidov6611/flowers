@@ -107,9 +107,9 @@
 .blur-load {
   background-image: url("../../public/images/img4.gif");
   background-position: center;
-  border-top-left-radius: 8px;
+  /* border-top-left-radius: 8px; */
   /* filter: blur(20px); */
-  border-top-right-radius: 8px;
+  /* border-top-right-radius: 8px; */
   background-size: cover;
   object-fit: cover;
   position: relative;

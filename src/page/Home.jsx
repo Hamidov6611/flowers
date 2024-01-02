@@ -36,6 +36,7 @@ function Home() {
           <SwiperSlide>
             <NewHeros
               img={"./images/ban1.png"}
+              img2={"/md1.png"}
               svg={"/images/ban1a.svg"}
               heroTitle={
                 "Не упускайте возможность приобрести этот восхитительный букет прямо сейчас!"
@@ -49,7 +50,8 @@ function Home() {
           </SwiperSlide>
           <SwiperSlide>
             <NewHeros
-              img={"./images/ban2.png"}
+              img={"/ban2.png"}
+              img2={"/ban2.png"}
               svg={"/images/ban2a.svg"}
               heroTitle={
                 "Наша команда опытных флористов с любовью и вниманием соберет для вас любую композицию, гармонично сочетая цвета и формы."
@@ -62,6 +64,7 @@ function Home() {
           <SwiperSlide>
             <NewHeros
               img={"./images/ban3.png"}
+              img2={"/md3.png"}
               svg={"/images/ban3a.svg"}
               heroTitle={
                 "Купите живое растение прямо сейчас и позвольте своему интерьеру расцвести вместе с нами!"
@@ -74,6 +77,7 @@ function Home() {
           <SwiperSlide>
             <NewHeros
               img={"./images/ban4.png"}
+              img2={"/md4.png"}
               svg={"/images/ban4a.svg"}
               heroTitle={
                 "Приобретайте сегодня товары со скидками у нас и заботьтесь о себе и о своих близких. "

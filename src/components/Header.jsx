@@ -128,11 +128,11 @@ function Header() {
       <div className="md:w-[96%] w-[90%] mx-auto p-0 m-0 h-[70px]  left-0 top-0 flex flex-row justify-between items-center">
         <div className="hidden xl:flex w-[35%] justify-start items-center relative">
           <Link
-            class=" md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px] group relative cursor-pointer py-2"
+            className=" md:mr-[10px] xl:mr-[5px] 2xl:mr-[20px] group relative cursor-pointer py-2"
             // to={"/bouquets"}
           >
-            <div class="flex items-center justify-between space-x-1">
-              <a class="menu-hover my-2 text-base font-medium text-white">
+            <div className="flex items-center justify-between space-x-1">
+              <a className="menu-hover my-2 text-base font-medium text-white">
                 <p
                   className={` ${
                     menu2 ? "text-white font-bold " : "text-white font-semibold"
@@ -142,11 +142,11 @@ function Header() {
                 </p>
               </a>
               <div className="ml-1">
-                <img src="./images/Vector.svg" alt="" />
+                <img src="/images/Vector.svg" alt="" />
               </div>
             </div>
             <div
-              class="invisible absolute z-50 flex flex-col bg-[#EDFCD6] boredr rounded-md py-1 px-4 text-[#000] w-[300px] shadow-xl group-hover:visible"
+              className="invisible absolute z-50 flex flex-col bg-[#EDFCD6] border border-navcolor2 rounded-md py-1 px-4 text-[#000] w-[300px] shadow-xl group-hover:visible"
               // onClick=""
             >
               {category?.map((item, index) => (
@@ -155,10 +155,10 @@ function Header() {
                   className={`${
                     index === category.length - 1
                       ? "border-b-0"
-                      : `border-b border-green-400`
+                      : `border-b border-navcolor2`
                   }`}
                 >
-                  <p className="px-3 py-2 text-[#000] font-semibold">
+                  <p className="px-3 py-2 text-[#1b2a1c] font-semibold">
                     {item?.title}
                   </p>
                 </Link>
@@ -328,7 +328,7 @@ function Header() {
       </div>
       {!menu && (
         <div className={`absolute top-0 left-0 flex flex-col ${(data?.length > 0 && search?.length > 0) ? 'min-h-[80vh]' : "min-h-[40vh]"} overflow-auto z-[999999]  w-full bg-[#758867] xl:hidden`}>
-          <div className="flex justify-between h-[70px] w-[100%] items-center ">
+          <div className="flex px-3 justify-between h-[70px] w-[100%] items-center ">
             <div className="xl:hidden flex ml-[2%] text-[#fff] ">
               {menu ? (
                 <DehazeIcon size={"large"} onClick={menuHandler} />
@@ -339,13 +339,13 @@ function Header() {
             <div className="md:w-[15%] w-[40%] sm:w-[60%] cursor-pointer ml-4">
               <Link to={"/"} onClick={clickHandler}>
                 <div className="w-[113px] lg:w-[171px] lg:h-[70px]">
-                  <img src="./images/1.svg" alt="" />
+                  <img src="/1.svg" alt="" className="fill-white p-2" />
                 </div>
               </Link>
             </div>
             <div className="flex flex-row md:w-[30%] w-[60%] sm:w-[40%] justify-end items-center mr-4">
               <Link to={"tel: +79119276162"} className="flex items-center">
-                <img src="../images/tel2.svg" alt="" className="mr-6" />
+                <img src="./images/tel2.svg" alt="" className="mr-6" />
               </Link>
 
               <Link

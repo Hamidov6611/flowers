@@ -80,10 +80,12 @@ function Buket() {
 
   const categorySubHandler = async () => {
     try {
-      const { data } = await axios.get(
-        `${url}/flowers_category_deteile/${id}/`
-      );
-      setFlowers(data);
+      if (id) {
+        const { data } = await axios.get(
+          `${url}/flowers_category_deteile/${id}/`
+        );
+        setFlowers(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -133,11 +135,13 @@ function Buket() {
 
   const subHandler2 = async (id) => {
     try {
-      setId(id);
-      const { data } = await axios.get(
-        `${url}/sub_category_all_views/${sasa?.id}/`
-      );
-      setSubCategory(data);
+      if (id) {
+        setId(id);
+        const { data } = await axios.get(
+          `${url}/sub_category_all_views/${sasa?.id}/`
+        );
+        setSubCategory(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -155,10 +159,12 @@ function Buket() {
     getFlowers();
   }, []);
 
-  const SortBySum1 = () => {
-    const arr = [...flowers1];
-    let newArr = [];
-    arr?.map((item) => {
+  const SortBySum1 = async() => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
+    let newArr = []
+    data?.results?.map((item) => {
       if (parseInt(item?.price) < 5000) {
         newArr.push(item);
       }
@@ -167,10 +173,12 @@ function Buket() {
     setPageSize(newArr.length);
   };
 
-  const SortBySum2 = () => {
-    const arr = [...flowers1];
-    let newArr = [];
-    arr?.map((item) => {
+  const SortBySum2 = async() => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
+    let newArr = []
+    data?.results?.map((item) => {
       if (parseInt(item?.price) < 10000) {
         newArr.push(item);
       }
@@ -178,10 +186,12 @@ function Buket() {
     setFlowers(newArr);
     setPageSize(newArr.length);
   };
-  const SortBySum3 = () => {
-    const arr = [...flowers1];
-    let newArr = [];
-    arr?.map((item) => {
+  const SortBySum3 =async () => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
+    let newArr = []
+    data?.results?.map((item) => {
       if (parseInt(item?.price) > 10000) {
         newArr.push(item);
         console.log(newArr);
@@ -190,6 +200,7 @@ function Buket() {
     setFlowers(newArr);
     setPageSize(newArr.length);
   };
+
 
   const blurDivs = document.querySelectorAll(".blur-div");
   blurDivs.forEach((div) => {
@@ -338,34 +349,31 @@ function Buket() {
             </div>
           </div> */}
           <div className="w-[100%] flex py-[40px] flex-col md:flex-row flex-wrap">
-            {newSum?.map((item) => (
-              <>
-                <button
-                  onClick={
-                    (item?.id == 1 && SortBySum1) ||
-                    (item?.id == 2 && SortBySum2) ||
-                    (item?.id == 3 && SortBySum3)
-                  }
-                  className={`bg-white text-[#443926] border-2 sm:w-auto border-[#443926]
-               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
-                >
-                  {item?.name}
-                </button>
-              </>
+            {newSum?.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={
+                  (item?.id == 1 && SortBySum1) ||
+                  (item?.id == 2 && SortBySum2) ||
+                  (item?.id == 3 && SortBySum3)
+                }
+                className={`bg-white text-[#443926] border-gray-400 sm:w-auto border-2
+               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#ECCEB4] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+              >
+                {item?.name}
+              </button>
             ))}
           </div>
           <div className="w-[100%] flex pb-[40px] flex-col md:flex-row flex-wrap">
-            {category?.map((item) => (
-              <>
-                <button
-                  key={item?.id}
-                  onClick={() => subHandler(item?.id)}
-                  className={`bg-white text-[#443926] border-2 border-[#443926]
+            {category?.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={() => subHandler(item?.id)}
+                className={`bg-white text-[#443926] border-2 border-[#443926]
                py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
-                >
-                  {item?.title}
-                </button>
-              </>
+              >
+                {item?.title}
+              </button>
             ))}
           </div>
 
@@ -390,7 +398,10 @@ function Buket() {
             </div>
           </div>
 
-          <div className="rounded-3xl relative p-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px]">
+          <div
+          className="rounded-3xl relative p-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px] justify-center"
+            style={{ background: "rgba(44, 81, 70, 0.48)" }}
+          >
             {flowers1.length > 0 ? (
               flowers1?.map((item, index) => {
                 return (
@@ -402,15 +413,7 @@ function Buket() {
                       onMouseLeave={() => toggleCardOver(item)}
                       onMouseEnter={() => toggleCard(item)}
                       key={index}
-                      className={`${
-                        item?.visible
-                          ? "min-h-max left-0 sticky z-[99999]"
-                          : "h-[380px] md:h-[570px]"
-                      } z-[8]  mb-[20px] ${
-                        !(index % 2 == 0)
-                          ? "w-full md:w-[55%]"
-                          : "w-full md:w-[43%]"
-                      } sticky z-0 card-shadow border rounded-lg`}
+                      className={` z-[8]  mb-[20px] w-full md:w-[49%] sticky card-shadow border rounded-lg`}
                     >
                       <div className="bg-blue-350 rounded-lg">
                         <Link
@@ -430,7 +433,8 @@ function Buket() {
                             {item?.flowers?.map((c, index) => (
                               <SwiperSlide key={index}>
                                 <div
-                                  className={`h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${
+                                  key={index}
+                                  className={`rounded-t-lg h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${
                                     ((uri + c?.img).length < 0 ||
                                       c?.img?.length < 0) &&
                                     "blurimage"
@@ -455,48 +459,24 @@ function Buket() {
                         </Link>
                         <div className="p-3 sm:p-5">
                           <div>
-                            <h5 className="mb-2 uppercase lg:font-semibold text-[16px] text-center md:text-[24px] tracking-tight text-[#000] font-montserrat font-normal line-clamp-1">
+                            <h5 className="lg:font-semibold xl:font-bold text-[16px] md:text-[18px] text-[#fff] font-normal line-clamp-1">
                               {item?.name}
                             </h5>
                           </div>
 
-                          <div className="flex justify-center md:flex-row">
-                            <p className="text-[#000] font-semibold text-[24px] md:text-[32px] font-montserrat">
-                              {item?.price} ₽
-                            </p>
+                          <div className="flex flex-row justify-between items-center gap-x-3 gap-y-3 mt-2">
+                            <button
+                              onClick={() => basketHandler(item.id)}
+                              className="bg-greenBtn  rounded-[10px] text-white h-[40px] min-w-[271px]  text-[14px] md:text-[16px] font-medium font-montserrat"
+                            >
+                              В КОРЗИНУ
+                            </button>
+                            <div className="flex justify-center md:flex-row">
+                              <p className="text-[#fff] font-normal text-[18px] md:text-[24px] font-montserrat">
+                                {item?.price} ₽
+                              </p>
+                            </div>
                           </div>
-
-                          {item?.visible && (
-                            <>
-                              <div className="flex gap-x-3 font-semibold text-[17px] md:text-[20px] font-montserrat text-[#000]">
-                                <p className="inline">
-                                  {item?.rank && (
-                                    <p className="inline m-0 p-0">Цветы:</p>
-                                  )}
-                                </p>
-                                <p
-                                  className="font-normal inline m-0 p-0 text-[#000] font-montserrat"
-                                  dangerouslySetInnerHTML={{
-                                    __html: item?.rank,
-                                  }}
-                                />
-                              </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-3 mt-6">
-                                <button
-                                  onClick={() => basketHandler(item.id)}
-                                  className="bg-[#585E50]  rounded-xl text-white py-[10px]  text-[18px] md:text-[20px] font-medium font-montserrat"
-                                >
-                                  В КОРЗИНУ
-                                </button>
-                                <button
-                                  onClick={() => handleQuickDelivery(item)}
-                                  className="border-2 border-[#585E50] rounded-xl text-[#585E50] py-[10px]  text-[18px] md:text-[20px] font-medium font-montserrat"
-                                >
-                                  БЫСТРЫЙ ЗАКАЗ
-                                </button>
-                              </div>
-                            </>
-                          )}
                         </div>
                       </div>
                     </div>

@@ -7,7 +7,6 @@ import { routes } from "./route.js";
 import Sitemap from './sitemap1.js'
 
 function App() {
- console.log("render App")
   
   return (
       <Theme>

@@ -73,45 +73,45 @@ function Korzinka4() {
   }
   return (
     <Wrapper>
-      <div class="container">
+      <div className="container">
       <p className="title flex justify-center md:mb-6">Ваш заказ</p>
-        <div class="wrap flex flex-col md:flex-row">
-          <div class="left w-[100%] md:w-[60%] mx-auto">
-            <div class="box">
+        <div className="wrap flex flex-col md:flex-row">
+          <div className="left w-[100%] md:w-[60%] mx-auto">
+            <div className="box">
               <h3>Уточните детали доставки</h3>
-              <div class="input-label">
-                <div class="input-label-1">
+              <div className="input-label">
+                <div className="input-label-1">
                   <h4>Адрес доставки (нас. пункт, улица, дом)</h4>
                   <input
-                    class="main-input dark:bg-white p-2 dark:text-slate-950"
+                    className="main-input dark:bg-white p-2 dark:text-slate-950"
                     type="text"
                     value={adress}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                   <label for=""></label>
                 </div>
-                <div class="checkbox1 flex items-center">
+                <div className="checkbox1 flex items-center">
                   <Checkbox />
-                  <label class="checkbox1-p" for="">
+                  <label className="checkbox1-p" for="">
                     Я не знаю адрес получателя. Уточните по телефону.
                   </label>
                 </div>
-                <div class="input-label-2">
+                <div className="input-label-2">
                   <h4>
                     Дополнительная информация (подъезд, домофон, квартира):
                   </h4>
                   <input
-                    class="main-input-1 dark:bg-white p-2 dark:text-slate-950"
+                    className="main-input-1 dark:bg-white p-2 dark:text-slate-950"
                     type="text"
                     value={fullData}
                     onChange={(e) => setFullData(e.target.value)}
                   />
                   <label for=""></label>
-                  <div class="time">
-                    <div class="time-date">
+                  <div className="time">
+                    <div className="time-date">
                       <h4>Дата доставки</h4>
                       <input
-                        class="main-input-2 dark:bg-white p-2 dark:text-slate-950"
+                        className="main-input-2 dark:bg-white p-2 dark:text-slate-950"
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
@@ -119,16 +119,16 @@ function Korzinka4() {
 
                       <label for=""></label>
                     </div>
-                    <div class="time-time">
+                    <div className="time-time">
                       <h4>Время доставки</h4>
                       <input
-                        class="main-input-2 mr-[20px] dark:bg-white mb-4 sm:mb-0 p-2 dark:text-slate-950"
+                        className="main-input-2 mr-[20px] dark:bg-white mb-4 sm:mb-0 p-2 dark:text-slate-950"
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                       />
                       <input
-                        class="main-input-2 dark:bg-white p-2 dark:text-slate-950"
+                        className="main-input-2 dark:bg-white p-2 dark:text-slate-950"
                         type="time"
                         value={andTime}
                         onChange={(e) => setAndTime(e.target.value)}
@@ -140,25 +140,25 @@ function Korzinka4() {
               </div>
             </div>
 
-            <div class="left-footer">
+            <div className="left-footer">
               <span>3/4</span>
-              <div class="btn1">
-                <Link to={'/basket'} class="back">
+              <div className="btn1">
+                <Link to={'/basket'} className="back">
                   Назад
                 </Link>
-                <button onClick={() => next()} class="next">
+                <button onClick={() => next()} className="next">
                   Далее
                 </button>
               </div>
             </div>
           </div>
-          <div class="right w-[100%] md:w-[40%] mx-auto">
-            <h3 class="title-h3">Итого:</h3>
-            <div class="price">
+          <div className="right w-[100%] md:w-[40%] mx-auto">
+            <h3 className="title-h3">Итого:</h3>
+            <div className="price">
               <h4>{data?.countFinally} товар</h4>
               <span>{data?.sumFinally} ₽</span>
             </div>
-            <div class="price-1">
+            <div className="price-1">
             <div className="w-full flex flex-col gap-y-3">
                 {isStepTrue ? (
                   <div className="w-full">
@@ -262,13 +262,13 @@ function Korzinka4() {
               </div>
             </div>
 
-            <hr class="border-bottom" />
+            <hr className="border-bottom" />
 
-            <div class="price-2">
+            <div className="price-2">
               <h4>Доставка</h4>
               <span>{data?.delivery} ₽</span>
             </div>
-            <div class="price-3">
+            <div className="price-3">
               <h4>К оплате</h4>
               <span>{data?.sumFinally} ₽</span>
             </div>

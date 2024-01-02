@@ -24,12 +24,12 @@ function Payment() {
     <Wrapper>
       <div className="w-[100%]">
         <div>
-          <div class="container">
+          <div className="container">
             <p className="text-[#15100C] font-montserrat text-[48px] flex justify-center md:mb-6">
               Ваш заказ
             </p>
-            <div class="wrap flex flex-col md:flex-row">
-              <div class="left w-[100%] md:w-[60%] mx-auto">
+            <div className="wrap flex flex-col md:flex-row">
+              <div className="left w-[100%] md:w-[60%] mx-auto">
                 <div className="flex flex-col p-4">
                   <form
                     className="p-4"

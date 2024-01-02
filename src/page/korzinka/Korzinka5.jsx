@@ -102,12 +102,12 @@ function Korzinka5() {
   }, []);
   return (
     <Wrapper>
-      <div class="container">
+      <div className="container">
         <p className="title flex justify-center md:mb-6">Ваш заказ</p>
-        <div class="wrap flex flex-col md:flex-row">
+        <div className="wrap flex flex-col md:flex-row">
           <form
             onSubmit={submitHandler}
-            class="left w-[100%] md:w-[60%] mx-auto"
+            className="left w-[100%] md:w-[60%] mx-auto"
           >
             <div className="flex flex-col p-4">
               <p className="leading-[24.38px] text-[20px] dark:text-slate-950 font-semibold font-montserrat my-3">
@@ -124,7 +124,7 @@ function Korzinka5() {
             <div className="left-footer">
               <span>4/4</span>
               <div className="btn1">
-                <Link to={"/basket/4"} class="back">
+                <Link to={"/basket/4"} className="back">
                   Назад
                 </Link>
                 <button type="submit" className="next">

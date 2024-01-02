@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Dostavka() {
     return (
         <Wrapper>
-            <div class="w-[98%] md:w-[94%] my-6 mx-auto p-2 md:p-0">
+            <div className="w-[98%] md:w-[94%] my-6 mx-auto p-2 md:p-0">
                 <b className='font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center md:text-start'>Доставка</b>
                 <p className='text-[#15100C] mb-5 md:mb-[40px] text-[16px] lg:text-[24px] font-medium md:text-start text-center'>Мы находимся в Санкт-Петербурге по адресу <strong>Большой Сампсониевский проспект, д. 25</strong> Вы можете оформить самовывоз любого понравившегося на сайте букета
                     из магазина или подобрать самостоятельно уже на месте.

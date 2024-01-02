@@ -150,12 +150,15 @@ const BuketDetail = () => {
         style={{ background: "rgba(237, 252, 214, 1)" }}
         className="min-h-[60vh] flex flex-col md:flex-row"
       >
+        <div className="w-[94%]  mx-auto md:hidden">
+          <BuketDetailItem data={data} />
+        </div>
         <div className="md:w-[30%] w-[100%] p-6 flex flex-col">
-          <p className="text-[#15100C] font-montserrat font-medium text-[24px] md:text-[40px]">
+          <p className="text-[#15100C] md:block hidden font-montserrat font-medium text-[24px] md:text-[40px]">
             {data?.name}
           </p>
 
-          <div className="grid grid-cols-2 gap-x-3 gap-y-8 my-6">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-8 mb-6 md:my-6">
             <button
               onClick={() => basketHandler(data)}
               className="bg-[#585E50] hover:text-[#585E50] hover:bg-transparent hover:border-2 hover:border-[#585E50] hover:transition-all hover:duration-500 rounded-xl text-white py-[10px] text-[14px] sm:text-[18px] md:text-[20px] font-medium font-montserrat"
@@ -177,7 +180,7 @@ const BuketDetail = () => {
             </p>
           </div>
 
-          <p className="my-2 sm:my-4 text-[#15100C] text-[20px] md:text-[24px] font-medium">
+          <p className="my-2 sm:my-4 text-[#15100C] text-[20px] md:text-[24px] font-semibold md:font-bold">
             Размер букета
           </p>
 
@@ -200,7 +203,7 @@ const BuketDetail = () => {
           </div>
 
           <div className="mt-2 sm:mt-4 flex flex-col">
-            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-medium">
+            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-semibold md:font-bold">
               Описание
             </p>
 
@@ -219,7 +222,7 @@ const BuketDetail = () => {
             </p>
           </div>
           <div className="my-4">
-            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-medium">
+            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-semibold md:font-bold">
               В составе
             </p>
             {data?.rank?.length > 0 ? (
@@ -236,7 +239,7 @@ const BuketDetail = () => {
             )}
           </div>
           <div className="my-4">
-            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-medium">
+            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-semibold md:font-bold">
               Упаковка
             </p>
             <p className="font-normal text-[14px] sm:text-[18px]  text-[#000] font-montserrat">
@@ -253,7 +256,7 @@ const BuketDetail = () => {
             </p>
           </div>
           <div className="my-4">
-            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-medium">
+            <p className="mb-2 text-[#15100C] text-[20px] md:text-[24px] font-semibold md:font-bold">
               Детали отправки
             </p>
             <p className="mb-2 text-[#15100C] text-[14px] md:text-[16px] font-medium">
@@ -265,7 +268,7 @@ const BuketDetail = () => {
             </strong>
           </div>
         </div>
-        <div className="md:w-[36%] w-[94%]  mx-auto">
+        <div className="md:w-[36%] w-[94%]  mx-auto md:block hidden">
           <BuketDetailItem data={data} />
         </div>
         {data?.commit?.length > 0 && (
@@ -313,7 +316,7 @@ const BuketDetail = () => {
                       {item?.flowers?.map((c, index) => (
                         <SwiperSlide key={index}>
                           <div
-                            className={`h-[200px] blur-div sm:h-[440px] w-[100%] blur-load ${
+                            className={`h-[200px] rounded-lg blur-div sm:h-[440px] w-[100%] blur-load ${
                               ((uri + c?.img).length < 0 ||
                                 c?.img?.length < 0) &&
                               "blurimage"
@@ -326,7 +329,7 @@ const BuketDetail = () => {
                                   ? c?.img
                                   : uri + c?.img
                               } `}
-                              className="w-[100%] h-[100%]  object-cover rounded-t-lg"
+                              className="w-[100%] h-[100%]  object-cover rounded-lg"
                               alt={"flower"}
                             />
                           </div>

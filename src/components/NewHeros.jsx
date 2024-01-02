@@ -1,20 +1,21 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
+const NewHeros = ({ img, svg, img2, heroTitle, cardTitle, price, link }) => {
   const navigate = useNavigate();
   return (
     <div className="relative w-full md:w-[94%] mx-auto my-0 py-0">
-      <div className="w-full h-[441px] md:h-[660px]">
-        <img src={img} alt={"NewHero"} className="h-full w-full" />
+      <div className="w-full h-[441px] md:h-[660px] hidden md:flex items-center justify-center">
+        <img src={img} alt="NewHero" className="w-full h-full object-cover" />
       </div>
+      <div className="w-[100%] h-[441px] md:hidden">
+        <img src={img2} alt="NewHero" className="w-full h-full" />
+      </div>
+
       <div className="absolute left-[8%] top-[15%] hidden md:flex w-[40%] text-start">
-        <p className="text-white lg:text-[40px] font-bold line-clamp-3">
-          {heroTitle}
-        </p>
+        <p className="text-white lg:text-[40px] font-bold">{heroTitle}</p>
       </div>
       <div className="absolute md:top-[10%] md:hidden  top-0 left-0 md:right-[6%] p-4 md:p-0 w-[100%] md:w-[40%] h-full md:h-[400px] bg-modal2 md:rounded-xl border">
-       
         <div className="md:hidden flex text-center md:text-start">
           <p className="text-white lg:text-[40px] font-bold line-clamp-4">
             {heroTitle}
@@ -33,7 +34,10 @@ const NewHeros = ({ img, svg, heroTitle, cardTitle, price, link }) => {
             <p className="text-white text-[24px] md:text-[28px] py-1 lg:text-[36px] text-center md:text-start line-clamp-1">
               от {price} ₽
             </p>
-            <Link to={link} className="flex items-center justify-center gap-x-3">
+            <Link
+              to={link}
+              className="flex items-center justify-center gap-x-3"
+            >
               <div className="text-white mr-1 sm:mr-8 font-medium md:font-semibold text-[14px]  text-start md:text-[19px] lg:text-[24px] font-montserrat">
                 Смотреть все букеты
               </div>

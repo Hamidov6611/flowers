@@ -19,11 +19,13 @@ function Buket2() {
   const [subCategory, setSubCategory] = useState([]);
   const [flowers1, setFlowers] = useState([]);
   const [ceo, setCeo] = useState({ title: "", desc: "" });
+  const [isSort, setIsSort] = useState(false);
+  const [isFilter, setIsFilter] = useState(false);
   const [newSum, setNewSum] = useState([
-    {id: 1, name:"до 5000 руб", visible: false},
-    {id: 2, name:"до 10000 руб", visible: false},
-    {id: 3, name:"до 100000 руб", visible: false},
-  ])
+    { id: 1, name: "до 5000р.", visible: false },
+    { id: 2, name: "от 5 000р. - 10 000р.", visible: false },
+    { id: 3, name: "свыше 10 000р.", visible: false },
+  ]);
   const [basket, setBasket] = useState(
     JSON.parse(localStorage.getItem("basket")) || []
   );
@@ -39,7 +41,6 @@ function Buket2() {
 
   const navigate = useNavigate();
   const sasa = useParams();
-  console.log(sasa);
 
   const location = useLocation();
 
@@ -67,15 +68,14 @@ function Buket2() {
       });
     }
 
-    toast.success("Добавлен в корзину")
-    navigate("/basket")
+    toast.success("Добавлен в корзину");
+    navigate("/basket");
   };
 
   const categoryHandler = async () => {
     try {
       const { data } = await axios.get(`${url}/category_all_views/`);
       setCategory(data);
-      // console.log(data)
     } catch (error) {
       console.log(error);
     }
@@ -83,10 +83,12 @@ function Buket2() {
 
   const categorySubHandler = async () => {
     try {
-      const { data } = await axios.get(
-        `${url}/flowers_category_deteile/${id}/`
-      );
-      setFlowers(data);
+      if (id) {
+        const { data } = await axios.get(
+          `${url}/flowers_category_deteile/${id}/`
+        );
+        setFlowers(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -124,11 +126,14 @@ function Buket2() {
   useEffect(() => {
     getFlowers();
   }, [pageId]);
-  const subHandler = async (id) => {
+  const subHandler = async (e, id) => {
+    e.stopPropagation();
     try {
+      setIsFilter(true);
       setId(id);
       const { data } = await axios.get(`${url}/sub_category_all_views/${id}/`);
       setSubCategory(data);
+      setIsFilter(false);
     } catch (error) {
       console.log(error);
     }
@@ -156,13 +161,14 @@ function Buket2() {
   }, [id]);
   useEffect(() => {
     categoryHandler();
-    getFlowers();
   }, []);
 
-  const SortBySum1 = () => {
-    const arr = [...flowers1];
+  const SortBySum1 = async () => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
     let newArr = [];
-    arr?.map((item) => {
+    data?.results?.map((item) => {
       if (parseInt(item?.price) < 5000) {
         newArr.push(item);
       }
@@ -171,10 +177,12 @@ function Buket2() {
     setPageSize(newArr.length);
   };
 
-  const SortBySum2 = () => {
-    const arr = [...flowers1];
+  const SortBySum2 = async () => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
     let newArr = [];
-    arr?.map((item) => {
+    data?.results?.map((item) => {
       if (parseInt(item?.price) < 10000) {
         newArr.push(item);
       }
@@ -182,10 +190,12 @@ function Buket2() {
     setFlowers(newArr);
     setPageSize(newArr.length);
   };
-  const SortBySum3 = () => {
-    const arr = [...flowers1];
+  const SortBySum3 = async () => {
+    const { data } = await axios.get(
+      `${url}/flowers_all_sites_views/?page=${pageId}`
+    );
     let newArr = [];
-    arr?.map((item) => {
+    data?.results?.map((item) => {
       if (parseInt(item?.price) > 10000) {
         newArr.push(item);
         console.log(newArr);
@@ -225,6 +235,7 @@ function Buket2() {
       )
     );
   };
+
   const handleQuickDelivery = (data) => {
     navigate(`/basket/2?quick=true`);
     localStorage.setItem("quick", JSON.stringify([data]));
@@ -304,81 +315,210 @@ function Buket2() {
     }
   };
 
+  // For ceo
   useEffect(() => {
     getAndSetCeo();
   }, [sasa.id]);
-  function a(matn) {
-    // Matndagi katta harflar oldidan vergul qo'yish
-    var yangiMatn = matn.replace(/([A-Z])/g, ", $1");
 
-    // Agar matn boshida vergul bo'lmasa, boshiga vergul qo'shish
-    if (yangiMatn.charAt(0) === ",") {
-      yangiMatn = yangiMatn.slice(2);
+  const sortResultsByPrice = (e) => {
+    e.stopPropagation();
+    if (flowers1) {
+      setIsSort(false);
+
+      const res = flowers1.sort(
+        (a, b) => parseInt(a.price) - parseInt(b.price)
+      );
+      console.log(res);
+      setFlowers(res);
+    } else {
+      console.log("flowers not found");
     }
+  };
 
-    return yangiMatn;
-  }
-
- 
+  const sortByPriceDescending = (e) => {
+    e.stopPropagation();
+    if (flowers1) {
+      setIsSort(false);
+      const res = flowers1.sort(
+        (a, b) => parseInt(b.price) - parseInt(a.price)
+      );
+      console.log(res);
+      setFlowers(res);
+    } else {
+      console.log("flowers not found");
+    }
+  };
 
   return (
     <Wrapper>
       <Layout title={ceo.title} desc={ceo.desc}>
-        <div className="w-[100%] px-4 lg:w-[94%] mx-auto">
-          <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center flex justify-center mt-[20px] md:text-start">
-            Букеты
-          </b>
-          {/* <div className="flex py-[40px] items-center flex-col md:flex-row">
-            <div className="flex md:flex-row flex-col gap-x-3 gap-y-4 text-center w-[93%]  my-3 md:my-0 ml-0 md:ml-5">
+        <div
+          className="w-[100%] md:px-4 lg:w-[94%] mx-auto"
+          onClick={() => {
+            setIsSort(false);
+            setIsFilter(false);
+          }}
+        >
+          <div className="flex items-center mt-[20px] px-3">
+            <b className="font-semibold w-[55%] text-[28px] md:text-[40px] text-[#15100C] text-center flex justify-end md:justify-start  md:text-start">
+              Букеты
+            </b>
+            <p
+              className="w-[45%] flex justify-end gap-x-1 md:hidden"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsSort((prev) => !prev);
+              }}
+            >
+              <b className="text-[12px] ml-2 text-[#443926] cursor-pointer">
+                Сортировать по:
+              </b>
+              <div className="flex gap-x-1 ml-2">
+                <img
+                  src="/bot.png"
+                  alt=""
+                  width={10}
+                  height={5}
+                  className="object-cover"
+                />
+                <img
+                  src="/top.png"
+                  alt=""
+                  width={10}
+                  height={5}
+                  className="object-cover"
+                />
+              </div>
+
+              {isSort && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute right-3 text-[12px] shadow-xl text-[#443926] top-[130px] rounded-md md:rounded-xl flex flex-col gap-y-2 bg-[#EDFCD6] py-2 px-2 border border-[#443926] z-30"
+                >
+                  <p
+                    onClick={(e) => sortResultsByPrice(e)}
+                    className="cursor-pointer"
+                  >
+                    ВОЗРАСТАНИЮ ЦЕНЫ
+                  </p>
+                  <p
+                    onClick={(e) => sortByPriceDescending(e)}
+                    className="cursor-pointer"
+                  >
+                    УБЫВАНИЮ ЦЕНЫ
+                  </p>
+                </div>
+              )}
+            </p>
+          </div>
+          <div className="w-[100%] md:w-[80%] flex items-end gap-x-2 py-[10px] pt-[30px] px-2">
+            <div
+              className="mb-1 md:hidden"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFilter((prev) => !prev);
+              }}
+            >
+              <img src="/filter.svg" alt="" width={25} height={20} />
+            </div>
+            <div className="flex gap-x-2 md:gap-x-3 items-center relative">
+              {newSum?.map((item) => (
+                <>
+                  <button
+                    onClick={
+                      (item?.id == 1 && SortBySum1) ||
+                      (item?.id == 2 && SortBySum2) ||
+                      (item?.id == 3 && SortBySum3)
+                    }
+                    className={`bg-white text-[#443926] border border-[#443926] md:border-gray-400
+               h-[40px] md:min-w-[180px]  md:px-8 focus:bg-[#ECCEB4] focus:text-black text-[12px] sm:text-[14px] px-[2px] md:text-[20px] font-medium rounded-lg md:rounded-3xl font-montserrat`}
+                  >
+                    {item?.name}
+                  </button>
+                </>
+              ))}
               <p
-                onClick={SortBySum1}
-                className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1"
+                className="hidden md:flex items-center justify-end gap-x-1"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsSort((prev) => !prev);
+                }}
               >
-                до 5000 руб
-              </p>
-              <p
-                onClick={SortBySum2}
-                className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1"
-              >
-                до 10000 руб
-              </p>
-              <p
-                onClick={SortBySum3}
-                className="bg-white mr-0 md:mr-5 rounded-2xl font-medium text-[14px] md:text-[16px] lg:text-[20px] py-2 cursor-pointer tracking-[1px] text-center text-[#343434] px-2 md:px-2 border-2 line-clamp-1"
-              >
-                свыше 10000 руб
+                <b className="text-[20px] ml-2 text-[#443926] cursor-pointer font-semibold">
+                  Сортировать по:
+                </b>
+                <div className="flex gap-x-1 ml-2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    cursor={"pointer"}
+                  >
+                    <path
+                      d="M0 8L1.41 9.41L7 3.83V16H9V3.83L14.58 9.42L16 8L8 0L0 8Z"
+                      fill="#443926"
+                    />
+                  </svg>
+
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    cursor={"pointer"}
+                  >
+                    <path
+                      d="M16 8L14.59 6.59L9 12.17V0H7V12.17L1.42 6.58L0 8L8 16L16 8Z"
+                      fill="#443926"
+                    />
+                  </svg>
+                </div>
+
+                {isSort && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="absolute right-3 text-[18px] shadow-xl text-[#443926] w-[30%] top-[50px] rounded-md md:rounded-xl flex flex-col gap-y-2 bg-[#EDFCD6] py-2 px-2 border border-[#443926] z-30"
+                  >
+                    <p
+                      onClick={(e) => sortResultsByPrice(e)}
+                      className="cursor-pointer"
+                    >
+                      ВОЗРАСТАНИЮ ЦЕНЫ
+                    </p>
+                    <p
+                      onClick={(e) => sortByPriceDescending(e)}
+                      className="cursor-pointer"
+                    >
+                      УБЫВАНИЮ ЦЕНЫ
+                    </p>
+                  </div>
+                )}
               </p>
             </div>
-          </div> */}
-          <div className="w-[100%] grid grid-cols-3 space-x-2 py-[10px] pt-[30px]">
-            {newSum?.map((item) => (
-              <>
-                <button
-                 onClick={(item?.id == 1 && SortBySum1) || (item?.id == 2 && SortBySum2) || (item?.id == 3 && SortBySum3)}
-                  className={`bg-white text-[#443926] border-2 border-[#443926]
-               py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[14px] px-1 md:text-[20px] font-medium rounded-3xl`}
-                >
-                  {item?.name}
-                </button>
-              </>
-            ))}
           </div>
-          <div className="mx-auto sm:w-[100%]  pb-[40px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 py-[40px] ">
-            {category?.map((item) => (
-              <>
-                <button
-                  key={item?.id}
-                  onClick={() => subHandler(item?.id)}
-                  className={`bg-white text-[#443926] border-2 border-[#443926]
-                  py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[12px] px-1 md:text-[20px] font-normal md:font-medium rounded-3xl`}
+          {isFilter && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="absolute top-[220px] left-4 p-2 md:hidden flex flex-col gap-y-1 bg-[#EDFCD6] z-[999999] border border-[#443926] rounded-lg "
+            >
+              {category?.map((c, idx) => (
+                <p
+                  onClick={(e) => subHandler(e, c?.id)}
+                  key={idx}
+                  className="text-[#443926] text-[13px] cursor-pointer font-medium"
                 >
-                  {item?.title}
-                </button>
-              </>
-            ))}
-          </div>
+                  {c?.title}
+                </p>
+              ))}
+            </div>
+          )}
 
-          <div className="flex pb-[30px] flex-col md:flex-row">
+          {/* subCategory, muted */}
+
+          {/* <div className="hidden flex pb-[30px] flex-col md:flex-row">
             <div className="flex flex-wrap">
               <button
                 className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
@@ -392,14 +532,14 @@ function Buket2() {
                   className="text-[#443926] text-[16px] md:text-[20px] focus:underline mr-4"
                   onClick={() => subHandlerCat(item?.id)}
                 >
-                  {/* {item?.id} */}
                   {item?.title}
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
 
-          <div className="rounded-3xl relative py-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px]">
+          {/* Flowers section */}
+          <div className="relative py-5 flex px-2 flex-wrap gap-x-4 gap-y-4 mb-[40px]">
             {flowers1.length > 0 ? (
               flowers1?.map((item, index) => {
                 return (
@@ -413,15 +553,15 @@ function Buket2() {
                       key={index}
                       className={`${
                         item?.visible
-                          ? "min-h-max left-0 sticky z-[99999]"
-                          : "h-[380px] md:h-[570px]"
+                          ? "min-h-max left-0 sticky z-[99999] rounded-[30px]"
+                          : " rounded-[30px]"
                       } z-[8]  mb-[20px] ${
                         !(index % 2 == 0)
-                          ? "w-full md:w-[55%]"
-                          : "w-full md:w-[43%]"
-                      } sticky z-0 card-shadow border rounded-lg`}
+                          ? "w-full md:w-[55%] rounded-[30px]"
+                          : "w-full md:w-[43%] rounded-[30px]"
+                      } sticky z-0 shadow-md border rounded-[30px]`}
                     >
-                      <div className="bg-blue-350 rounded-lg">
+                      <div className=" rounded-[30px]">
                         <Link
                           to={`/bouquets/${item.id}`}
                           onClick={() => {
@@ -429,21 +569,26 @@ function Buket2() {
                               top: 0,
                             });
                           }}
+                          className=""
                         >
                           <Swiper
                             modules={[Pagination, A11y]}
                             spaceBetween={50}
                             slidesPerView={1}
                             pagination={{ clickable: true }}
+                            className=""
                           >
                             {item?.flowers?.map((c, index) => (
-                              <SwiperSlide key={index}>
+                              <SwiperSlide
+                                key={index}
+                                className=" rounded-[30px]"
+                              >
                                 <div
-                                  className={`h-[273px] blur-div sm:h-[440px] w-[100%] blur-load ${
+                                  className={`h-[372px] blur-div sm:h-[620px] w-[100%] blur-load rounded-[30px] ${
                                     ((uri + c?.img).length < 0 ||
                                       c?.img?.length < 0) &&
-                                    "blurimage"
-                                  }`}
+                                    "blurimage "
+                                  } rounded-[30px]`}
                                 >
                                   <img
                                     loading="lazy"
@@ -454,7 +599,7 @@ function Buket2() {
                                         ? c?.img
                                         : uri + c?.img
                                     } `}
-                                    className="w-[100%] h-[100%]  object-cover rounded-t-lg"
+                                    className="w-[100%] h-[100%] bg-contain rounded-[30px] "
                                     alt={"flower"}
                                   />
                                 </div>
@@ -464,7 +609,7 @@ function Buket2() {
                         </Link>
                         <div className="p-3 sm:p-5">
                           <div>
-                            <h5 className="mb-2 uppercase lg:font-semibold text-[16px] text-center md:text-[24px] tracking-tight text-[#000] font-montserrat font-normal line-clamp-1">
+                            <h5 className="mb-2 lg:font-medium text-[16px] text-center md:text-[24px] tracking-tight text-[#000] font-montserrat font-normal line-clamp-1">
                               {item?.name}
                             </h5>
                           </div>
@@ -477,19 +622,23 @@ function Buket2() {
 
                           {item?.visible && (
                             <>
-                              <div className="flex gap-x-3 font-semibold text-[17px] md:text-[20px] font-montserrat text-[#000]">
-                                <p className="inline">
-                                  {item?.rank && (
-                                    <p className="inline m-0 p-0">Цветы:</p>
-                                  )}
-                                </p>
-                                <p
-                                  className="font-normal inline m-0 p-0 text-[#000] font-montserrat"
-                                  dangerouslySetInnerHTML={{
-                                    __html: item?.rank,
-                                  }}
-                                />
+                              <div className="gap-x-3 font-semibold  text-[17px] md:text-[20px] font-montserrat text-[#000]">
+                                {item?.rank && (
+                                  <>
+                                    <p className="inline mr-2">Цветы:</p>
+                                    <p
+                                      className="font-normal inline m-0 p-0 text-[#000] font-montserrat"
+                                      dangerouslySetInnerHTML={{
+                                        __html: item?.rank.replace(
+                                          /<[^>]*>/g,
+                                          ""
+                                        ),
+                                      }}
+                                    />
+                                  </>
+                                )}
                               </div>
+
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-3 mt-6">
                                 <button
                                   onClick={() => basketHandler(item.id)}
@@ -521,18 +670,7 @@ function Buket2() {
             )}
           </div>
           {location.pathname == "/" ? (
-            <div className="w-[100%] flex justify-center">
-              {/* {
-                <Link to={location.pathname == "/" && "/bouquets"} className="w-[100%] flex justify-center">
-                  <button
-                    className="py-[20px] px-[60px] text-[12px] lg:text-[20px] font-montserrat rounded-lg text-[#fff] bg-[#443926]"
-                    onClick={() => setShow(!show)}
-                  >
-                    {show ? "Cократить" : "Смотреть все букеты"}
-                  </button>
-                </Link>
-              } */}
-            </div>
+            <div className="w-[100%] flex justify-center"></div>
           ) : (
             <div className="flex justify-center my-8">
               {flowers1?.length > 0 && (
@@ -540,9 +678,6 @@ function Buket2() {
               )}
             </div>
           )}
-
-          {/* {location.pathname === "/%D0%B1%D1%83%D0%BA%D0%B5%D1%82%D1%8B" && (
-        )} */}
         </div>
       </Layout>
     </Wrapper>
@@ -553,7 +688,7 @@ export default Buket2;
 
 const Wrapper = styled.section`
   .card {
-    background-color: ${(props) => props.theme.colors.cardBackground};
+    background-color: #edfcd6;
     padding: 48px;
     border-radius: 30px;
 

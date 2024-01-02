@@ -34,27 +34,27 @@ const ContactForm = ({setIsOrder}) => {
     <div 
     className="fixed top-0 left-0 w-full h-[100vh] bg-modal2 flex items-center justify-center z-[9999]" onClick={handleCLose}>
         <div className="w-[95%] rounded-lg text-[#151] md:w-[60%] bg-[#EDFCD6]">
-        <form class="left w-[100%]" onSubmit={submitForm} onClick={e => e.stopPropagation()}>
-              <div class="box p-6">
+        <form className="left w-[100%]" onSubmit={submitForm} onClick={e => e.stopPropagation()}>
+              <div className="box p-6">
                 <h3 className="w-[100%] flex font-montserrat justify-center text-[16px] mb-4 sm:text-[20px] md:text-[24px] font-medium md:font-semibold tracking-wide">
                   Введите контактные данные
                 </h3>
-                <div class="input-label flex flex-col ">
+                <div className="input-label flex flex-col ">
                   <div className="flex md:flex-row flex-col md:justify-between">
-                    <div class="input-label-1 md:w-[48%] w-[100%] mb-2">
+                    <div className="input-label-1 md:w-[48%] w-[100%] mb-2">
                       <h4 className="mb-2 font-montserrat">Ваше имя и фамилия</h4>
                       <input
-                        class="main-input  w-[100%] p-3 dark:bg-white"
+                        className="main-input  w-[100%] p-3 dark:bg-white"
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                       />
                       <label for=""></label>
                     </div>
-                    <div class="input-label-2 md:w-[48%] w-[100%]">
+                    <div className="input-label-2 md:w-[48%] w-[100%]">
                       <h4 className="mb-2 font-montserrat">Ваш телефон</h4>
                       <input
-                        class="main-input dark:bg-white  w-[100%]  p-3"
+                        className="main-input dark:bg-white  w-[100%]  p-3"
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}

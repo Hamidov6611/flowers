@@ -18,7 +18,9 @@ module.exports = {
         modal:"rgba(0,0,0,.8)",
         modal2:"rgba(0,0,0,.5)",
         modal3:"rgba(0,0,0,.3)",
-        end: "#ECCEB4"
+        end: "#ECCEB4",
+        greenBtn: "rgba(119, 146, 67, 1)",
+        navcolor2: "rgba(88, 94, 80, 1)"
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif']
