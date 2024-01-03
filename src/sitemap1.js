@@ -8,7 +8,7 @@ const Sitemap = () => {
     const sitemapItems = routes.map(
       (route) =>
         `<url>
-        <loc>${window.location.origin}${route.path}</loc>
+        <loc>${"https://www.букетнаямануфактура.рф"}${route.path}</loc>
         <priority>${route.priority || "0.5"}</priority>
       </url>`
     );

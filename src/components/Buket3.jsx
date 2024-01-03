@@ -421,7 +421,7 @@ function Buket3() {
                       (item?.id == 3 && SortBySum3)
                     }
                     className={`bg-white text-[#443926] border border-[#443926] md:border-gray-400
-               h-[40px] md:min-w-[180px]  md:px-8 focus:bg-[#ECCEB4] focus:text-black text-[12px] sm:text-[14px] px-[2px] md:text-[20px] font-medium rounded-lg md:rounded-3xl font-montserrat`}
+               h-[40px] md:min-w-[180px]  md:px-8 focus:bg-[#ECCEB4] focus:text-black text-[12px] sm:text-[14px] px-[2px] md:text-[20px] font-medium rounded-lg md:rounded-lg font-montserrat`}
                   >
                     {item?.name}
                   </button>
@@ -512,7 +512,7 @@ function Buket3() {
                   key={item?.id}
                   onClick={(e) => subHandler(e, item?.id)}
                   className={`bg-white text-[#443926] border-2 border-[#443926]
-                  py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[12px] px-1 md:text-[20px] font-normal md:font-medium rounded-3xl`}
+                  py-1 md:py-2  md:px-8 focus:bg-[#443926] focus:text-white text-[12px] px-1 md:text-[20px] font-normal md:font-medium rounded-lg`}
                 >
                   {item?.title}
                 </button>
@@ -552,7 +552,7 @@ function Buket3() {
                     <div
                       onMouseLeave={() => toggleCardOver(item)}
                       onMouseEnter={() => toggleCard(item)}
-                      key={index}
+                      key={item?.id}
                       className={`${
                         item?.visible
                           ? "min-h-max left-0 sticky z-[99999] rounded-[30px]"

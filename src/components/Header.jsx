@@ -276,7 +276,7 @@ function Header() {
               <div className="w-full h-[60vh] over bg-white overflow-y-auto absolute border p-3 rounded-md left-0 top-[40px] z-20 flex flex-col">
                 <>
                   {data?.map((c, i) => (
-                    <div key={i} className="z-30 border-b border-navcolor">
+                    <div key={c?.name} className="z-30 border-b border-navcolor">
                       <div className="w-24 h-24">
                         <img
                           src={uri + c?.flowers[0]?.img}
@@ -381,7 +381,7 @@ function Header() {
               <div className="w-full h-[60vh] over bg-white overflow-y-auto absolute border p-3 rounded-md left-0 top-[40px] z-20 flex flex-col">
                 <>
                   {data?.map((c, i) => (
-                    <div key={i} className="z-30 border-b border-navcolor">
+                    <div key={c?.id} className="z-30 border-b border-navcolor">
                       <div className="w-24 h-24">
                         <img
                           src={uri + c?.flowers[0]?.img}

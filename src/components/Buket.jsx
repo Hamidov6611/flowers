@@ -358,7 +358,7 @@ function Buket() {
                   (item?.id == 3 && SortBySum3)
                 }
                 className={`bg-white text-[#443926] border-gray-400 sm:w-auto border-2
-               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#ECCEB4] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#ECCEB4] focus:text-white text-[20px] font-medium rounded-lg ml-5`}
               >
                 {item?.name}
               </button>
@@ -370,7 +370,7 @@ function Buket() {
                 key={idx}
                 onClick={() => subHandler(item?.id)}
                 className={`bg-white text-[#443926] border-2 border-[#443926]
-               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-3xl ml-5`}
+               py-1 md:py-2 mb-[20px] md:px-8 focus:bg-[#443926] focus:text-white text-[20px] font-medium rounded-lg ml-5`}
               >
                 {item?.title}
               </button>
@@ -399,7 +399,7 @@ function Buket() {
           </div>
 
           <div
-          className="rounded-3xl relative p-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px] justify-center"
+          className="rounded-lg relative p-5 flex flex-wrap gap-x-4 gap-y-4 mb-[40px] justify-center"
             style={{ background: "rgba(44, 81, 70, 0.48)" }}
           >
             {flowers1.length > 0 ? (

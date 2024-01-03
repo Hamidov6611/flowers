@@ -431,7 +431,7 @@ function Buket2() {
                       (item?.id == 3 && SortBySum3)
                     }
                     className={`bg-white text-[#443926] border border-[#443926] md:border-gray-400
-               h-[40px] md:min-w-[180px]  md:px-8 focus:bg-[#ECCEB4] focus:text-black text-[12px] sm:text-[14px] px-[2px] md:text-[20px] font-medium rounded-lg md:rounded-3xl font-montserrat`}
+               h-[40px] md:min-w-[180px]  md:px-8 focus:bg-[#ECCEB4] focus:text-black text-[12px] sm:text-[14px] px-[2px] md:text-[20px] font-medium rounded-lg md:rounded-lg font-montserrat`}
                   >
                     {item?.name}
                   </button>

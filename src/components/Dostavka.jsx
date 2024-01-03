@@ -12,7 +12,7 @@ function Dostavka() {
           <img src="./images/dostavka_bg.png" alt="" />
         </div>
         <div className="title-div">
-          <p className="title">Доставка цветов</p>
+          <b className="font-semibold text-[28px] md:text-[40px] text-[#15100C] text-center md:text-start">Доставка цветов</b>
           <div className="circle"></div>
         </div>
 

@@ -191,7 +191,7 @@ const BuketDetail = () => {
             >
               {sizeData?.map((item, index) => (
                 <option
-                  key={index}
+                  key={item?.id}
                   value={item?.id}
                   className="text-[20px]"
                   id="ddlProducts"
@@ -298,7 +298,7 @@ const BuketDetail = () => {
               <div
                 onMouseLeave={() => toggleCardOver(item)}
                 onMouseEnter={() => toggleCard(item)}
-                key={index}
+                key={item?.id}
                 className={`${
                   item?.visible
                     ? "min-h-max left-0 sticky z-[99999]"

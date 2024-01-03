@@ -28,10 +28,19 @@
     object-fit: cover;
   }
   .swiper-button-next::after {
-    color: #443926;
+    color: #fff;
+    /* color: #443926; */
+    width: 25px;
+    font-size: 33px;
+    height: 25px;
+    font-weight: 900;
   }
   .swiper-button-prev::after {
-    color: #443926;
+    color: #fff;
+    width: 25px;
+    font-size: 33px;
+    height: 25px;
+    font-weight: 900;
   }
 
   .react-multiple-carousel__arrow--right {
