@@ -149,9 +149,10 @@ function Header() {
               className="invisible absolute z-50 flex flex-col bg-[#EDFCD6] border border-navcolor2 rounded-md py-1 px-4 text-[#000] w-[300px] shadow-xl group-hover:visible"
               // onClick=""
             >
-              {category?.map((item, index) => (
+              {category?.sort((a,b) => parseInt(a.id)-parseInt(b.id))?.map((item, index) => (
                 <Link
                   to={`/bouquets/categories/${item?.id}`}
+                  onMouseEnter={() => console.log(item?.id+", "+item?.title, typeof(item.id))}
                   className={`${
                     index === category.length - 1
                       ? "border-b-0"
@@ -463,7 +464,7 @@ function Header() {
             </div>
           ) : (
             <div className="flex flex-col gap-y-2">
-              {category?.map((item) => (
+              {category?.sort((a,b) => parseInt(a.id)-parseInt(b.id))?.map((item) => (
                 <div className="flex flex-col gap-y-2 relative">
                   <Link
                     to={`/bouquets/categories/${item?.id}`}
